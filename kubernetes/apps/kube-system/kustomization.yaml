@@ -2,9 +2,9 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-# components:
-#   - ../../flux/components/namespace
-#   - ../../flux/components/sops
+components:
+  #   - ../../flux/components/namespace
+  - ../../flux/components/sops
 #   - ../../flux/components/substitutions
 resources:
   - ./ns.yaml
