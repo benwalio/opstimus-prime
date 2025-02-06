@@ -14,7 +14,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-    namespace: flux-system
   interval: 30m
   targetNamespace: network
   timeout: 5m
@@ -32,13 +31,14 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-external-dns
+    - name: external-ingress-nginx
+    - name: internal-ingress-nginx
   interval: 30m
   path: ./kubernetes/apps/network/external/cloudflared
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-    namespace: flux-system
   targetNamespace: network
   timeout: 5m
   wait: false
@@ -61,7 +61,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-    namespace: flux-system
   targetNamespace: network
   timeout: 5m
   wait: false
