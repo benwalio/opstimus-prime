@@ -4,7 +4,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app external-external-dns
-  namespace: &namespace network
+  namespace: flux-system
 spec:
   commonMetadata:
     labels:
@@ -16,7 +16,7 @@ spec:
     name: flux-system
     namespace: flux-system
   interval: 30m
-  targetNamespace: *namespace
+  targetNamespace: network
   timeout: 5m
   wait: true
 ---
@@ -25,7 +25,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app cloudflared
-  namespace: &namespace network
+  namespace: flux-system
 spec:
   commonMetadata:
     labels:
@@ -40,7 +40,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: *namespace
+  targetNamespace: network
   timeout: 5m
   wait: false
 ---
@@ -49,7 +49,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app external-ingress-nginx
-  namespace: &namespace network
+  namespace: flux-system
 spec:
   commonMetadata:
     labels:
@@ -64,6 +64,6 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: *namespace
+  targetNamespace: network
   timeout: 5m
   wait: false
