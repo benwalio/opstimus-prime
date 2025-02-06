@@ -11,7 +11,6 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: cert-manager-tls
-      namespace: cert-manager
   interval: 30m
   path: ./kubernetes/apps/network/internal/ingress-nginx
   prune: true
