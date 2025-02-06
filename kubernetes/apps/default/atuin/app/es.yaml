@@ -1,0 +1,25 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: atuin
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword
+  target:
+    name: atuin-secret
+    template:
+      data:
+        ATUIN_DB_URI: "postgres://{{ .ATUIN_DB_USER }}:{{ .ATUIN_DB_PASS }}@{{ .PSQL16_HOST }}/{{ .ATUIN_DB_NAME }}"
+        INIT_POSTGRES_DBNAME: "{{ .ATUIN_DB_NAME }}"
+        INIT_POSTGRES_HOST: "{{ .PSQL16_HOST }}"
+        INIT_POSTGRES_SUPER_PASS: "{{ .PSQL16_SUPER_PASS }}"
+        INIT_POSTGRES_USER: "{{ .ATUIN_DB_USER }}"
+        INIT_POSTGRES_PASS: "{{ .ATUIN_DB_PASS }}"
+  dataFrom:
+    - extract:
+        key: atuin
+    - extract:
+        key: postgres16
