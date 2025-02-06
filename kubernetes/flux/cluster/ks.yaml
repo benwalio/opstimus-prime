@@ -34,7 +34,6 @@ spec:
       name: sops-age
   dependsOn:
     - name: cluster-meta
-      namespace: flux-system
   interval: 30m
   path: ./kubernetes/apps
   prune: true
@@ -42,8 +41,10 @@ spec:
     substituteFrom:
       - name: cluster-settings
         kind: ConfigMap
+        optional: true
       - name: cluster-secrets
         kind: Secret
+        optional: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -64,8 +65,10 @@ spec:
             substituteFrom:
               - name: cluster-settings
                 kind: ConfigMap
+                optional: true
               - name: cluster-secrets
                 kind: Secret
+                optional: true
       target:
         group: kustomize.toolkit.fluxcd.io
         kind: Kustomization
