@@ -32,7 +32,6 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-external-dns
-      namespace: network
   interval: 30m
   path: ./kubernetes/apps/network/external/cloudflared
   prune: true
