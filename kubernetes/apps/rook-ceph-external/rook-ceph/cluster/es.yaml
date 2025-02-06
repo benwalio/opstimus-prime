@@ -13,7 +13,7 @@ spec:
     template:
       type: kubernetes.io/rook
       data:
-        cluster-name: rook-ceph
+        cluster-name: rook-ceph-external
         # admin-secret: "{{ .ROOK_EXTERNAL_ADMIN_SECRET }}"
         ceph-secret: "{{ .ROOK_EXTERNAL_USER_SECRET }}"
         ceph-username: "{{ .ROOK_EXTERNAL_USERNAME }}"
