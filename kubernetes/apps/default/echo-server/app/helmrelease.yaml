@@ -23,7 +23,6 @@ spec:
       retries: 3
   dependsOn:
     - name: cloudflared
-      namespace: network
   values:
     controllers:
       echo-server:
