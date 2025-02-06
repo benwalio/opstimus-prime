@@ -1,0 +1,35 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+  notready:
+    desc: Get all not ready status
+    cmd: flux get all -A --status-selector ready=false
+    preconditions:
+      - which flux
+
+  get-github-hook:
+    desc: Get the github webhook url
+    cmd: kubectl -n flux-system get receiver github-receiver -o jsonpath='{.status.webhookPath}'
+    preconditions:
+      - which flux
+
+  reconcile:
+    desc: Force Flux to pull in changes from your Git repository
+    cmd: flux --namespace flux-system reconcile kustomization flux-system --with-source
+    preconditions:
+      - test -f {{.KUBECONFIG}}
+      - which flux
+
+  sops-secret:
+    desc: Create sops secret
+    cmds:
+      - '{{if eq .SOPS_SECRET_EXISTS "false"}}cat {{.SOPS_AGE_KEY_FILE}} | kubectl --namespace flux-system create secret generic sops-age --from-file=age.agekey=/dev/stdin{{end}}'
+    vars:
+      SOPS_SECRET_EXISTS:
+        sh: kubectl --namespace flux-system get secret sops-age &>/dev/null && echo true || echo false
+    preconditions:
+      - test -f {{.KUBECONFIG}}
+      - test -f {{.SOPS_AGE_KEY_FILE}}
+      - which kubectl sops
