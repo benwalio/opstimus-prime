@@ -31,8 +31,6 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-external-dns
-    - name: external-ingress-nginx
-    - name: internal-ingress-nginx
   interval: 30m
   path: ./kubernetes/apps/network/external/cloudflared
   prune: true
