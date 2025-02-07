@@ -33,7 +33,7 @@ spec:
           init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: 16
+              tag: 17
             # env:
             #   INIT_POSTGRES_DBNAME: atuin
             #   INIT_POSTGRES_HOST: postgres16-rw.database.svc.cluster.local
