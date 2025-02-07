@@ -10,7 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/talos-maxi/apps/rook-ceph-external/rook-ceph/haproxy/app
+  path: ./kubernetes/apps/rook-ceph-external/haproxy/app
   prune: false
   sourceRef:
     kind: GitRepository
