@@ -1,0 +1,141 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: minio
+spec:
+  interval: 60m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+      interval: 60m
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      minio:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
+            image:
+              repository: quay.io/minio/minio
+              tag: RELEASE.2025-02-03T21-03-04Z
+
+            env:
+              MINIO_UPDATE: "off"
+              MINIO_BROWSER_REDIRECT_URL: "https://minio.${SECRET_DOMAIN}"
+              MINIO_SERVER_URL: "https://s3.${SECRET_DOMAIN}"
+              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}
+              # MINIO_PROMETHEUS_JOB_ID: minio
+              # MINIO_PROMETHEUS_URL: https://prometheus.${SECRET_DOMAIN}
+              # MINIO_PROMETHEUS_AUTH_TYPE: public
+
+            envFrom:
+              - secretRef:
+                  name: minio-secret
+
+            args:
+              - server
+              - /data
+              - --console-address
+              - :9001
+
+            probes:
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+
+            resources:
+              requests:
+                memory: 100Mi
+                cpu: 100m
+              limits:
+                memory: 4000Mi
+
+    service:
+      app:
+        controller: minio
+        ports:
+          http:
+            port: &port-console 9001
+          api:
+            enabled: true
+            port: &port-api 9000
+
+    serviceMonitor:
+      app:
+        serviceName: minio
+        endpoints:
+          - port: s3
+            scheme: http
+            path: /minio/v2/metrics/cluster
+            interval: 1m
+            scrapeTimeout: 10s
+
+    ingress:
+      app:
+        className: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: S3 storage
+          gethomepage.dev/group: Tools
+          gethomepage.dev/icon: sh-minio.svg
+          gethomepage.dev/name: Minio
+          gethomepage.dev/app: minio
+        hosts:
+          - host: &host-console minio.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: *port-console
+
+      s3:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
+          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+          nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            chunked_transfer_encoding off;
+        hosts:
+          - host: &host-api s3.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: *port-api
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: minio-nfs
+        globalMounts:
+          - path: /data
