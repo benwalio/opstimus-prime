@@ -14,13 +14,13 @@ spec:
       data:
         username: "{{ .POSTGRES_SUPER_USER }}"
         password: "{{ .POSTGRES_SUPER_PASS }}"
-        # AWS_ACCESS_KEY_ID: "{{ .AWS_ACCESS_KEY_ID }}"
-        # AWS_SECRET_ACCESS_KEY: "{{ .AWS_SECRET_ACCESS_KEY }}"
+        MINIO_CNPG_KEY: "{{ .MINIO_CNPG_KEY }}"
+        MINIO_CNPG_SECRET: "{{ .MINIO_CNPG_SECRET }}"
       metadata:
         labels:
           cnpg.io/reload: "true"
   dataFrom:
-    # - extract:
-    #     key: cloudflare
+    - extract:
+        key: minio
     - extract:
         key: cloudnative-pg

@@ -33,18 +33,18 @@ spec:
       wal:
         compression: bzip2
         maxParallel: 8
-      destinationPath: s3://barman-u7z9m76w/
-      endpointURL: https://ba20be062ff7623f9d887afa37183c8f.r2.cloudflarestorage.com
-      # Note: serverName version needs to be inclemented
+      destinationPath: s3://postgres/
+      endpointURL: https://s3.${SECRET_DOMAIN}
+      # endpointURL: http://rook-ceph-rgw-ceph-objectstore.storage.svc.cluster.local # Note: serverName version needs to be inclemented
       # when recovering from an existing cnpg cluster
-      serverName: postgres-v13
+      serverName: postgres17-001
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
-          key: AWS_ACCESS_KEY_ID
+          key: MINIO_CNPG_KEY
         secretAccessKey:
           name: cloudnative-pg-secret
-          key: AWS_SECRET_ACCESS_KEY
+          key: MINIO_CNPG_SECRET
   # # Note: previousCluster needs to be set to the name of the previous
   # # cluster when recovering from an existing cnpg cluster
   # bootstrap:
