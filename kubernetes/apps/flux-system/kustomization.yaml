@@ -5,7 +5,7 @@ kind: Kustomization
 # components:
 #   - ../../flux/components/sops
 components:
-  - ../../flux/components/alerts
+  - ../../flux/components/common
 #   - ../../flux/components/sops
 #   - ../../flux/components/substitutions
 resources:
