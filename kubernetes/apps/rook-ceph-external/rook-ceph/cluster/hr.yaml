@@ -53,12 +53,12 @@ spec:
         - ip: 10.10.10.52
       interval: 15s
 
-    ingress:
-      dashboard:
-        ingressClassName: internal
-        host:
-          name: rook.${SECRET_DOMAIN}
-          path: /
+    # ingress:
+    #   dashboard:
+    #     ingressClassName: internal
+    #     host:
+    #       name: rook.${SECRET_DOMAIN}
+    #       path: /
 
     # -- Settings for the block pool snapshot class
     # @default -- See [RBD Snapshots](../Storage-Configuration/Ceph-CSI/ceph-csi-snapshot.md#rbd-snapshots)
