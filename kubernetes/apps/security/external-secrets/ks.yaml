@@ -4,7 +4,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app external-secrets
-  namespace: flux-system
+  namespace: &namespace security
 spec:
   commonMetadata:
     labels:
@@ -15,6 +15,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  targetNamespace: security
+  targetNamespace: *namespace
   timeout: 5m
   wait: false

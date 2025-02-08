@@ -4,20 +4,22 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app internal-ingress-nginx
-  namespace: flux-system
+  namespace: &namespace network
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: cert-manager-tls
+      namespace: cert-manager
   interval: 30m
   path: ./kubernetes/apps/network/internal/ingress-nginx
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  targetNamespace: network
+    namespace: flux-system
+  targetNamespace: *namespace
   timeout: 5m
   wait: false
 ---
@@ -26,7 +28,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app k8s-gateway
-  namespace: flux-system
+  namespace: &namespace network
 spec:
   commonMetadata:
     labels:
@@ -37,6 +39,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  targetNamespace: network
+    namespace: flux-system
+  targetNamespace: *namespace
   timeout: 5m
   wait: false

@@ -2,7 +2,9 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: rook-ceph-external
+components:
+  - ../../flux/components/common
 resources:
-  - ./ns.yaml
   - ./haproxy/ks.yaml
   - ./rook-ceph/ks.yaml
