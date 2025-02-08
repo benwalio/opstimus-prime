@@ -12,7 +12,12 @@ spec:
   dependsOn:
     - name: cloudflared
       namespace: network
+  components:
+    - ../../../../flux/components/gatus/external
   interval: 30m
+  postBuild:
+    substitute:
+      APP: *app
   path: ./kubernetes/apps/default/echo-server/app
   prune: true
   sourceRef:
