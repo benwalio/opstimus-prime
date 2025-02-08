@@ -5,4 +5,5 @@ kind: Component
 resources:
   - ./ns.yaml
   - ./alerts
+  - ./settings
   - ./sops
