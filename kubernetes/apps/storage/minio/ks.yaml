@@ -11,7 +11,12 @@ spec:
   dependsOn:
     - name: onepassword-store
       namespace: security
+  components:
+    - ../../../../flux/components/gatus/external
   interval: 30m
+  postBuild:
+    substitute:
+      APP: *app
   path: ./kubernetes/apps/storage/minio/app
   prune: true
   sourceRef:
