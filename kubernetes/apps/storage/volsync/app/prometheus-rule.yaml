@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/prometheusrule_v1.json
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
@@ -9,21 +8,20 @@ spec:
     - name: volsync.rules
       rules:
         - alert: VolSyncComponentAbsent
+          annotations:
+            summary: VolSync component has disappeared from Prometheus target discovery.
           expr: |
             absent(up{job="volsync-metrics"})
-          annotations:
-            summary: >
-              VolSync component has disappeared from Prometheus target discovery
-          for: 5m
+          for: 15m
           labels:
             severity: critical
-
         - alert: VolSyncVolumeOutOfSync
+          annotations:
+            summary: >-
+              {{ $labels.obj_namespace }}/{{ $labels.obj_name }} volume
+              is out of sync.
           expr: |
             volsync_volume_out_of_sync == 1
-          annotations:
-            summary: >
-              {{ $labels.obj_namespace }}/{{ $labels.obj_name }} volume is out of sync
-          for: 5m
+          for: 15m
           labels:
             severity: critical
