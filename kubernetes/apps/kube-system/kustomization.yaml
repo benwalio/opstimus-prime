@@ -2,12 +2,10 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-# components:
-#   - ../../flux/components/namespace
-# - ../../flux/components/sops
-#   - ../../flux/components/substitutions
+namespace: kube-system
+components:
+  - ../../flux/components/common
 resources:
-  - ./ns.yaml
   - ./cilium/ks.yaml
   - ./coredns/ks.yaml
   - ./csi-driver-nfs/ks.yaml

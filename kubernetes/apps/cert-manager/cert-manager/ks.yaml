@@ -4,7 +4,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app cert-manager
-  namespace: flux-system
+  namespace: &namespace cert-manager
 spec:
   commonMetadata:
     labels:
@@ -17,7 +17,7 @@ spec:
     name: flux-system
     namespace: flux-system
   timeout: 5m
-  targetNamespace: cert-manager
+  targetNamespace: *namespace
   wait: false
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
@@ -25,11 +25,14 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app cert-manager-issuers
-  namespace: flux-system
+  namespace: &namespace cert-manager
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  dependsOn:
+    - name: onepassword-store
+      namespace: security
   interval: 30m
   path: ./kubernetes/apps/cert-manager/cert-manager/issuers
   prune: true
@@ -37,7 +40,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: cert-manager
+  targetNamespace: *namespace
   timeout: 5m
   wait: true
 ---
@@ -46,19 +49,23 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app cert-manager-tls
-  namespace: flux-system
+  namespace: &namespace cert-manager
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: cert-manager-issuers
+      namespace: cert-manager
+    - name: onepassword-store
+      namespace: security
   interval: 30m
   path: ./kubernetes/apps/cert-manager/cert-manager/tls
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  targetNamespace: cert-manager
+    namespace: flux-system
+  targetNamespace: *namespace
   timeout: 5m
   wait: true
