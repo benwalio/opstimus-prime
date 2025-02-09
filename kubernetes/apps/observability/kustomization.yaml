@@ -6,9 +6,9 @@ namespace: observability
 components:
   - ../../flux/components/common
 resources:
-  - ./gatus/ks.yaml
-  - ./grafana/ks.yaml
+  # - ./gatus/ks.yaml
+  # - ./grafana/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
-  - ./loki/ks.yaml
-  - ./promtail/ks.yaml
-  - ./unpoller/ks.yaml
+  # - ./loki/ks.yaml
+  # - ./promtail/ks.yaml
+  # - ./unpoller/ks.yaml
