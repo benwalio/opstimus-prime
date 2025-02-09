@@ -24,58 +24,70 @@ cniConfig:
 
 nodes:
   - hostname: "controller-1"
-    ipAddress: "10.10.10.60"
-    installDisk: "/dev/sda"
+    ipAddress: "10.10.10.50"
+    installDiskSelector:
+      serial: "TPBF2411060100303906"
+    machineDisks:
+      - device: /dev/disk/by-id/nvme-TEAM_TM8FP6001T_TPBF2411060100302920
+        partitions:
+          - mountpoint: /var/mnt/extra
     machineSpec:
       secureboot: false
-    talosImageURL: factory.talos.dev/installer/95d432d6bb450a67e801a6ae77c96a67e38820b62ba4159ae7e997e1695207f7
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "bc:24:11:8f:79:cf"
+          hardwareAddr: "58:47:ca:7a:b0:3e"
         dhcp: false
         addresses:
-          - "10.10.10.60/24"
+          - "10.10.10.50/24"
         routes:
-          - network: "0.0.0.0/0"
+          - network: "10.10.10.0/24"
             gateway: "10.10.10.1"
         mtu: 1500
         vip:
           ip: "10.10.10.20"
   - hostname: "controller-2"
-    ipAddress: "10.10.10.61"
-    installDisk: "/dev/sda"
+    ipAddress: "10.10.10.51"
+    installDiskSelector:
+      serial: "TPBF2411060100302903"
+    machineDisks:
+      - device: /dev/disk/by-id/nvme-TEAM_TM8FP6001T_TPBF2411060100303393_1
+        partitions:
+          - mountpoint: /var/mnt/extra
     machineSpec:
       secureboot: false
-    talosImageURL: factory.talos.dev/installer/95d432d6bb450a67e801a6ae77c96a67e38820b62ba4159ae7e997e1695207f7
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "bc:24:11:16:c0:01"
+          hardwareAddr: "58:47:ca:7a:ac:7e"
         dhcp: false
         addresses:
-          - "10.10.10.61/24"
+          - "10.10.10.51/24"
         routes:
-          - network: "0.0.0.0/0"
+          - network: "10.10.10.0/24"
             gateway: "10.10.10.1"
         mtu: 1500
         vip:
           ip: "10.10.10.20"
   - hostname: "controller-3"
-    ipAddress: "10.10.10.62"
-    installDisk: "/dev/sda"
+    ipAddress: "10.10.10.52"
+    installDiskSelector:
+      serial: "TPBF2411060100302774"
+    machineDisks:
+      - device: /dev/disk/by-id/nvme-TEAM_TM8FP6001T_TPBF2411060100302759
+        partitions:
+          - mountpoint: /var/mnt/extra
     machineSpec:
       secureboot: false
-    talosImageURL: factory.talos.dev/installer/95d432d6bb450a67e801a6ae77c96a67e38820b62ba4159ae7e997e1695207f7
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "bc:24:11:59:ea:c6"
+          hardwareAddr: "58:47:ca:7a:c5:ea"
         dhcp: false
         addresses:
-          - "10.10.10.62/24"
+          - "10.10.10.52/24"
         routes:
-          - network: "0.0.0.0/0"
+          - network: "10.10.10.0/24"
             gateway: "10.10.10.1"
         mtu: 1500
         vip:
@@ -83,14 +95,38 @@ nodes:
 
 # Global patches
 patches:
+  - "@./patches/global/machine-features.yaml"
   - "@./patches/global/machine-files.yaml"
+  - "@./patches/global/machine-kernel.yaml"
   - "@./patches/global/machine-kubelet.yaml"
   - "@./patches/global/machine-network.yaml"
   - "@./patches/global/machine-sysctls.yaml"
+  - "@./patches/global/machine-sysfs.yaml"
   - "@./patches/global/machine-time.yaml"
+  - "@./patches/global/machine-udev.yaml"
 
 # Controller patches
 controlPlane:
   patches:
     - "@./patches/controller/admission-controller-patch.yaml"
     - "@./patches/controller/cluster.yaml"
+
+  schematic:
+    customization:
+      extraKernelArgs:
+        - apparmor=0 # Less security, faster puter
+        - init_on_alloc=0 # Less security, faster puter
+        - init_on_free=0 # Less security, faster puter
+        - intel_iommu=on # PCI Passthrough
+        - iommu=pt # PCI Passthrough
+        - mitigations=off # Less security, faster puter
+        - security=none # Less security, faster puter
+        - talos.auditd.disabled=1 # Less security, faster puter
+
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/gasket-driver
+          - siderolabs/i915
+          - siderolabs/intel-ucode
+          - siderolabs/mei
+          - siderolabs/thunderbolt
