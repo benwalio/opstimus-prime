@@ -41,22 +41,13 @@ nodes:
         addresses:
           - "10.10.10.50/24"
         routes:
-          - network: "0.0.0.0/0"
+          - network: "10.10.10.0/24"
             gateway: "10.10.10.1"
         mtu: 1500
         vip:
           ip: "10.10.10.20"
-      - deviceSelector:
-          hardwareAddr: "58:47:ca:7a:b0:3f"
-        dhcp: false
-        addresses:
-          - "10.20.16.50/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "10.20.0.1"
-        mtu: 1500
   - hostname: "controller-2"
-    ipAddress: "10.10.10.50"
+    ipAddress: "10.10.10.51"
     installDiskSelector:
       serial: "TPBF2411060100302903"
     machineDisks:
@@ -73,22 +64,13 @@ nodes:
         addresses:
           - "10.10.10.51/24"
         routes:
-          - network: "0.0.0.0/0"
+          - network: "10.10.10.0/24"
             gateway: "10.10.10.1"
         mtu: 1500
         vip:
           ip: "10.10.10.20"
-      - deviceSelector:
-          hardwareAddr: "58:47:ca:7a:ac:7f"
-        dhcp: false
-        addresses:
-          - "10.20.16.51/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "10.20.0.1"
-        mtu: 1500
   - hostname: "controller-3"
-    ipAddress: "10.10.10.50"
+    ipAddress: "10.10.10.52"
     installDiskSelector:
       serial: "TPBF2411060100302774"
     machineDisks:
@@ -105,20 +87,11 @@ nodes:
         addresses:
           - "10.10.10.52/24"
         routes:
-          - network: "0.0.0.0/0"
+          - network: "10.10.10.0/24"
             gateway: "10.10.10.1"
         mtu: 1500
         vip:
           ip: "10.10.10.20"
-      - deviceSelector:
-          hardwareAddr: "58:47:ca:7a:c5:eb"
-        dhcp: false
-        addresses:
-          - "10.20.16.52/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "10.20.0.1"
-        mtu: 1500
 
 # Global patches
 patches:
