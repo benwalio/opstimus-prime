@@ -5,6 +5,6 @@ kind: Kustomization
 namespace: rook-ceph-external
 components:
   - ../../flux/components/common
-resources:
-  - ./haproxy/ks.yaml
-  - ./rook-ceph/ks.yaml
+# resources:
+# - ./haproxy/ks.yaml
+# - ./rook-ceph/ks.yaml
