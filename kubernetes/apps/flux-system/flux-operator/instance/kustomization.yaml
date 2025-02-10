@@ -9,6 +9,6 @@ resources:
 configMapGenerator:
   - name: flux-instance-helm-values
     files:
-      - values.yaml=./helm-values.yaml
+      - values.yaml=./h-v.yaml
 configurations:
-  - kustomizeconfig.yaml
+  - kconf.yaml
