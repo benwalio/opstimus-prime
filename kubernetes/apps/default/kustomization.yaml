@@ -6,6 +6,6 @@ namespace: default
 components:
   - ../../flux/components/common
 resources:
-  # - ./atuin/ks.yaml
+  - ./atuin/ks.yaml
   - ./echo-server/ks.yaml
-  # - ./pinchflat/ks.yaml
+  - ./pinchflat/ks.yaml
