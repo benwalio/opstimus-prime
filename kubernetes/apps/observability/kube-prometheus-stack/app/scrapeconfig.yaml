@@ -7,23 +7,7 @@ metadata:
 spec:
   staticConfigs:
     - targets:
-        - expanse.internal:9100
-        - pikvm.internal:9100
-  metricsPath: /metrics
-  relabelings:
-    - action: replace
-      targetLabel: job
-      replacement: *name
----
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: ScrapeConfig
-metadata:
-  name: &name smartctl-exporter
-spec:
-  staticConfigs:
-    - targets:
-        - expanse.internal:9633
+        - pikvm.home.internal:9100
   metricsPath: /metrics
   relabelings:
     - action: replace
@@ -38,23 +22,8 @@ metadata:
 spec:
   staticConfigs:
     - targets:
-        - pikvm.internal
+        - pikvm.home.internal
   metricsPath: /api/export/prometheus/metrics
-  relabelings:
-    - action: replace
-      targetLabel: job
-      replacement: *name
----
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: ScrapeConfig
-metadata:
-  name: &name zigbee-controller
-spec:
-  staticConfigs:
-    - targets:
-        - zigbee-controller.internal
-  metricsPath: /metrics
   relabelings:
     - action: replace
       targetLabel: job

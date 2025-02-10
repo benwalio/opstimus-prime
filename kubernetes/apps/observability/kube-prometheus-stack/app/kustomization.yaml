@@ -6,4 +6,4 @@ resources:
   - ./alertmanagerconfig.yaml
   - ./es.yaml
   - ./hr.yaml
-  # - ./scrapeconfig.yaml
+  - ./scrapeconfig.yaml
