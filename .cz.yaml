@@ -1,10 +1,10 @@
 ---
 commitizen:
-  name: cz_gitmoji
-  version_provider: "commitizen"
-  version_files:
-    - src/__version__.py
-    - pyproject.toml:version
-  update_changelog_on_bump: true
   major_version_zero: true
-  version: 0.0.1
+  name: cz_gitmoji
+  update_changelog_on_bump: true
+  version: 0.1.0
+  version_files:
+  - src/__version__.py
+  - pyproject.toml:version
+  version_provider: commitizen
