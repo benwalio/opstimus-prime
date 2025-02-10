@@ -21,8 +21,10 @@ includes:
   bootstrap: .taskfiles/bootstrap
   flux: .taskfiles/flux
   kubernetes: .taskfiles/kubernetes
+  sops: .taskfiles/sops
   talos: .taskfiles/talos
   template: .taskfiles/template
+  workstation: .taskfiles/workstation
 
 tasks:
   default: task --list
@@ -33,3 +35,9 @@ tasks:
     preconditions:
       - test -f {{.KUBECONFIG}}
       - which flux
+
+  scan-repo:
+    desc: GitGuardian scan current repo
+    cmd: ggshield secret scan repo {{.ROOT_DIR}}
+    preconditions:
+      - which ggshield
