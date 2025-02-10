@@ -1,0 +1,20 @@
+{
+  "overrides": [
+    {
+      "files": "*.yaml",
+      "options": {
+        "tabWidth": 2,
+        "singleQuote": false,
+        "proseWrap": "preserve"
+      }
+    },
+    {
+      "files": "*.json5",
+      "options": {
+        "trailingComma": "es5",
+        "parser": "jsonc",
+        "quoteProps": "consistent"
+      }
+    }
+  ]
+}
