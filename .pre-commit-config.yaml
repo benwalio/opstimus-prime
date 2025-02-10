@@ -3,6 +3,7 @@ repos:
     rev: v4.2.1
     hooks:
       - id: commitizen
+        additional_dependencies: [cz-conventional-gitmoji]
       - id: commitizen-branch
         stages: [pre-push]
   - repo: https://github.com/gitguardian/ggshield
