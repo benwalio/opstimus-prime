@@ -10,20 +10,20 @@ _... managed by Flux, Renovate and GitHub Actions_ :robot:
 
 <div align="center">
 
-[![Talos](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.movishell.pl%2Ftalos_version&style=for-the-badge&logo=talos&logoColor=white&color=orange&label=talos)](https://talos.dev)&nbsp;
-[![Kubernetes](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.movishell.pl%2Fkubernetes_version&style=for-the-badge&logo=kubernetes&logoColor=white&color=blue&label=k8s)](https://kubernetes.io)&nbsp;&nbsp;
-[![Flux](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.movishell.pl%2Fflux_version&style=for-the-badge&logo=flux&logoColor=white&color=blue&label=flux)](https://fluxcd.io)&nbsp;
+[![Talos](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.benwal.rodeo%2Ftalos_version&style=for-the-badge&logo=talos&logoColor=white&color=orange&label=talos)](https://talos.dev)&nbsp;
+[![Kubernetes](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.benwal.rodeo%2Fkubernetes_version&style=for-the-badge&logo=kubernetes&logoColor=white&color=blue&label=k8s)](https://kubernetes.io)&nbsp;&nbsp;
+[![Flux](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.benwal.rodeo%2Fflux_version&style=for-the-badge&logo=flux&logoColor=white&color=blue&label=flux)](https://fluxcd.io)&nbsp;
 
 </div>
 
 <div align="center">
 
-[![Age-Days](https://kromgo.movishell.pl/cluster_age_days?format=badge)](https://github.com/kashalls/kromgo)&nbsp;
-[![Node-Count](https://kromgo.movishell.pl/cluster_node_count?format=badge)](https://github.com/kashalls/kromgo)&nbsp;&nbsp;
-[![Alerts](https://kromgo.movishell.pl/cluster_alert_count?format=badge)](https://github.com/kashalls/kromgo)&nbsp;&nbsp;
-[![Pod-Count](https://kromgo.movishell.pl/cluster_pod_count?format=badge)](https://github.com/kashalls/kromgo)&nbsp;&nbsp;
-[![CPU-Usage](https://kromgo.movishell.pl/cluster_cpu_usage?format=badge)](https://github.com/kashalls/kromgo)&nbsp;&nbsp;
-[![Memory-Usage](https://kromgo.movishell.pl/cluster_memory_usage?format=badge)](https://github.com/kashalls/kromgo)&nbsp;&nbsp;
+[![Age-Days](https://kromgo.benwal.rodeo/cluster_age_days?format=badge)](https://github.com/kashalls/kromgo)&nbsp;
+[![Node-Count](https://kromgo.benwal.rodeo/cluster_node_count?format=badge)](https://github.com/kashalls/kromgo)&nbsp;&nbsp;
+[![Alerts](https://kromgo.benwal.rodeo/cluster_alert_count?format=badge)](https://github.com/kashalls/kromgo)&nbsp;&nbsp;
+[![Pod-Count](https://kromgo.benwal.rodeo/cluster_pod_count?format=badge)](https://github.com/kashalls/kromgo)&nbsp;&nbsp;
+[![CPU-Usage](https://kromgo.benwal.rodeo/cluster_cpu_usage?format=badge)](https://github.com/kashalls/kromgo)&nbsp;&nbsp;
+[![Memory-Usage](https://kromgo.benwal.rodeo/cluster_memory_usage?format=badge)](https://github.com/kashalls/kromgo)&nbsp;&nbsp;
 
 </div>
 <br>
