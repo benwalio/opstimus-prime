@@ -22,4 +22,4 @@ spec:
           {{ .ARC_GH_WEBHOOK_SECRET_TOKEN }}
   dataFrom:
     - extract:
-        key: actions-runner-controller
+        key: opstimus-arc
