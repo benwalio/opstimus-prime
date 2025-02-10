@@ -41,7 +41,7 @@ spec:
       name: actions-runner-controller-secret
       valuesKey: ACTION_RUNNER_CONTROLLER_GITHUB_PRIVATE_KEY
   values:
-    githubConfigUrl: ${GHUB_HTTP_URL}
+    githubConfigUrl: "${GHUB_HTTP_URL}"
     minRunners: 1
     maxRunners: 3
     containerMode:
