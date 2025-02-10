@@ -11,8 +11,8 @@ spec:
   dependsOn:
     - name: onepassword-store
       namespace: security
-  components:
-    - ../../../../flux/components/gatus/external
+  # components:
+  #   - ../../../../flux/components/gatus/external
   interval: 30m
   postBuild:
     substitute:
