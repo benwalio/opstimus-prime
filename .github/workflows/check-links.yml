@@ -5,6 +5,10 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
+    paths: [".github/workflows/lychee.yaml"]
     # Optionally limit the check to certain file types
     # paths:
     #   - '**/*.md'
@@ -20,21 +24,34 @@ jobs:
     permissions:
       issues: write
     steps:
+      - name: Generate Token
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: "${{ secrets.BOT_APP_ID }}"
+          private-key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
+
+      - name: Set base branch for pull request
+        if: github.event_name == 'pull_request'
+        run: echo "BASE_BRANCH=${{ github.event.pull_request.base.ref }}" >> $GITHUB_ENV
+
+      - name: Set base branch for push
+        if: github.event_name == 'push'
+        run: echo "BASE_BRANCH=${{ github.ref }}" >> $GITHUB_ENV
+
+      - name: Set base branch for manual run
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "BASE_BRANCH=main" >> $GITHUB_ENV # Default branch or prompt for input
+
       - name: Clone repository
         uses: actions/checkout@v4
-        if: github.event_name == 'pull_request'
         with:
           fetch-depth: 0
-          ref: ${{github.event.pull_request.head.ref}}
-
-      - name: Clone repository
-        uses: actions/checkout@v4
-        if: github.event_name != 'pull_request'
-        with:
-          path: main
+          token: "${{ steps.app-token.outputs.token }}"
+          ref: "${{ env.BASE_BRANCH }}"
 
       - name: Check out base branch
-        run: git checkout ${{github.event.pull_request.base.ref}}
+        run: git checkout ${{ env.BASE_BRANCH }}
 
       - name: Dump all links from ${{github.event.pull_request.base.ref}}
         uses: lycheeverse/lychee-action@f613c4a64e50d792e0b31ec34bbcbba12263c6a6
