@@ -8,4 +8,5 @@ components:
 resources:
   - ./atuin/ks.yaml
   - ./echo-server/ks.yaml
+  - ./it-tools/ks.yaml
   - ./pinchflat/ks.yaml
