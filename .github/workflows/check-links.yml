@@ -30,6 +30,8 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v4
         if: github.event_name != 'pull_request'
+        with:
+          path: main
 
       - name: Check out base branch
         run: git checkout ${{github.event.pull_request.base.ref}}
