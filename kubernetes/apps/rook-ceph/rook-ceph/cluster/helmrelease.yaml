@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: rook-ceph-cluster
+  name: &app rook-ceph-cluster
 spec:
   interval: 30m
   timeout: 15m
@@ -41,6 +41,7 @@ spec:
           gethomepage.dev/group: data
           gethomepage.dev/icon: sh-ceph-light.svg
           gethomepage.dev/name: rook
+          gethomepage.dev/app: *app
         host:
           name: rook.${SECRET_DOMAIN}
           path: /

@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: grafana
+  name: &app grafana
 spec:
   interval: 30m
   chart:
@@ -264,6 +264,7 @@ spec:
         gethomepage.dev/group: observe
         gethomepage.dev/icon: sh-grafana.svg
         gethomepage.dev/name: grafana
+        gethomepage.dev/app: *app
       hosts:
         - "grafana.${SECRET_DOMAIN}"
     persistence:
