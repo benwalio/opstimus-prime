@@ -20,7 +20,6 @@ spec:
         HP_VAR_WID_HOUSE_LONG: "{{ .HOME_LONG }}"
 
         ## services
-        HP_VAR_SVC_: "{{  }}"
         HP_VAR_SVC_PROX_URL: "{{ .HP_PM_URL }}"
         HP_VAR_SVC_PROX_USER: "{{ .HP_PM_TOKEN }}"
         HP_VAR_SVC_PROX_PASS: "{{ .HP_PM_SECRET }}"
