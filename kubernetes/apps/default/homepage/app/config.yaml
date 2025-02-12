@@ -118,7 +118,7 @@ data:
                 type: adguard
                 url: {{HOMEPAGE_VAR_SVC_AGH_A_URL}}
                 username: {{HOMEPAGE_VAR_SVC_AGH_A_USER}}
-                password: {{.HOMEPAGE_VAR_SVC_AGH_A_PASS}}
+                password: {{HOMEPAGE_VAR_SVC_AGH_A_PASS}}
 
     - observe:
         - uptime-kuma:

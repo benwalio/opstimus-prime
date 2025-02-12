@@ -39,8 +39,10 @@ spec:
       homepage:
         replicas: 2
         strategy: RollingUpdate
-        annotations:
-          reloader.stakater.com/auto: "true"
+        pod:
+          annotations:
+            configmap.reloader.stakater.com/reload: &config homepage-config
+            secret.reloader.stakater.com/reload: &secret homepage-secret
 
         containers:
           app:
@@ -52,7 +54,7 @@ spec:
               LOG_LEVEL: debug
             envFrom:
               - secretRef:
-                  name: &secret homepage-secret
+                  name: *secret
             resources:
               requests:
                 cpu: 25m
@@ -84,7 +86,7 @@ spec:
     persistence:
       config:
         type: configMap
-        name: homepage-config
+        name: *config
         globalMounts:
           - subPath: settings.yaml
             path: /app/config/settings.yaml
