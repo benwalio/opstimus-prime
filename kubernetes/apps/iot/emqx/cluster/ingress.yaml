@@ -5,6 +5,12 @@ metadata:
   name: emqx-dashboard
 spec:
   ingressClassName: internal
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: mqtt cluster
+    gethomepage.dev/group: automation
+    gethomepage.dev/icon: sh-emqx.svg
+    gethomepage.dev/name: emqx
   rules:
     - host: emqx.${SECRET_DOMAIN}
       http:

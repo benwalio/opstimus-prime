@@ -35,6 +35,12 @@ spec:
     ingress:
       dashboard:
         ingressClassName: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: Ceph storage
+          gethomepage.dev/group: data
+          gethomepage.dev/icon: sh-ceph-light.svg
+          gethomepage.dev/name: rook
         host:
           name: rook.${SECRET_DOMAIN}
           path: /

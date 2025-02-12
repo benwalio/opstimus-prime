@@ -70,7 +70,14 @@ spec:
       ingress:
         enabled: true
         ingressClassName: internal
-        hosts: ["prometheus.${SECRET_DOMAIN}"]
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: log monitor and alerting
+          gethomepage.dev/group: observe
+          gethomepage.dev/icon: sh-prometheus.svg
+          gethomepage.dev/name: prometheus
+        hosts:
+          - "prometheus.${SECRET_DOMAIN}"
         pathType: Prefix
       prometheusSpec:
         podMonitorSelectorNilUsesHelmValues: false
