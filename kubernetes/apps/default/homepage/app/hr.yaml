@@ -39,10 +39,8 @@ spec:
       homepage:
         replicas: 2
         strategy: RollingUpdate
-        pod:
-          annotations:
-            configmap.reloader.stakater.com/reload: &config homepage-config
-            secret.reloader.stakater.com/reload: &secret homepage-secret
+        annotations:
+          reloader.stakater.com/auto: "true"
 
         containers:
           app:

@@ -79,7 +79,7 @@ data:
     ---
     - infra:
         - proxmox:
-            icon: proxmoxda
+            icon: sh-proxmox.svg
             href: {{HOMEPAGE_VAR_SVC_PROX_URL}}
             siteMonitor: {{HOMEPAGE_VAR_SVC_PROX_URL}}
             widget:
