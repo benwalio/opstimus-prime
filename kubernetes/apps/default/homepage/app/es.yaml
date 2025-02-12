@@ -24,7 +24,7 @@ spec:
         HP_VAR_SVC_PROX_USER: "{{ .HP_PM_TOKEN }}"
         HP_VAR_SVC_PROX_PASS: "{{ .HP_PM_SECRET }}"
 
-        HP_VAR_SVC_PORT_URL: "{{ HP_PORT_URL }}"
+        HP_VAR_SVC_PORT_URL: "{{ PORT_URL }}"
         HP_VAR_SVC_PORT_ENV: "{{ HP_PORT_ENV }}"
         HP_VAR_SVC_PORT_PASS: "{{ HP_PORT_SECRET }}"
 
