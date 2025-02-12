@@ -86,7 +86,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/description: youtube downloader
           gethomepage.dev/group: media-get
-          gethomepage.dev/icon: sh-pinchflat.svg
+          gethomepage.dev/icon: sh-pinchflat.png
           gethomepage.dev/name: pinchflat
         hosts:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
