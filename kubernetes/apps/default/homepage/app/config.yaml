@@ -80,23 +80,23 @@ data:
     - infra:
         - proxmox:
             icon: proxmoxda
-            href: {{ HP_VAR_SVC_PROX_URL }}
-            siteMonitor: {{ HP_VAR_SVC_PROX_URL }}
+            href: {{HP_VAR_SVC_PROX_URL}}
+            siteMonitor: {{HP_VAR_SVC_PROX_URL}}
             widget:
                 type: proxmox
-                url: {{ HP_VAR_SVC_PROX_URL }}
-                username: {{ HP_VAR_SVC_PROX_USER }}
-                password: {{ HP_VAR_SVC_PROX_PASS }}
+                url: {{HP_VAR_SVC_PROX_URL}}
+                username: {{HP_VAR_SVC_PROX_USER}}
+                password: {{HP_VAR_SVC_PROX_PASS}}
 
         - portainer-swarm:
             icon: portainer
-            href: {{ HP_VAR_SVC_PORT_URL }}
-            siteMonitor: {{ HP_VAR_SVC_PORT_URL }}
+            href: {{HP_VAR_SVC_PORT_URL}}
+            siteMonitor: {{HP_VAR_SVC_PORT_URL}}
             widget:
                 type: portainer
-                url: {{ HP_VAR_SVC_PORT_URL }}
-                env: {{ HP_VAR_SVC_PORT_ENV }}
-                key: {{ HP_VAR_SVC_PORT_PASS }}
+                url: {{HP_VAR_SVC_PORT_URL}}
+                env: {{HP_VAR_SVC_PORT_ENV}}
+                key: {{HP_VAR_SVC_PORT_PASS}}
 
     - network:
         - unifi:
@@ -106,70 +106,70 @@ data:
             widget:
                 type: unifi
                 url: https://192.168.0.1
-                username: {{ HP_VAR_WID_UBI_USER }}
-                password: {{ HP_VAR_WID_UBI_PASS }}
+                username: {{HP_VAR_WID_UBI_USER}}
+                password: {{HP_VAR_WID_UBI_PASS}}
 
     - dns:
         - adguard-a:
             icon: adguard-home
-            href: {{ HP_VAR_SVC_AGH_A_URL }}
-            siteMonitor: {{ HP_VAR_SVC_AGH_A_URL }}
+            href: {{HP_VAR_SVC_AGH_A_URL}}
+            siteMonitor: {{HP_VAR_SVC_AGH_A_URL}}
             widget:
                 type: adguard
-                url: {{ HP_VAR_SVC_AGH_A_URL }}
-                username: {{ HP_VAR_SVC_AGH_A_USER }}
-                password: {{ .HP_VAR_SVC_AGH_A_PASS }}
+                url: {{HP_VAR_SVC_AGH_A_URL}}
+                username: {{HP_VAR_SVC_AGH_A_USER}}
+                password: {{.HP_VAR_SVC_AGH_A_PASS}}
 
     - observe:
         - uptime-kuma:
             icon: uptime-kuma
-            href: {{ HP_VAR_SVC_UPKU_URL }}
-            siteMonitor: {{ HP_VAR_SVC_UPKU_URL }}
+            href: {{HP_VAR_SVC_UPKU_URL}}
+            siteMonitor: {{HP_VAR_SVC_UPKU_URL}}
             widget:
                 type: uptimekuma
-                url: {{ HP_VAR_SVC_UPKU_URL }}
-                slug: {{ HP_VAR_SVC_UPKU_SLUG }}
+                url: {{HP_VAR_SVC_UPKU_URL}}
+                slug: {{HP_VAR_SVC_UPKU_SLUG}}
 
     - backup:
         - proxmox-backup:
             icon: proxmox-light
-            href: {{ HP_VAR_SVC_PBS_URL }}
-            siteMonitor: {{ HP_VAR_SVC_PBS_URL }}
+            href: {{HP_VAR_SVC_PBS_URL}}
+            siteMonitor: {{HP_VAR_SVC_PBS_URL}}
             widget:
                 type: proxmoxbackupserver
-                url: {{ HP_VAR_SVC_PBS_URL }}
-                username: {{ HP_VAR_SVC_PBS_USER }}
-                password: {{ HP_VAR_SVC_PBS_PASS }}
+                url: {{HP_VAR_SVC_PBS_URL}}
+                username: {{HP_VAR_SVC_PBS_USER}}
+                password: {{HP_VAR_SVC_PBS_PASS}}
 
     - power:
         - desk-ups:
             icon: peanut
-            href: {{ HP_VAR_SVC_PNUT_URL }}
-            siteMonitor: {{ HP_VAR_SVC_PNUT_URL }}
+            href: {{HP_VAR_SVC_PNUT_URL}}
+            siteMonitor: {{HP_VAR_SVC_PNUT_URL}}
             widget:
                 type: peanut
-                url: {{ HP_VAR_SVC_PNUT_URL }}
-                key: {{ HP_VAR_SVC_PNUT_KEY }}
+                url: {{HP_VAR_SVC_PNUT_URL}}
+                key: {{HP_VAR_SVC_PNUT_KEY}}
 
     - dev:
         - gitea:
             icon: gitea
-            href: {{ HP_VAR_SVC_GITEA_HREF_URL }}
-            siteMonitor: {{ HP_VAR_SVC_GITEA_LOCAL_URL }}
+            href: {{HP_VAR_SVC_GITEA_HREF_URL}}
+            siteMonitor: {{HP_VAR_SVC_GITEA_LOCAL_URL}}
             widget:
                 type: gitea
-                url: {{ HP_VAR_SVC_GITEA_LOCAL_URL }}
-                key: {{ HP_VAR_SVC_GITEA_PASS }}
+                url: {{HP_VAR_SVC_GITEA_LOCAL_URL}}
+                key: {{HP_VAR_SVC_GITEA_PASS}}
 
     - document:
         - paperless:
             icon: paperless-ngx
-            href: {{ HP_VAR_SVC_PPRL_URL }}
-            siteMonitor: {{ HP_VAR_SVC_PPRL_URL }}
+            href: {{HP_VAR_SVC_PPRL_URL}}
+            siteMonitor: {{HP_VAR_SVC_PPRL_URL}}
             widget:
                 type: paperlessngx
-                url: {{ HP_VAR_SVC_PPRL_URL }}
-                key: {{ HP_VAR_SVC_PPRL_PASS }}
+                url: {{HP_VAR_SVC_PPRL_URL}}
+                key: {{HP_VAR_SVC_PPRL_PASS}}
 
   bookmarks.yaml: |
     ---
