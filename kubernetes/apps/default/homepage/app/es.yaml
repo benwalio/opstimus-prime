@@ -1,0 +1,80 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: homepage
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword
+  target:
+    name: homepage-secret
+    template:
+      data:
+        HP_VAR_PROV_OWM_API: "{{ .OWM_SECRET }}"
+        HP_VAR_PROV_WAPI_API: "{{ .WAPI_API_KEY }}"
+        HP_VAR_WID_UBI_USER: "{{ .HP_UBI_USER }}"
+        HP_VAR_WID_UBI_PASS: "{{ .HP_UBI_PASS }}"
+        HP_VAR_WID_HOUSE_LAT: "{{ .HOME_LAT }}"
+        HP_VAR_WID_HOUSE_LONG: "{{ .HOME_LONG }}"
+
+        ## services
+        HP_VAR_SVC_: "{{  }}"
+        HP_VAR_SVC_PROX_URL: "{{ .HP_PM_URL }}"
+        HP_VAR_SVC_PROX_USER: "{{ .HP_PM_TOKEN }}"
+        HP_VAR_SVC_PROX_PASS: "{{ .HP_PM_SECRET }}"
+
+        HP_VAR_SVC_PORT_URL: "{{ HP_PORT_URL }}"
+        HP_VAR_SVC_PORT_ENV: "{{ HP_PORT_ENV }}"
+        HP_VAR_SVC_PORT_PASS: "{{ HP_PORT_SECRET }}"
+
+        HP_VAR_SVC_AGH_A_URL: "{{ .HP_AGH_A_URL }}"
+        HP_VAR_SVC_AGH_A_USER: "{{ .HP_AGH_A_TOKEN }}"
+        HP_VAR_SVC_AGH_A_PASS: "{{ .HP_AGH_A_SECRET }}"
+
+        HP_VAR_SVC_UPKU_URL: "{{ .UPKU_URL }}"
+        HP_VAR_SVC_UPKU_SLUG: "{{ .UPKU_HP_SLUG }}"
+        HP_VAR_SVC_UPKU_PASS: "{{ .UPKU_HP_API_SECRET }}"
+
+        HP_VAR_SVC_PBS_URL: "{{ .PBS_URL }}"
+        HP_VAR_SVC_PBS_USER: "{{ .PBS_HP_TOKEN }}"
+        HP_VAR_SVC_PBS_PASS: "{{ .PBS_HP_SECRET }}"
+
+        HP_VAR_SVC_PNUT_URL: "{{ .PNUT_A_URL }}"
+        HP_VAR_SVC_PNUT_KEY: "{{ .PNUT_A_KEY }}"
+
+        HP_VAR_SVC_GITEA_HREF_URL: "{{ .GITEA_HOME_URL }}"
+        HP_VAR_SVC_GITEA_LOCAL_URL: "{{ .GITEA_LOCAL_URL }}"
+        HP_VAR_SVC_GITEA_PASS: "{{ .GITEA_HP_SECRET }}"
+
+        HP_VAR_SVC_PPRL_URL: "{{ .PPRL_URL }}"
+        HP_VAR_SVC_PPRL_PASS: "{{ .PPRL_HP_SECRET }}"
+
+  dataFrom:
+    - extract:
+        key: house
+    - extract:
+        key: homepage
+    - extract:
+        key: openweathermap
+    - extract:
+        key: weatherapi
+    - extract:
+        key: house
+    - extract:
+        key: proxmox
+    - extract:
+        key: portainer
+    - extract:
+        key: adguard-home
+    - extract:
+        key: uptime-kuma
+    - extract:
+        key: proxmox-backup-server
+    - extract:
+        key: peanut
+    - extract:
+        key: gitea
+    - extract:
+        key: paperless
