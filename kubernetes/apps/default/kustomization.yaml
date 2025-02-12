@@ -9,6 +9,6 @@ resources:
   - ./atuin/ks.yaml
   - ./echo-server/ks.yaml
   - ./hajimari/ks.yaml
-  - ./homepage/ks.yaml
+  # - ./homepage/ks.yaml
   - ./it-tools/ks.yaml
   - ./pinchflat/ks.yaml
