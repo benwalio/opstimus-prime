@@ -37,8 +37,8 @@ data:
       media-remote:
 
     providers:
-      openweathermap: {{ HP_VAR_PROV_OWM_API }}
-      weatherapi: {{ HP_VAR_PROV_WAPI_API }}
+      openweathermap: {{HP_VAR_PROV_OWM_API}}
+      weatherapi: {{HP_VAR_PROV_WAPI_API}}
 
   widgets.yaml: |
     ---
@@ -62,13 +62,13 @@ data:
 
     - unifi_console:
         url: https://192.168.0.1
-        username: {{ HP_VAR_WID_UBI_USER }}
-        password: {{ HP_VAR_WID_UBI_PASS }}
+        username: {{HP_VAR_WID_UBI_USER}}
+        password: {{HP_VAR_WID_UBI_PASS}}
 
     - openweathermap:
         label: Home #optional
-        latitude: {{ HP_VAR_WID_HOUSE_LAT }}
-        longitude: {{ HP_VAR_WID_HOUSE_LONG }}
+        latitude: {{HP_VAR_WID_HOUSE_LAT}}
+        longitude: {{HP_VAR_WID_HOUSE_LONG}}
         units: imperial
         provider: openweathermap
         cache: 5 # Time in minutes to cache API responses, to stay within limits
