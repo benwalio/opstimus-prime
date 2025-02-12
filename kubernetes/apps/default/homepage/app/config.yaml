@@ -3,9 +3,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: &app homepage
-  annotations:
-    reloader.stakater.com/match: "true"
+  name: homepage-config
+  labels:
+    app.kubernetes.io/name: homepage
 data:
   settings.yaml: |
     ---

@@ -37,9 +37,10 @@ spec:
 
     controllers:
       homepage:
-        strategy: Recreate
+        replicas: 2
+        strategy: RollingUpdate
         annotations:
-          reloader.stakater.com/search: "true"
+          reloader.stakater.com/auto: "true"
 
         containers:
           app:
@@ -57,10 +58,7 @@ spec:
                 cpu: 25m
                 memory: 105M
               limits:
-                memory: 225M
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities: { drop: ["ALL"] }
+                memory: 2G
     serviceAccount:
       # allow scraping of k8s resources for widget
       create: true
@@ -86,7 +84,7 @@ spec:
     persistence:
       config:
         type: configMap
-        name: *app
+        name: homepage-config
         globalMounts:
           - subPath: settings.yaml
             path: /app/config/settings.yaml
