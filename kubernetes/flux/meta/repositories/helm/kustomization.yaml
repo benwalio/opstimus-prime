@@ -12,6 +12,7 @@ resources:
   - ./coredns.yaml
   - ./csi-driver-nfs.yaml
   - ./descheduler.yaml
+  - ./dragonfly.yaml
   - ./emqx.yaml
   - ./external-dns.yaml
   - ./external-secrets.yaml
