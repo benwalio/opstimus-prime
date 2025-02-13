@@ -10,7 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/main/apps/storage/dragonfly-operator/app
+  path: ./kubernetes/apps/storage/dragonfly-operator/app
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -31,7 +31,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/main/apps/storage/dragonfly-operator/cluster
+  path: ./kubernetes/apps/storage/dragonfly-operator/cluster
   sourceRef:
     kind: GitRepository
     name: flux-system
