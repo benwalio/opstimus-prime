@@ -7,7 +7,7 @@ components:
   - ../../flux/components/common
 resources:
   - ./cloudnative-pg/ks.yaml
-  # - ./dragonfly-operator/ks.yaml
+  - ./dragonfly-operator/ks.yaml
   - ./minio/ks.yaml
   - ./openebs/ks.yaml
   - ./snapshot-controller/ks.yaml

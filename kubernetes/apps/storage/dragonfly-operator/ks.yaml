@@ -38,9 +38,11 @@ spec:
     namespace: flux-system
   dependsOn:
     - name: dragonfly-operator
-      namespace: storage
+      namespace: *namespace
     - name: rook-ceph-cluster
       namespace: rook-ceph
+    - name: onepassword-store
+      namespace: security
   prune: true
   wait: false
   interval: 30m

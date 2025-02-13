@@ -15,12 +15,16 @@ spec:
         name: dragonfly
         namespace: flux-system
   install:
+    crds: CreateReplace
     remediation:
       retries: 3
   upgrade:
+    crds: CreateReplace
     cleanupOnFail: true
     remediation:
       retries: 3
+  uninstall:
+    keepHistory: false
   values:
     serviceMonitor:
       enabled: false
