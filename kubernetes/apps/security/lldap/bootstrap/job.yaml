@@ -50,8 +50,8 @@ spec:
               - secret:
                   name: lldap-config-secret
                   items:
-                    - key: users.json
-                      path: user-configs.json
+                    - key: user0.json
+                      path: user0-configs.json
 
         - name: group-configs
           projected:

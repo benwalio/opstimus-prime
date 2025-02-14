@@ -12,18 +12,16 @@ spec:
     name: lldap-config-secret
     template:
       data:
-        users.json: |
-          [
-            {
-              "id": "{{ .LLDAP_USER_0_ID }}",
-              "email": "{{ .LLDAP_USER_0_EMAIL }}",
-              "password": "{{ .LLDAP_USER_0_PASS }}",
-              "displayName": "{{ .LLDAP_USER_0_DNAME }}",
-              "firstName": "{{ .LLDAP_USER_0_FNAME }}",
-              "lastName": "{{ .LLDAP_USER_0_LNAME }}",
-              "gravatar_avatar": "false"
-            }
-          ]
+        user0.json: |
+          {
+            "id": "{{ .LLDAP_USER_0_ID }}",
+            "email": "{{ .LLDAP_USER_0_EMAIL }}",
+            "password": "{{ .LLDAP_USER_0_PASS }}",
+            "displayName": "{{ .LLDAP_USER_0_DNAME }}",
+            "firstName": "{{ .LLDAP_USER_0_FNAME }}",
+            "lastName": "{{ .LLDAP_USER_0_LNAME }}",
+            "gravatar_avatar": "false"
+          }
         group0.json: |
           {
             "name": "superusers"
