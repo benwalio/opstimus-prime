@@ -26,7 +26,7 @@ spec:
         AUTHENTIK_POSTGRESQL__USE_PGBOUNCER: "false"
         AUTHENTIK_POSTGRESQL__SSLMODE: "require"
         # initdb
-        INIT_POSTGRES_HOST: "{{ .PG_RW_INTERNAL_HOST }}"
+        INIT_POSTGRES_HOST: "{{ .PG16_RW_INTERNAL_HOST }}"
         INIT_POSTGRES_USER: "{{ .AK_PG_USER }}"
         INIT_POSTGRES_PASS: "{{ .AK_PG_PASS }}"
         INIT_POSTGRES_DBNAME: "{{ .AK_PG_DB }}"
