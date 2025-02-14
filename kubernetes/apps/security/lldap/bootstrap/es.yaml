@@ -21,9 +21,18 @@ spec:
               "displayName": "{{ .LLDAP_USER_0_DNAME }}",
               "firstName": "{{ .LLDAP_USER_0_FNAME }}",
               "lastName": "{{ .LLDAP_USER_0_LNAME }}",
-              "gravatar_avatar": "false",
+              "gravatar_avatar": "false"
             }
           ]
+        group0.json: |
+          {
+            "name": "superusers"
+          }
+        group1.json: |
+          {
+            "name": "appusers"
+          }
+
   dataFrom:
     - extract:
         key: lldap

@@ -31,9 +31,9 @@ spec:
               mountPath: /bootstrap/user-configs
               readOnly: true
 
-            # - name: group-configs
-            #   mountPath: /bootstrap/group-configs
-            #   readOnly: true
+            - name: group-configs
+              mountPath: /bootstrap/group-configs
+              readOnly: true
 
       volumes:
         - name: bootstrap
@@ -53,11 +53,13 @@ spec:
                     - key: users.json
                       path: user-configs.json
 
-        # - name: group-configs
-        #   projected:
-        #     sources:
-        #       - secret:
-        #           name: lldap-bootstrap-configs
-        #           items:
-        #             - key: group-configs.json
-        #               path: group-configs.json
+        - name: group-configs
+          projected:
+            sources:
+              - secret:
+                  name: lldap-config-secret
+                  items:
+                    - key: group0.json
+                      path: group0-config.json
+                    - key: group1.json
+                      path: group1-config.json
