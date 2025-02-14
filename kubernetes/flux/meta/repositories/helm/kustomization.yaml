@@ -19,6 +19,7 @@ resources:
   - ./external-secrets.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
+  - ./headlamp.yaml
   - ./intel.yaml
   - ./ingress-nginx.yaml
   - ./jetstack.yaml
@@ -32,4 +33,5 @@ resources:
   - ./spegel.yaml
   - ./stakater.yaml
   - ./tailscale.yaml
+  - ./tofu-controller.yaml
   - ./wiremind.yaml

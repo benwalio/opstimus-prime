@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: cluster-settings
 data:
-  SETTING_EXAMPLE: This value will be available to all YAML resources as ${SETTING_EXAMPLE}
+  CLUSTER: prod
   TIMEZONE: America/New_York
   GHUB_HTTP_URL: https://github.com/benwalio/opstimus-prime
   GHUB_SSH_URL: ssh://git@github.com:benwalio/opstimus-prime.git
