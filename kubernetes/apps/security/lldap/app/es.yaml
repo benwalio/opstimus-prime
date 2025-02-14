@@ -15,38 +15,8 @@ spec:
         LLDAP_JWT_SECRET: "{{ .LLDAP_JWT_SECRET }}"
         LLDAP_LDAP_USER_PASS: "{{ .LLDAP_USER_ADMIN_PASS }}"
         LLDAP_LDAP_BASE_DN: "{{ .LLDAP_USER_DN }}"
-        LLDAP_USER_DN: "{{ .LLDAP_USER_ADMIN_DN }}"
         LLDAP_LDAP_USER_EMAIL: "{{ .LLDAP_USER_ADMIN_EMAIL }}"
         LLDAP_SERVER_KEY_SEED: "{{ .LLDAP_SERVER_KEY_SEED }}"
-  dataFrom:
-    - extract:
-        key: lldap
----
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/external-secrets.io/externalsecret_v1beta1.json
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  name: lldap-config
-spec:
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: onepassword
-  target:
-    name: lldap-config-secret
-    template:
-      data:
-        users.json: |
-          [
-            {
-              "id": "{{ .LLDAP_USER_0_ID }}",
-              "email": "{{ .LLDAP_USER_0_EMAIL }}",
-              "password": "{{ .LLDAP_USER_0_PASS }}",
-              "displayName": "{{ .LLDAP_USER_0_DNAME }}",
-              "firstName": "{{ .LLDAP_USER_0_FNAME }}",
-              "lastName": "{{ .LLDAP_USER_0_LNAME }}",
-              "gravatar_avatar": "false",
-            }
-          ]
   dataFrom:
     - extract:
         key: lldap
