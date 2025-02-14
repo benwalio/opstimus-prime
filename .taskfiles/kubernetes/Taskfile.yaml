@@ -1,9 +1,8 @@
 ---
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
-version: '3'
+version: "3"
 
 tasks:
-
   browse-pvc:
     desc: Mount a PVC to an temp container [NS=default] [CLAIM=required]
     interactive: true
@@ -27,6 +26,24 @@ tasks:
       - kubectl get nodes {{.NODE}}
       - kubectl node-shell --version
       - which kubectl
+
+  # clean-pods-error:
+  #   desc: Clean 'Error' state pods [NS=default]
+  #   cmd: kubectl -n {{.NS}} get pods | grep Error | cut -d' ' -f 1 | xargs kubectl delete pod
+  #   vars:
+  #     NS: '{{.NS | default "default"}}'
+  #   preconditions:
+  #     # - kubectl get namespaces {{.NODE}}
+  #     - which kubectl
+
+  # clean-pods-completed:
+  #   desc: Clean 'Completed' state pods in NS [NS= required]
+  #   cmd: kubectl -n {{.NS}} get pods | grep Completed | cut -d' ' -f 1 | xargs kubectl delete pod
+  #   requires:
+  #     vars: [NS]
+  #   preconditions:
+  #     # - kubectl get namespaces {{.NODE}}
+  #     - which kubectl
 
   sync-secrets:
     desc: Sync all ExternalSecrets
