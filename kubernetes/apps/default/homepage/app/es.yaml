@@ -50,6 +50,8 @@ spec:
         HOMEPAGE_VAR_SVC_PPRL_URL: "{{ .PPRL_URL }}"
         HOMEPAGE_VAR_SVC_PPRL_PASS: "{{ .PPRL_HP_SECRET }}"
 
+        HOMEPAGE_VAR_SVC_AK_TOKEN: "{{ .AK_TOKEN }}"
+
   dataFrom:
     - extract:
         key: house
