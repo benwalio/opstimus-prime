@@ -79,3 +79,5 @@ spec:
         key: gitea
     - extract:
         key: paperless
+    - extract:
+        key: authentik
