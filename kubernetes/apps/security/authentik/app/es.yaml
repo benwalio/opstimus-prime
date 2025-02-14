@@ -20,7 +20,7 @@ spec:
         AUTHENTIK_REDIS__DB: "1"
         # Database
         AUTHENTIK_POSTGRESQL__NAME: "{{ .AK_PG_DB }}"
-        AUTHENTIK_POSTGRESQL__HOST: "{{ .PG_RW_INTERNAL_HOST }}" #pgBouncer is set to session for Grafana, and Authentik requires transaction
+        AUTHENTIK_POSTGRESQL__HOST: "{{ .PG16_RW_INTERNAL_HOST }}" #pgBouncer is set to session for Grafana, and Authentik requires transaction
         AUTHENTIK_POSTGRESQL__USER: "{{ .AK_PG_USER }}"
         AUTHENTIK_POSTGRESQL__PASSWORD: "{{ .AK_PG_PASS }}"
         AUTHENTIK_POSTGRESQL__USE_PGBOUNCER: "false"
