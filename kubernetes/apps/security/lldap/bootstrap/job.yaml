@@ -38,7 +38,7 @@ spec:
       volumes:
         - name: bootstrap
           configMap:
-            name: bootstrap
+            name: lldap-bootstrap-config
             defaultMode: 0555
             items:
               - key: bootstrap.sh
