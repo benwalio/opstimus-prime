@@ -31,7 +31,15 @@ spec:
       lldap:
         annotations:
           reloader.stakater.com/auto: "true"
-          secret.reloader.stakater.com/reload: lldap-db-secret
+          secret.reloader.stakater.com/reload: &dbsecret lldap-db-secret
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: "16.6"
+            envFrom:
+              - secretRef:
+                  name: *dbsecret
         containers:
           app:
             image:
@@ -46,7 +54,7 @@ spec:
               - secretRef:
                   name: lldap-secret
               - secretRef:
-                  name: lldap-db-secret
+                  name: *dbsecret
             resources:
               requests:
                 cpu: 100m
