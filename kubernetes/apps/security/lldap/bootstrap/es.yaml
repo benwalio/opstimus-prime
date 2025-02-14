@@ -20,7 +20,10 @@ spec:
             "displayName": "{{ .LLDAP_USER_0_DNAME }}",
             "firstName": "{{ .LLDAP_USER_0_FNAME }}",
             "lastName": "{{ .LLDAP_USER_0_LNAME }}",
-            "gravatar_avatar": "false"
+            "gravatar_avatar": "false",
+            "groups": [
+              "superusers""
+            ]
           }
         group0.json: |
           {
