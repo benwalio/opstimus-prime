@@ -40,6 +40,13 @@ spec:
     ingress:
       enabled: true
       ingressClassName: internal
+      annotations:
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/description: cluster view
+        gethomepage.dev/group: observe
+        gethomepage.dev/icon: sh-target.svg
+        gethomepage.dev/name: headlamp
+        gethomepage.dev/app: *app
       hosts:
         - host: headlamp.${SECRET_DOMAIN}
           paths:
