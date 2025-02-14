@@ -48,7 +48,7 @@ spec:
           projected:
             sources:
               - secret:
-                  name: lldap-config
+                  name: lldap-config-secret
                   items:
                     - key: users.json
                       path: user-configs.json
