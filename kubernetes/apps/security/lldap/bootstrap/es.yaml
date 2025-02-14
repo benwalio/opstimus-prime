@@ -12,6 +12,20 @@ spec:
     name: lldap-config-secret
     template:
       data:
+        searchuser.json: |
+          {
+            "id": "{{ .LLDAP_USER_SEARCH_ID }}",
+            "email": "{{ .LLDAP_USER_SEARCH_EMAIL }}",
+            "password": "{{ .LLDAP_USER_SEARCH_PASS }}",
+            "displayName": "{{ .LLDAP_USER_SEARCH_DNAME }}",
+            "firstName": "{{ .LLDAP_USER_SEARCH_FNAME }}",
+            "lastName": "{{ .LLDAP_USER_SEARCH_LNAME }}",
+            "gravatar_avatar": "false",
+            "groups": [
+              "lldap_strict_readonly""
+            ]
+          }
+
         user0.json: |
           {
             "id": "{{ .LLDAP_USER_0_ID }}",

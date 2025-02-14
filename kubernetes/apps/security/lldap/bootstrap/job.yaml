@@ -50,6 +50,8 @@ spec:
               - secret:
                   name: lldap-config-secret
                   items:
+                    - key: searchuser.json
+                      path: searchuser-configs.json
                     - key: user0.json
                       path: user0-configs.json
 
