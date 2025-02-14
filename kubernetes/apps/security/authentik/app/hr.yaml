@@ -1,0 +1,80 @@
+---
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: authentik
+      version: 2024.12.3
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    global:
+      podAnnotations:
+        secret.reloader.stakater.com/reload: &secret authentik-secret
+      deploymentStrategy:
+        type: RollingUpdate
+      envFrom:
+        - secretRef:
+            name: authentik-secret
+    authentik:
+      redis:
+        host: dragonfly.storage.svc.cluster.local
+    server:
+      initContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:16.6@sha256:a37bbb04a0ea3f15b505c6f97637e7ae89bc66541ae23b8d3848024087980e76
+          envFrom:
+            - secretRef:
+                name: *secret
+      autoscaling:
+        enabled: true
+        minReplicas: 1
+      resources:
+        requests:
+          cpu: 200m
+        limits:
+          memory: 1Gi
+      metrics:
+        prometheus:
+          serviceMonitor:
+            enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: external
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: authentik.png
+          gethomepage.dev/name: Authentik
+          gethomepage.dev/group: infra
+          gethomepage.dev/app: authentik
+          gethomepage.dev/description: OIDC User Management
+          gethomepage.dev/widget.type: authentik
+          gethomepage.dev/widget.url: http://authentik-server.security
+          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_AUTHENTIK_TOKEN}}"
+        hosts:
+          - sso.${SECRET_DOMAIN}
+        https: false
+    worker:
+      autoscaling:
+        enabled: true
+        minReplicas: 1
+      resources:
+        requests:
+          cpu: 200m
+        limits:
+          memory: 1Gi

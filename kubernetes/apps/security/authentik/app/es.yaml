@@ -1,0 +1,42 @@
+---
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: &name authentik-secret
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword
+  target:
+    name: *name
+    template:
+      data:
+        # Authentik
+        AUTHENTIK_BOOTSTRAP_EMAIL: "{{ .AK_ADMIN_EMAIL }}"
+        AUTHENTIK_BOOTSTRAP_PASSWORD: "{{ .AK_ADMIN_PASS }}"
+        AUTHENTIK_BOOTSTRAP_TOKEN: "{{ .AUTHENTIK_TOKEN }}"
+        AUTHENTIK_SECRET_KEY: "{{ .AK_TOKEN }}"
+        AUTHENTIK_REDIS__DB: "1"
+        # Database
+        AUTHENTIK_POSTGRESQL__NAME: "{{ .AK_PG_DB }}"
+        AUTHENTIK_POSTGRESQL__HOST: "{{ .PG_RW_INTERNAL_HOST }}" #pgBouncer is set to session for Grafana, and Authentik requires transaction
+        AUTHENTIK_POSTGRESQL__USER: "{{ .AK_PG_USER }}"
+        AUTHENTIK_POSTGRESQL__PASSWORD: "{{ .AK_PG_PASS }}"
+        AUTHENTIK_POSTGRESQL__USE_PGBOUNCER: "false"
+        AUTHENTIK_POSTGRESQL__SSLMODE: "require"
+        INIT_POSTGRES_SUPER_PASS: "{{ .POSTGRES_SUPER_USER }}"
+        # email
+        AUTHENTIK_EMAIL__HOST: "{{ .EXTERNAL_SMTP_HOST }}"
+        AUTHENTIK_EMAIL__PORT: "{{ .EXTERNAL_SMTP_PORT }}"
+        AUTHENTIK_EMAIL__USERNAME: "{{ .EXTERNAL_SMTP_USER }}"
+        AUTHENTIK_EMAIL__PASSWORD: "{{ .EXTERNAL_SMTP_PASS }}"
+        AUTHENTIK_EMAIL__USE_SSL: "true"
+        AUTHENTIK_EMAIL__FROM: "{{ .EXTERNAL_SMTP_FROM_EMAIL }}"
+  dataFrom:
+    - extract:
+        key: authentik
+    - extract:
+        key: cloudnative-pg
+    - extract:
+        key: external-smtp
