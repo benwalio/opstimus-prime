@@ -30,7 +30,7 @@ spec:
         type: RollingUpdate
       envFrom:
         - secretRef:
-            name: authentik-secret
+            name: *secret
     authentik:
       redis:
         host: dragonfly.storage.svc.cluster.local

@@ -15,8 +15,8 @@ spec:
         # Authentik
         AUTHENTIK_BOOTSTRAP_EMAIL: "{{ .AK_ADMIN_EMAIL }}"
         AUTHENTIK_BOOTSTRAP_PASSWORD: "{{ .AK_ADMIN_PASS }}"
-        AUTHENTIK_BOOTSTRAP_TOKEN: "{{ .AUTHENTIK_TOKEN }}"
-        AUTHENTIK_SECRET_KEY: "{{ .AK_TOKEN }}"
+        AUTHENTIK_BOOTSTRAP_TOKEN: "{{ .AK_TOKEN }}"
+        AUTHENTIK_SECRET_KEY: "{{ .AK_SECRET_KEY }}"
         AUTHENTIK_REDIS__DB: "1"
         # Database
         AUTHENTIK_POSTGRESQL__NAME: "{{ .AK_PG_DB }}"
