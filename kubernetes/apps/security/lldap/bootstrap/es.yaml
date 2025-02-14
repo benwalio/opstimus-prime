@@ -22,7 +22,7 @@ spec:
             "lastName": "{{ .LLDAP_USER_SEARCH_LNAME }}",
             "gravatar_avatar": "false",
             "groups": [
-              "lldap_strict_readonly""
+              "lldap_strict_readonly"
             ]
           }
 
@@ -36,7 +36,7 @@ spec:
             "lastName": "{{ .LLDAP_USER_0_LNAME }}",
             "gravatar_avatar": "false",
             "groups": [
-              "superusers""
+              "superusers"
             ]
           }
         group0.json: |
