@@ -1,0 +1,63 @@
+---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.18.1-standalone-strict/configmap-v1.json
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lldap-config
+  labels:
+    app.kubernetes.io/name: lldap
+data:
+  #   {
+  #   "id": "username",
+  #   "email": "username@example.com",
+  #   "password": "changeme",
+  #   "displayName": "Display Name",
+  #   "firstName": "First",
+  #   "lastName": "Last",
+  #   "avatar_file": "/path/to/avatar.jpg",
+  #   "avatar_url": "https://i.imgur.com/nbCxk3z.jpg",
+  #   "gravatar_avatar": "false",
+  #   "weserv_avatar": "false",
+  #   "groups": [
+  #     "group-1",
+  #     "group-2"
+  #   ]
+  # }
+  users.json: |
+    [
+    ]
+  # {
+  #   "name": "group-1"
+  # }
+  # {
+  #   "name": "group-2"
+  # }
+  groups.json: |
+    [
+    ]
+  # [
+  #   {
+  #     "name": "uid",
+  #     "attributeType": "INTEGER",
+  #     "isEditable": false,
+  #     "isList": false,
+  #     "isVisible": true
+  #   },
+  #   {
+  #     "name": "mailbox",
+  #     "attributeType": "STRING",
+  #     "isEditable": false,
+  #     "isList": false,
+  #     "isVisible": true
+  #   },
+  #   {
+  #     "name": "mail_alias",
+  #     "attributeType": "STRING",
+  #     "isEditable": false,
+  #     "isList": true,
+  #     "isVisible": true
+  #   }
+  # ]
+  schemas.json: |
+    [
+    ]

@@ -23,6 +23,7 @@ includes:
   kubernetes: .taskfiles/kubernetes
   sops: .taskfiles/sops
   talos: .taskfiles/talos
+  tools: .taskfiles/tools
   workstation: .taskfiles/workstation
 
 tasks:

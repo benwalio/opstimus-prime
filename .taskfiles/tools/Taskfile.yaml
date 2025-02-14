@@ -1,0 +1,14 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+  gen-jwt:
+    desc: Generate jwt (rand hex 32)
+    cmds:
+      - openssl rand -hex 32
+
+  gen-oauth:
+    desc: Generate oauth secret (rand hex 64)
+    cmds:
+      - openssl rand -hex 64
