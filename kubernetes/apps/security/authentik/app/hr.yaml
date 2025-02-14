@@ -36,7 +36,7 @@ spec:
         host: dragonfly.storage.svc.cluster.local
     server:
       initContainers:
-        init-db:
+        - name: init-db
           image:
             repository: ghcr.io/buroa/postgres-init
             tag: 17
