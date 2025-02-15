@@ -1,0 +1,13 @@
+version: 2
+
+secret:
+  # Exclude files and paths by globbing
+  ignored_paths:
+    - "**/README.md"
+    - "LICENSE"
+    - "**/*.tf"
+
+  # Ignore security incidents with the SHA256 of the occurrence obtained at output or the secret itself
+  ignored_matches:
+    - name: tfm_opitem_pg
+      match: 6e0d657eb1f0fbc40cf0b8f3c3873ef627cc9cb7c4108d1c07d979c04bc8a4bb
