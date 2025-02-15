@@ -15,7 +15,11 @@ talosconfig
 # Ansible
 .venv*
 # terraform
-.terraform*
+.terraform
+.terraform.tfstate*
+.terraform.lock.hcl
+terraform.tfstate*
+*.tfvars
 # Taskfile
 .task
 # Brew
