@@ -39,13 +39,13 @@ module "onepassword_lldap" {
 
 data "authentik_property_mapping_source_ldap" "lldap_user_mappings" {
   managed_list = [
-    "goauthentik.io/sources/ldap/default-mail"
-    , "goauthentik.io/sources/ldap/default-name",
+    "goauthentik.io/sources/ldap/default-mail",
+    "goauthentik.io/sources/ldap/default-name",
     "goauthentik.io/sources/ldap/ms-givenName",
     "goauthentik.io/sources/ldap/ms-sn",
     "goauthentik.io/sources/ldap/openldap-cn",
     "goauthentik.io/sources/ldap/openldap-uid"
-    ]
+  ]
 }
 
 data "authentik_property_mapping_source_ldap" "lldap_group_mappings" {
