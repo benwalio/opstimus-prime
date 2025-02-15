@@ -4,6 +4,11 @@ terraform {
       source  = "aminueza/minio"
       version = "3.2.4"
     }
+
+    onepassword = {
+      source  = "1Password/onepassword"
+      version = "2.1.2"
+    }
   }
 }
 
@@ -42,4 +47,41 @@ EOF
 resource "minio_iam_user_policy_attachment" "attachment" {
   user_name   = minio_iam_user.user.id
   policy_name = minio_iam_policy.policy.id
+}
+
+resource "minio_iam_service_account" "service_account" {
+  target_user = minio_iam_user.user.name
+  description = minio_iam_user.user.name
+}
+
+resource "onepassword_item" "item" {
+  vault    = var.onepassword_vault
+  title    = var.onepassword_item
+  category = "login"
+
+  section {
+    label = "MINIO"
+    field {
+      label = "${var.onepassword_slug}_MINIO_UI_USER"
+      type  = "STRING"
+      value = var.user_name
+    }
+
+    field {
+      label = "${var.onepassword_slug}_MINIO_UI_PASS"
+      type  = "CONCEALED"
+      value = var.user_secret
+    }
+
+    field {
+      label = "${var.onepassword_slug}_MINIO_ACCESS_KEY"
+      type  = "STRING"
+      value = minio_iam_service_account.service_account.access_key
+    }
+    field {
+      label = "${var.onepassword_slug}_MINIO_SECRET_KEY"
+      type  = "CONCEALED"
+      value = minio_iam_service_account.service_account.secret_key
+    }
+  }
 }
