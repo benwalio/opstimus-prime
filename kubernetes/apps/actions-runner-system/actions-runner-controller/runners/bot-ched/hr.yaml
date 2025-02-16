@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &name opstimus-runner
+  name: &name bot-ched-runner
 spec:
   interval: 30m
   chart:
@@ -31,17 +31,17 @@ spec:
     - targetPath: githubConfigSecret.github_app_id
       kind: Secret
       name: actions-runner-controller-secret
-      valuesKey: OB_ARC_GITHUB_APP_ID
+      valuesKey: BC_ARC_GITHUB_APP_ID
     - targetPath: githubConfigSecret.github_app_installation_id
       kind: Secret
       name: actions-runner-controller-secret
-      valuesKey: OB_ARC_GITHUB_INSTALLATION_ID
+      valuesKey: BC_ARC_GITHUB_INSTALLATION_ID
     - targetPath: githubConfigSecret.github_app_private_key
       kind: Secret
       name: actions-runner-controller-secret
-      valuesKey: OB_ARC_GITHUB_PRIVATE_KEY
+      valuesKey: BC_ARC_GITHUB_PRIVATE_KEY
   values:
-    githubConfigUrl: "${GHUB_HTTP_URL}"
+    githubConfigUrl: "https://github.com/benwalio"
     minRunners: 1
     maxRunners: 3
     containerMode:
