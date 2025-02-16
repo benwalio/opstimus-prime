@@ -12,3 +12,11 @@ tasks:
     desc: Generate oauth secret (rand hex 64)
     cmds:
       - openssl rand -hex 64
+
+  gen-oidc:
+    desc: Generate oidc pairs
+    cmds:
+      - echo "Client ID"
+      - openssl rand -hex 32
+      - echo "Client Secret:"
+      - openssl rand -hex 64

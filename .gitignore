@@ -14,6 +14,12 @@ talosconfig
 .cache_ggshield
 # Ansible
 .venv*
+# terraform
+.terraform
+.terraform.tfstate*
+.terraform.lock.hcl
+terraform.tfstate*
+*.tfvars
 # Taskfile
 .task
 # Brew
@@ -23,3 +29,5 @@ Brewfile.lock.json
 # Bootstrap
 /config.yaml
 cloudflared.json
+# general
+*.bak
