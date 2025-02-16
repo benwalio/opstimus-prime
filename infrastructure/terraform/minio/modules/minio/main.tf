@@ -56,30 +56,36 @@ resource "minio_iam_service_account" "service_account" {
 
 resource "onepassword_item" "item" {
   vault    = var.onepassword_vault
-  title    = var.onepassword_item
+  title    = "${var.onepassword_item}-tfm-minio"
   category = "login"
+
+  username = var.user_name
+  password = var.user_secret
+
+  url  = "https://s3.benwal.rodeo"
+  tags = ["automation/terraform"]
 
   section {
     label = "MINIO"
     field {
-      label = "${var.onepassword_slug}_MINIO_UI_USER"
+      label = "MINIO_UI_USER"
       type  = "STRING"
       value = var.user_name
     }
 
     field {
-      label = "${var.onepassword_slug}_MINIO_UI_PASS"
+      label = "MINIO_UI_PASS"
       type  = "CONCEALED"
       value = var.user_secret
     }
 
     field {
-      label = "${var.onepassword_slug}_MINIO_ACCESS_KEY"
+      label = "MINIO_ACCESS_KEY"
       type  = "STRING"
       value = minio_iam_service_account.service_account.access_key
     }
     field {
-      label = "${var.onepassword_slug}_MINIO_SECRET_KEY"
+      label = "MINIO_SECRET_KEY"
       type  = "CONCEALED"
       value = minio_iam_service_account.service_account.secret_key
     }

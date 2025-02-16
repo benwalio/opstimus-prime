@@ -8,12 +8,16 @@ locals {
 }
 
 module "minio" {
-  source           = "./modules/minio"
-  bucket_name      = "dragonfly"
-  onepassword_item = "dragonfly"
-  onepassword_slug = "DF"
-  user_name        = random_password.user_name["dragonfly"].result
-  user_secret      = random_password.user_secret["dragonfly"].result
+  for_each          = toset(local.buckets)
+  source            = "./modules/minio"
+  onepassword_vault = data.onepassword_vault.kubernetes.uuid
+
+  bucket_name = each.key
+
+  user_name   = each.key
+  user_secret = random_password.user_secret[each.key].result
+
+  onepassword_item = each.key
 
   providers = {
     minio       = minio
@@ -21,47 +25,61 @@ module "minio" {
   }
 }
 
-module "minio" {
-  source           = "./modules/minio"
-  bucket_name      = "postgres"
-  onepassword_item = "postgres"
-  onepassword_slug = "PG"
-  user_name        = random_password.user_name["postgres"].result
-  user_secret      = random_password.user_secret["postgres"].result
+# module "minio" {
+#   source           = "./modules/minio"
+#   bucket_name      = "dragonfly"
+#   onepassword_item = "dragonfly"
+#   onepassword_slug = "DF"
+#   user_name        = random_password.user_name["dragonfly"].result
+#   user_secret      = random_password.user_secret["dragonfly"].result
 
-  providers = {
-    minio       = minio
-    onepassword = onepassword
-  }
-}
+#   providers = {
+#     minio       = minio
+#     onepassword = onepassword
+#   }
+# }
 
-module "minio" {
-  source           = "./modules/minio"
-  bucket_name      = "postgres16"
-  onepassword_item = "postgres"
-  onepassword_slug = "PG16"
-  user_name        = random_password.user_name["postgres16"].result
-  user_secret      = random_password.user_secret["postgres16"].result
+# module "minio" {
+#   source           = "./modules/minio"
+#   bucket_name      = "postgres"
+#   onepassword_item = "postgres"
+#   onepassword_slug = "PG"
+#   user_name        = random_password.user_name["postgres"].result
+#   user_secret      = random_password.user_secret["postgres"].result
 
-  providers = {
-    minio       = minio
-    onepassword = onepassword
-  }
-}
+#   providers = {
+#     minio       = minio
+#     onepassword = onepassword
+#   }
+# }
 
-module "minio" {
-  source           = "./modules/minio"
-  bucket_name      = "volsync"
-  onepassword_item = "volsync"
-  onepassword_slug = "VSYNC"
-  user_name        = random_password.user_name["volsync"].result
-  user_secret      = random_password.user_secret["volsync"].result
+# module "minio" {
+#   source           = "./modules/minio"
+#   bucket_name      = "postgres16"
+#   onepassword_item = "postgres"
+#   onepassword_slug = "PG16"
+#   user_name        = random_password.user_name["postgres16"].result
+#   user_secret      = random_password.user_secret["postgres16"].result
 
-  providers = {
-    minio       = minio
-    onepassword = onepassword
-  }
-}
+#   providers = {
+#     minio       = minio
+#     onepassword = onepassword
+#   }
+# }
+
+# module "minio" {
+#   source           = "./modules/minio"
+#   bucket_name      = "volsync"
+#   onepassword_item = "volsync"
+#   onepassword_slug = "VSYNC"
+#   user_name        = random_password.user_name["volsync"].result
+#   user_secret      = random_password.user_secret["volsync"].result
+
+#   providers = {
+#     minio       = minio
+#     onepassword = onepassword
+#   }
+# }
 
 # module "onepassword_dragonfly" {
 #   source = "github.com/joryirving/terraform-1password-item"

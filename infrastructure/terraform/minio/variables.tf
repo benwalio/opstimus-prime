@@ -17,3 +17,25 @@ variable "minio_url" {
   description = "Minio Server URL"
   default     = "s3.benwal.rodeo"
 }
+
+
+variable "minio_buckets" {
+  description = "Map of buckets for minio"
+  type        = map(any)
+
+  default = {
+    # dragonfly = {
+    #   op_item = "dragonfly-tfm-minio"
+    # }
+    # postgres = {
+    #   op_item = "cloudnative-pg-tfm-minio"
+    # }
+    postgres16 = {
+      op_item = "cloudnative-pg16-tfm-minio"
+    }
+    volsync = {
+      op_item = "volsync-tfm-minio"
+    }
+  }
+
+}
