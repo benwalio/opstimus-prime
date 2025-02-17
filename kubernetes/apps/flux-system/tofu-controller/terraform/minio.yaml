@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://kube-schemas.pages.dev/infra.contrib.fluxcd.io/terraform_v1alpha2.json
+---
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
 metadata:
@@ -13,7 +13,7 @@ spec:
         key    = "minio/minio.tfstate"
         region   = "main"
         endpoints = {
-          s3 = "https://s3.${SECRET_DOMAIN}"
+          s3 = "http://minio.storage.svc.cluster.local:9000"
         }
 
         skip_credentials_validation = true
@@ -23,13 +23,13 @@ spec:
         use_path_style              = true
       }
   backendConfigsFrom:
-  - kind: Secret
-    name: terraform-backend-secret
+    - kind: Secret
+      name: terraform-backend-secret
   path: ./minio
   sourceRef:
     kind: OCIRepository
     name: terraform
     namespace: flux-system
   varsFrom:
-  - kind: Secret
-    name: terraform-secret
+    - kind: Secret
+      name: terraform-secret

@@ -25,8 +25,8 @@ spec:
   values:
     runner:
       image:
-        repository: ghcr.io/joryirving/opentofu-runner
-        tag: 1.9.0@sha256:64c8f7b55a781373a9cafde7c6346d88a1c10649f23882dc1a370fd1284a794e
+        repository: ghcr.io/benwalio/opentofu-runner
+        tag: 1.9.0@sha256:eff1e7e09f82a4e7db9bb5995e9c8bbfe015d0a1dca7ffee2912e9b91a311f7e
     metrics:
       enabled: true
       serviceMonitor:

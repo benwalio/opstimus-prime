@@ -5,7 +5,7 @@ kind: OCIRepository
 metadata:
   name: terraform
 spec:
-  interval: 1m
+  interval: 1h
   url: oci://ghcr.io/joryirving/manifests/terraform
   ref:
     tag: main
