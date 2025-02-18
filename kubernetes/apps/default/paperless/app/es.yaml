@@ -1,0 +1,56 @@
+---
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: paperless
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword
+  target:
+    name: paperless-secret
+    template:
+      data:
+        # App
+        PAPERLESS_ADMIN_USER: "{{ .PPRL_ADMIN_USER }}"
+        PAPERLESS_ADMIN_PASSWORD: "{{ .PPRL_ADMIN_PASS }}"
+        PAPERLESS_SECRET_KEY: "{{ .PPRL_SECRET_KEY }}"
+        PAPERLESS_SOCIALACCOUNT_PROVIDERS: |-
+          {
+            "openid_connect": {
+                "APPS": [
+                    {
+                        "provider_id": "authentik",
+                        "name": "Authentik",
+                        "client_id": "{{ .PPRL_AK_CLIENT_ID }}",
+                        "secret": "{{ .PPRL_AK_CLIENT_SECRET }}",
+                        "settings": {
+                            "server_url": "https://sso.${SECRET_DOMAIN}/application/o/paperless/.well-known/openid-configuration"
+                        }
+                    }
+                ]
+            }
+          }
+        # Database
+        PAPERLESS_DBENGINE: postgresql
+        INIT_POSTGRES_DBNAME: "{{ .PPRL_PG_DB_NAME }}"
+        INIT_POSTGRES_HOST: "{{ .PG_RW_INTERNAL_HOST }}"
+        INIT_POSTGRES_SUPER_PASS: "{{ .POSTGRES_SUPER_PASS }}"
+        INIT_POSTGRES_USER: "{{ .PPRL_PG_DB_USER }}"
+        INIT_POSTGRES_PASS: "{{ .PPRL_PG_DB_PASS }}"
+
+        PAPERLESS_DBPORT: "{{ .PG_PORT }}"
+        PAPERLESS_DBNAME: "{{ .PPRL_PG_DB_NAME }}"
+        PAPERLESS_DBHOST: "{{ .PG_RW_INTERNAL_HOST }}"
+        PAPERLESS_DBUSER: "{{ .PPRL_PG_DB_USER }}"
+        PAPERLESS_DBPASS: "{{ .PPRL_PG_DB_PASS }}"
+        # user
+        USERMAP_UID: "{{ .PPRL_UID }}"
+        USERMAP_GID: "{{ .PPRL_GID }}"
+
+  dataFrom:
+    - extract:
+        key: paperless
+    - extract:
+        key: cloudnative-pg

@@ -11,4 +11,5 @@ resources:
   - ./hoarder/ks.yaml
   - ./homepage/ks.yaml
   - ./it-tools/ks.yaml
+  - ./paperless/ks.yaml
   - ./pinchflat/ks.yaml
