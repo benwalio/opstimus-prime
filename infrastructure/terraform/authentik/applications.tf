@@ -79,5 +79,5 @@ resource "authentik_application" "application" {
   open_in_new_tab    = true
   meta_icon          = each.value.icon_url
   meta_launch_url    = each.value.launch_url
-  policy_engine_mode = "all"
+  policy_engine_mode = "any"
 }
