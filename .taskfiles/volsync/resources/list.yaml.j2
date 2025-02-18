@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: volsync-unlock-{{ ENV.APP }}
+  name: {{ ENV.JOB }}
   namespace: {{ ENV.NS }}
 spec:
   ttlSecondsAfterFinished: 3600
@@ -13,23 +13,15 @@ spec:
       containers:
         - name: minio
           image: docker.io/restic/restic:latest
-          args: ["unlock", "--remove-all"]
+          args: ["snapshots"]
           envFrom:
             - secretRef:
                 name: {{ ENV.APP }}-volsync-minio-secret
-          volumeMounts:
-            - name: repository
-              mountPath: /repository
           resources: {}
         - name: r2
           image: docker.io/restic/restic:latest
-          args: ["unlock", "--remove-all"]
+          args: ["snapshots"]
           envFrom:
             - secretRef:
                 name: {{ ENV.APP }}-volsync-r2-secret
           resources: {}
-      volumes:
-        - name: repository
-          nfs:
-            server: expanse.internal
-            path: /mnt/eros/Volsync
