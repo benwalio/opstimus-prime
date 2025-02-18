@@ -1,10 +1,10 @@
 ## Authorization stages
 resource "authentik_stage_identification" "authentication-identification" {
   name                      = "authentication-identification"
-  user_fields               = ["username", "email"]
-  case_insensitive_matching = false
+  user_fields               = ["username", "email", "upn"]
+  case_insensitive_matching = true
   show_source_labels        = true
-  show_matched_user         = false
+  show_matched_user         = true
   password_stage            = authentik_stage_password.authentication-password.id
   recovery_flow             = authentik_flow.recovery.uuid
   sources                   = [authentik_source_ldap.lldap.uuid]
@@ -12,7 +12,7 @@ resource "authentik_stage_identification" "authentication-identification" {
 
 resource "authentik_stage_password" "authentication-password" {
   name                          = "authentication-password"
-  backends                      = ["authentik.core.auth.InbuiltBackend"]
+  backends                      = ["authentik.core.auth.InbuiltBackend", "authentik.sources.ldap.auth.LDAPBackend"]
   failed_attempts_before_cancel = 3
 }
 

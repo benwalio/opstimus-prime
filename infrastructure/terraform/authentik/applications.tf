@@ -33,14 +33,6 @@ locals {
   }
 }
 
-data "authentik_group" "appusers" {
-  name = "appusers"
-}
-
-data "authentik_group" "superusers" {
-  name = "superusers"
-}
-
 resource "authentik_provider_oauth2" "oauth2" {
   for_each              = local.applications
   name                  = each.key

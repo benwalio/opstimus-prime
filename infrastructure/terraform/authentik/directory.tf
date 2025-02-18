@@ -12,10 +12,6 @@ data "authentik_group" "admins" {
   name = "authentik Admins"
 }
 
-resource "authentik_group" "grafana_admin" {
-  name         = "Grafana Admins"
-  is_superuser = false
-}
 
 resource "authentik_group" "default" {
   for_each     = local.authentik_groups
@@ -23,11 +19,36 @@ resource "authentik_group" "default" {
   is_superuser = false
 }
 
+resource "authentik_group" "appusers" {
+  name = "authentik appusers"
+}
+
+
+resource "authentik_group" "grafana_admin" {
+  name         = "grafana admins"
+  is_superuser = false
+}
+
+resource "authentik_group" "superusers" {
+  name         = "authentik superusers"
+  is_superuser = true
+  parent       = authentik_group.appusers.id
+}
+
+
 resource "authentik_policy_binding" "application_policy_binding" {
   for_each = local.applications
 
   target = authentik_application.application[each.key].uuid
   group  = authentik_group.default[each.value.group].id
+  order  = 0
+}
+
+resource "authentik_policy_binding" "application_policy_binding_superusers" {
+  for_each = local.applications
+
+  target = authentik_application.application[each.key].uuid
+  group  = authentik_group.superusers.id
   order  = 0
 }
 
@@ -64,8 +85,9 @@ resource "authentik_source_ldap" "lldap" {
   bind_password = module.onepassword_lldap.fields["LLDAP_USER_ADMIN_PASS"]
   base_dn       = module.onepassword_lldap.fields["LLDAP_AK_BASE_DN"]
 
-  property_mappings = data.authentik_property_mapping_source_ldap.lldap_user_mappings.ids
+  password_login_update_internal_password = true
 
+  property_mappings       = data.authentik_property_mapping_source_ldap.lldap_user_mappings.ids
   property_mappings_group = data.authentik_property_mapping_source_ldap.lldap_group_mappings.ids
 
   user_path_template      = "LDAP/users"
