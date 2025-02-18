@@ -9,7 +9,7 @@ resources:
   - ./atuin/ks.yaml
   - ./echo-server/ks.yaml
   # - ./hajimari/ks.yaml
-  # - ./hoarder/ks.yaml
+  - ./hoarder/ks.yaml
   - ./homepage/ks.yaml
   - ./it-tools/ks.yaml
-  # - ./pinchflat/ks.yaml
+  - ./pinchflat/ks.yaml
