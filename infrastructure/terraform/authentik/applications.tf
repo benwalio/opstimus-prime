@@ -25,11 +25,11 @@ locals {
 }
 
 data "authentik_group" "appusers" {
-  name = "authentik appusers"
+  name = "appusers"
 }
 
 data "authentik_group" "superusers" {
-  name = "authentik superusers"
+  name = "superusers"
 }
 
 resource "authentik_provider_oauth2" "oauth2" {
