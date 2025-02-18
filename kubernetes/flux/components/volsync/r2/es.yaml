@@ -1,0 +1,23 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: "${APP}-volsync-r2"
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword
+  target:
+    name: "${APP}-volsync-r2-secret"
+    template:
+      data:
+        RESTIC_REPOSITORY: "s3:{{ .CF_R2_ENDPOINT }}/{{ .VSYNC_R2_BUCKET }}/${APP}"
+        RESTIC_PASSWORD: "{{ .VSYNC_RESTIC_PASS }}"
+        AWS_ACCESS_KEY_ID: "{{ .VSYNC_R2_ACCESS_KEY }}"
+        AWS_SECRET_ACCESS_KEY: "{{ .VSYNC_R2_SECRET_KEY }}"
+  dataFrom:
+    - extract:
+        key: volsync
+    - extract:
+        key: cloudflare

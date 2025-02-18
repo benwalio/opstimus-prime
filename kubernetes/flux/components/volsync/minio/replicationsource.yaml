@@ -5,12 +5,12 @@ kind: ReplicationSource
 metadata:
   name: ${APP}
 spec:
-  sourcePVC: "${VOLSYNC_CLAIM:-${APP}}-volsync"
+  sourcePVC: "${VOLSYNC_CLAIM:-${APP}}"
   trigger:
     schedule: "0 * * * *"
   restic:
-    copyMethod: Snapshot
-    repository: ${APP}-volsync-minio
+    copyMethod: "${VOLSYNC_COPYMETHOD:-Snapshot}"
+    repository: ${APP}-volsync-minio-secret
     cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-openebs-hostpath}"
     cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
     cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-1Gi}"

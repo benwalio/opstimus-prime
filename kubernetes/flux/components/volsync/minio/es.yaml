@@ -9,15 +9,17 @@ spec:
     kind: ClusterSecretStore
     name: onepassword
   target:
-    name: "${APP}-volsync-minio"
+    name: "${APP}-volsync-minio-secret"
     template:
       data:
-        RESTIC_REPOSITORY: "{{ .REPOSITORY_TEMPLATE }}/${APP}"
-        RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
+        RESTIC_REPOSITORY: "s3:http://{{ .MINIO_ENDPOINT }}:{{ .MINIO_PORT }}/{{ .MINIO_BUCKET }}/${APP}"
+        RESTIC_PASSWORD: "{{ .VSYNC_RESTIC_PASS }}"
         AWS_ACCESS_KEY_ID: "{{ .MINIO_VOLSYNC_KEY }}"
         AWS_SECRET_ACCESS_KEY: "{{ .MINIO_VOLSYNC_SECRET }}"
   dataFrom:
     - extract:
-        key: volsync-template
+        key: volsync-tfm-minio
+    - extract:
+        key: volsync
     - extract:
         key: minio

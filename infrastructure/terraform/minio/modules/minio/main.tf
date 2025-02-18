@@ -67,6 +67,7 @@ resource "onepassword_item" "item" {
 
   section {
     label = "MINIO"
+
     field {
       label = "MINIO_UI_USER"
       type  = "STRING"
@@ -88,6 +89,12 @@ resource "onepassword_item" "item" {
       label = "MINIO_SECRET_KEY"
       type  = "CONCEALED"
       value = minio_iam_service_account.service_account.secret_key
+    }
+
+    field {
+      label = "MINIO_BUCKET"
+      type  = "STRING"
+      value = var.bucket_name
     }
   }
 }

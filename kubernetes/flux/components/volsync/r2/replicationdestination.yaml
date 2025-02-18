@@ -6,11 +6,11 @@ metadata:
   name: "${APP}-dst"
 spec:
   trigger:
+    schedule: "30 0 * * *"
     manual: restore-once
-    schedule: "0 * * * *"
   restic:
     copyMethod: Snapshot
-    repository: "${APP}-volsync-minio-secret"
+    repository: "${APP}-volsync-r2-secret"
     cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-openebs-hostpath}"
     cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
     cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-2Gi}"
@@ -18,7 +18,7 @@ spec:
     volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-csi-ceph-blockpool}"
     accessModes:
       - "${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"
-    capacity: "${VOLSYNC_CAPACITY:-1Gi}"
+    capacity: "${VOLSYNC_CAPACITY:-2Gi}"
     # enableFileDeletion: true # Uncomment on next Volsync release
     # cleanupCachePVC: true # Uncomment on next Volsync release
     # cleanupTempPVC: true # Uncomment on next Volsync release
