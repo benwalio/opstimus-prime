@@ -9,7 +9,7 @@ spec:
     kind: ClusterSecretStore
     name: onepassword
   target:
-    name: headlamp-secret
+    name: headlamp-oidc
     template:
       data:
         # OIDC
