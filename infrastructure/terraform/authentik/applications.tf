@@ -24,6 +24,14 @@ locals {
   }
 }
 
+data "authentik_group" "appusers" {
+  name = "authentik appusers"
+}
+
+data "authentik_group" "superusers" {
+  name = "authentik superusers"
+}
+
 resource "authentik_provider_oauth2" "oauth2" {
   for_each              = local.applications
   name                  = each.key

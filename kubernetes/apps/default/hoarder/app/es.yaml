@@ -1,0 +1,21 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: hoarder
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword
+  target:
+    name: hoarder-secret
+    template:
+      data:
+        OIDC_CLIENT_ID: "{{ .HDR_AK_CLIENT_ID }}"
+        OIDC_CLIENT_SECRET: "{{ .HDR_AK_CLIENT_SECRET }}"
+        encryption_key: "{{ .HDR_ENC_KEY }}"
+        meilisearch_master_key: "{{ .HDR_MEILI_KEY }}"
+        OPENAI_API_KEY: "{{ .HDR_OAI_KEY }}"
+  dataFrom:
+    - extract:
+        key: hoarder
