@@ -33,6 +33,8 @@ spec:
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
       GF_SECURITY_ANGULAR_SUPPORT_ENABLED: true
       GF_SERVER_ROOT_URL: https://grafana.${SECRET_DOMAIN}
+    envFromSecrets:
+      - name: grafana-secret
     grafana.ini:
       analytics:
         check_for_updates: false
@@ -45,6 +47,19 @@ spec:
         org_role: Viewer
       news:
         news_feed_enabled: false
+      auth:
+        signout_redirect_url: https://sso.${SECRET_DOMAIN}/application/o/grafana/end-session/
+        oauth_auto_login: false
+        oauth_allow_insecure_email_lookup: true
+      auth.generic_oauth:
+        name: authentik
+        enabled: true
+        scopes: openid email profile
+        auth_url: https://sso.${SECRET_DOMAIN}/application/o/authorize/
+        token_url: https://sso.${SECRET_DOMAIN}/application/o/token/
+        api_url: https://sso.${SECRET_DOMAIN}/application/o/userinfo/
+        # Optionally map user groups to Grafana roles
+        role_attribute_path: contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'superusers') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'
     datasources:
       datasources.yaml:
         apiVersion: 1
