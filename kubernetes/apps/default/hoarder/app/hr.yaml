@@ -58,7 +58,7 @@ spec:
                   secretKeyRef:
                     name: hoarder-secret
                     key: OPENAI_API_KEY
-              OAUTH_WELLKNOWN_URL: https://sso.${SECRET_DOMAIN}/.well-known/openid-configuration
+              OAUTH_WELLKNOWN_URL: https://sso.${SECRET_DOMAIN}/application/o/hoarder/.well-known/openid-configuration
               OAUTH_CLIENT_SECRET:
                 valueFrom:
                   secretKeyRef:

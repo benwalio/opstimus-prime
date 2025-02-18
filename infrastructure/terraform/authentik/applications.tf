@@ -1,6 +1,7 @@
 locals {
   oauth_apps = [
-    "grafana"
+    "grafana",
+    "hoarder"
   ]
 }
 
@@ -20,6 +21,14 @@ locals {
       icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/grafana.png"
       redirect_uri  = "https://grafana.${var.cluster_domain}/login/generic_oauth"
       launch_url    = "https://grafana.${var.cluster_domain}/login/generic_oauth"
+    },
+    hoarder = {
+      client_id     = module.onepassword_application["hoarder"].fields["HDR_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["hoarder"].fields["HDR_AK_CLIENT_SECRET"]
+      group         = "monitoring"
+      icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/hoarder.png"
+      redirect_uri  = "https://hoarder.${var.cluster_domain}/api/auth/callback/custom"
+      launch_url    = "https://hoarder.${var.cluster_domain}/api/auth/callback/custom"
     }
   }
 }
