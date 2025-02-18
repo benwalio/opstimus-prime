@@ -6,7 +6,7 @@ namespace: default
 components:
   - ../../flux/components/common
 resources:
-  # - ./atuin/ks.yaml
+  - ./atuin/ks.yaml
   - ./echo-server/ks.yaml
   # - ./hajimari/ks.yaml
   # - ./hoarder/ks.yaml
