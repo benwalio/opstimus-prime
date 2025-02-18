@@ -1,7 +1,9 @@
 locals {
   oauth_apps = [
     "grafana",
-    "hoarder"
+    "headlamp",
+    "hoarder",
+    "paperless",
   ]
 }
 
@@ -22,6 +24,14 @@ locals {
       redirect_uri  = "https://grafana.${var.cluster_domain}/login/generic_oauth"
       launch_url    = "https://grafana.${var.cluster_domain}/login/generic_oauth"
     },
+    headlamp = {
+      client_id     = module.onepassword_application["headlamp"].fields["HL_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["headlamp"].fields["HL_AK_CLIENT_SECRET"]
+      group         = "infrastructure"
+      icon_url      = "https://raw.githubusercontent.com/headlamp-k8s/headlamp/refs/heads/main/frontend/src/resources/icon-dark.svg"
+      redirect_uri  = "https://headlamp.${var.cluster_domain}/oidc-callback"
+      launch_url    = "https://headlamp.${var.cluster_domain}/"
+    },
     hoarder = {
       client_id     = module.onepassword_application["hoarder"].fields["HDR_AK_CLIENT_ID"]
       client_secret = module.onepassword_application["hoarder"].fields["HDR_AK_CLIENT_SECRET"]
@@ -29,7 +39,15 @@ locals {
       icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/hoarder.png"
       redirect_uri  = "https://hoarder.${var.cluster_domain}/api/auth/callback/custom"
       launch_url    = "https://hoarder.${var.cluster_domain}/api/auth/callback/custom"
-    }
+    },
+    paperless = {
+      client_id     = module.onepassword_application["paperless"].fields["PPRL_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["paperless"].fields["PPRL_AK_CLIENT_SECRET"]
+      group         = "home"
+      icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/paperless.png"
+      redirect_uri  = "https://docs.${var.cluster_domain}/accounts/oidc/authentik/login/callback/"
+      launch_url    = "https://docs.${var.cluster_domain}/"
+    },
   }
 }
 
