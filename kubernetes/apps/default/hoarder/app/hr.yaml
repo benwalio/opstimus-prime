@@ -61,6 +61,7 @@ spec:
                   secretKeyRef:
                     name: hoarder-secret
                     key: OPENAI_API_KEY
+
               OAUTH_WELLKNOWN_URL: https://sso.${SECRET_DOMAIN}/application/o/hoarder/.well-known/openid-configuration
               OAUTH_CLIENT_SECRET:
                 valueFrom:
@@ -75,6 +76,9 @@ spec:
               OAUTH_PROVIDER_NAME: authentik
 
               DISABLE_NEW_RELEASE_CHECK: true
+
+              # https://github.com/nodejs/corepack/issues/612
+              COREPACK_INTEGRITY_KEYS: 0
             probes:
               liveness:
                 enabled: true
