@@ -14,7 +14,9 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+  maxHistory: 2
   install:
+    createNamespace: true
     remediation:
       retries: 3
   upgrade:
@@ -22,6 +24,8 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  uninstall:
+    keepHistory: false
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
@@ -36,12 +40,10 @@ spec:
             env:
               TZ: ${TIMEZONE}
               TITLE: *app
-              PUID: 65534
-              PGID: 65534
               UMASK: "022"
-            # envFrom: &envFrom
-            #   - secretRef:
-            #       name: &secret calibre-secret
+            envFrom: &envFrom
+              - secretRef:
+                  name: &secret calibre-secret
             probes:
               liveness:
                 enabled: true
@@ -52,24 +54,12 @@ spec:
                 spec:
                   failureThreshold: 30
                   periodSeconds: 5
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities:
-                drop: ["ALL"]
-                add: ["seccomp:unconfined"]
             resources:
               requests:
                 cpu: 100m
                 memory: 250M
               limits:
                 memory: 2Gi
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65534
-        runAsGroup: 65534
-        seccompProfile: { type: RuntimeDefault }
     service:
       main:
         controller: calibre
@@ -111,11 +101,14 @@ spec:
                   port: web
     persistence:
       config:
+        enabled: true
         existingClaim: *app
-      tmp:
-        type: emptyDir
+        globalMounts:
+          - path: /config
+
       books:
         type: nfs
+        enabled: true
         server: "${SECRET_NFS_SERVER}"
         path: "${SECRET_NFS_MOUNT_MEDIA}"
         globalMounts:
