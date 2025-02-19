@@ -32,6 +32,8 @@ spec:
   values:
     controllers:
       calibre:
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
@@ -41,6 +43,9 @@ spec:
               TZ: ${TIMEZONE}
               TITLE: *app
               UMASK: "022"
+            envFrom: &envFrom
+              - secretRef:
+                  name: &secret calibre-secret
             probes:
               liveness:
                 enabled: true
