@@ -108,7 +108,7 @@ spec:
         type: emptyDir
       books:
         type: nfs
-        server: "${SECRET_NFS_MOUNT}"
+        server: "${SECRET_NFS_SERVER}"
         path: "${SECRET_NFS_MOUNT_MEDIA}"
         globalMounts:
           - path: /data
