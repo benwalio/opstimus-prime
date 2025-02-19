@@ -41,9 +41,6 @@ spec:
               TZ: ${TIMEZONE}
               TITLE: *app
               UMASK: "022"
-            envFrom: &envFrom
-              - secretRef:
-                  name: &secret calibre-secret
             probes:
               liveness:
                 enabled: true
