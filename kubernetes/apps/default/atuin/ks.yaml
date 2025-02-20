@@ -12,6 +12,8 @@ spec:
   dependsOn:
     - name: onepassword-store
       namespace: security
+    - name: volsync
+      namespace: storage
   components:
     - ../../../../flux/components/gatus/guarded
     - ../../../../flux/components/volsync

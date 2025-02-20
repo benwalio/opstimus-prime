@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: pinchflat
+  name: &app pinchflat
 spec:
   interval: 30m
   chart:
@@ -95,13 +95,15 @@ spec:
                 service:
                   identifier: app
                   port: http
+
     persistence:
       config:
-        existingClaim: pinchflat
+        existingClaim: *app
       yt-dlp:
         type: emptyDir
         globalMounts:
           - path: /etc/yt-dlp
+
       media:
         type: nfs
         server: ${SECRET_NFS_SERVER}
@@ -111,5 +113,6 @@ spec:
             app:
               - path: /downloads
                 subPath: video/youtube/pinchflat
+
       tmp:
         type: emptyDir
