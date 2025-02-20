@@ -32,13 +32,6 @@ spec:
         labels:
           nfsMount: "true"
           postgres: "true"
-        pod:
-          securityContext:
-            runAsUser: 1003
-            runAsGroup: 100
-            runAsNonRoot: false
-            fsGroup: 100
-            fsGroupChangePolicy: OnRootMismatch
         initContainers:
           init-db:
             image:
