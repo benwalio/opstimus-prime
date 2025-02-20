@@ -36,7 +36,7 @@ spec:
           securityContext:
             runAsUser: 1003
             runAsGroup: 100
-            runAsNonRoot: true
+            runAsNonRoot: false
             fsGroup: 100
             fsGroupChangePolicy: OnRootMismatch
         initContainers:
