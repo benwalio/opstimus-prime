@@ -1,0 +1,113 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app n8n
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  values:
+    controllers:
+      n8n:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/buroa/postgres-init
+              tag: 17
+            envFrom:
+              - secretRef:
+                  name: n8n-dbinit-secret
+
+        pod:
+          securityContext:
+            runAsUser: 1003
+            runAsGroup: 100
+            fsGroup: 100
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/n8n-io/n8n
+              tag: 1.80.1
+            env:
+              EXECUTIONS_DATA_PRUNE: true
+              EXECUTIONS_DATA_MAX_AGE: 7
+              EXECUTIONS_DATA_PRUNE_MAX_COUNT: 50000
+              GENERIC_TIMEZONE: "${TIMEZONE}"
+              TZ: "${TIMEZONE}"
+              N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: false
+
+              N8N_PROTOCOL: "https"
+              N8N_PORT: &port 8080
+              N8N_HOST: &host n8n.${SECRET_DOMAIN}
+              WEBHOOK_URL: "https://n8n.$SECRET_DOMAIN}"
+              N8N_EDITOR_BASE_URL: *host
+
+              N8N_VERSION_NOTIFICATIONS_ENABLED: false
+              N8N_HIRING_BANNER_ENABLED: false
+              N8N_METRICS: true
+              N8N_RUNNERS_ENABLED: true
+              N8N_ONBOARDING_FLOW_DISABLED: true
+
+              N8N_LOG_LEVEL: info
+              N8N_LOG_OUTPUT: console
+
+              DB_TYPE: "postgresql"
+
+            envFrom:
+              - secretRef:
+                  name: n8n-secret
+            resources:
+              requests:
+                cpu: 5m
+                memory: 128Mi
+              limits:
+                memory: 2Gi
+
+    service:
+      app:
+        controller: n8n
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      app:
+        className: external
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: apps
+          gethomepage.dev/name: n8n
+          gethomepage.dev/icon: n8n.png
+          gethomepage.dev/description: IPAAS
+
+        hosts:
+          - host: *host
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+
+    persistence:
+      data:
+        existingClaim: *app
+        advancedMounts:
+          n8n:
+            app:
+              - path: /home/node/.n8n

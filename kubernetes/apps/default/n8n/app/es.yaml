@@ -1,0 +1,70 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: n8n
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword
+  target:
+    name: n8n-secret
+    creationPolicy: Owner
+    template:
+      data:
+        N8N_ENCRYPTION_KEY: "{{ .N8N_ENC_KEY }}"
+        N8N_USER_MANAGEMENT_JWT_SECRET: "{{ .N8N_JWT }}"
+
+        DB_POSTGRESDB_DATABASE: "{{ .N8N_PG_DB }}"
+        DB_POSTGRESDB_HOST: "postgres-rw.storage.svc.cluster.local"
+        DB_POSTGRESDB_PORT: "5432"
+        DB_POSTGRESDB_USER: "{{ .N8N_PG_USER }}"
+        DB_POSTGRESDB_PASSWORD: "{{ .N8N_PG_PASS }}"
+
+        # TODO: setup s3
+        # N8N_EXTERNAL_STORAGE_S3_HOST: ""
+        # N8N_EXTERNAL_STORAGE_S3_BUCKET_NAME: ""
+        # N8N_EXTERNAL_STORAGE_S3_BUCKET_REGION: ""
+        # N8N_EXTERNAL_STORAGE_S3_ACCESS_KEY: ""
+        # N8N_EXTERNAL_STORAGE_S3_ACCESS_SECRET: ""
+
+        N8N_SMTP_HOST: "{{ .EXTERNAL_SMTP_HOST }}"
+        N8N_SMTP_PORT: "{{ .EXTERNAL_SMTP_PORT }}"
+        N8N_SMTP_USER: "{{ .EXTERNAL_SMTP_USER }}"
+        N8N_SMTP_PASS: "{{ .EXTERNAL_SMTP_PASS }}"
+        N8N_SMTP_SENDER: "{{ .N8N_EMAIL_SENDER }}"
+        N8N_SMTP_SSL: "{{ .EXTERNAL_SMTP_SSL }}"
+        N8N_SMTP_STARTTLS: "{{ .EXTERNAL_SMTP_STARTTLS }}"
+  dataFrom:
+    - extract:
+        key: n8n
+    - extract:
+        key: external-smtp
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: n8n-dbinit
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword
+  target:
+    name: n8n-dbinit-secret
+    creationPolicy: Owner
+    template:
+      data:
+        INIT_POSTGRES_DBNAME: "{{ .N8N_PG_DB }}"
+        INIT_POSTGRES_HOST: postgres-rw.storage.svc.cluster.local
+        INIT_POSTGRES_SUPER_PASS: "{{ .POSTGRES_SUPER_PASS }}"
+        INIT_POSTGRES_USER: "{{ .N8N_PG_USER }}"
+        INIT_POSTGRES_PASS: "{{ .N8N_PG_PASS }}"
+  dataFrom:
+    - extract:
+        key: n8n
+    - extract:
+        key: cloudnative-pg
