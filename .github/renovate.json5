@@ -9,8 +9,6 @@
     "github>benwalio/opstimus-prime//.github/renovate/grafanaDashboards.json5",
     "github>benwalio/opstimus-prime//.github/renovate/groups.json5",
   ],
-  "onboarding": false,
-  "requireConfig": "optional",
   "ignorePaths": ["**/*.sops.*", "**/resources/**"],
   "flux": {
     "fileMatch": [

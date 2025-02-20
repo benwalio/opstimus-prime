@@ -2,3 +2,5 @@ changelog:
   exclude:
     authors:
       - renovate
+      - opstimus-arc
+      - bot-ched
