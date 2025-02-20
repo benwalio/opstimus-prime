@@ -67,7 +67,7 @@ spec:
               N8N_LOG_LEVEL: info
               N8N_LOG_OUTPUT: console
 
-              DB_TYPE: "postgresql"
+              DB_TYPE: "postgresdb"
 
             envFrom:
               - secretRef:

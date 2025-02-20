@@ -18,7 +18,7 @@ spec:
         N8N_USER_MANAGEMENT_JWT_SECRET: "{{ .N8N_JWT }}"
 
         DB_POSTGRESDB_DATABASE: "{{ .N8N_PG_DB }}"
-        DB_POSTGRESDB_HOST: "postgres-rw.storage.svc.cluster.local"
+        DB_POSTGRESDB_HOST: postgres-rw.storage.svc.cluster.local
         DB_POSTGRESDB_PORT: "5432"
         DB_POSTGRESDB_USER: "{{ .N8N_PG_USER }}"
         DB_POSTGRESDB_PASSWORD: "{{ .N8N_PG_PASS }}"
