@@ -93,13 +93,13 @@ spec:
         className: external
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Home
-          gethomepage.dev/name: Paperless
+          gethomepage.dev/group: document
+          gethomepage.dev/name: Paperless rodeo
           gethomepage.dev/icon: paperless.png
           gethomepage.dev/description: Document OCR Software
           gethomepage.dev/widget.type: paperlessngx
           gethomepage.dev/widget.url: http://paperless.default:8000
-          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_PAPERLESS_TOKEN}}` }}"
+          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_SVC_PPRL_2_PASS}}` }}"
         hosts:
           - host: "docs.${SECRET_DOMAIN}"
             paths:
