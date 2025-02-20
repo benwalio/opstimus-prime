@@ -65,9 +65,9 @@ spec:
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+        runAsUser: 1003
+        runAsGroup: 100
+        fsGroup: 100
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [44]
         seccompProfile: { type: RuntimeDefault }
@@ -79,6 +79,7 @@ spec:
         ports:
           http:
             port: *port
+
     ingress:
       app:
         className: internal
@@ -107,7 +108,7 @@ spec:
       media:
         type: nfs
         server: ${SECRET_NFS_SERVER}
-        path: /mnt/user/media
+        path: ${SECRET_NFS_MOUNT_MEDIA}
         advancedMounts:
           pinchflat:
             app:
