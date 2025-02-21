@@ -54,4 +54,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: homepage
-    namespace: default
+    namespace: selfhosted
