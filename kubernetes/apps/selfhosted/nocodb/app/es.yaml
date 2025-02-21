@@ -1,0 +1,72 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: nocodb
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword
+  target:
+    name: nocodb-secret
+    creationPolicy: Owner
+    template:
+      data:
+        NC_DB: "pg://{{ .PG_RW_INTERNAL_HOST }}:{{ .PG_PORT }}?u={{ .NCDB_PG_USER }}&p={{ .NCDB_PG_PASS }}&d={{ .NCDB_PG_DB}}"
+        NC_REDIS_URL: "redis://{{ .DF_HOST }}:{{ .DF_REDIS_PORT }}/{{ .DF_REDIS_NCDB_DB }}"
+        NC_AUTH_JWT_SECRET: "{{ .NCDB_JWT }}"
+
+        NC_ADMIN_EMAIL: "{{ .NCDB_ADMIN_EMAIL }}"
+        NC_ADMIN_PASSWORD: "{{ .NCDB_ADMIN_PASS }}"
+
+        # TODO: setup s3
+        # NC_S3_ENDPOINT: ""
+        # NC_S3_BUCKET_NAME: ""
+        # NC_S3_REGION: ""
+        # NC_S3_ACCESS_KEY: ""
+        # NC_S3_ACCESS_SECRET: ""
+
+        NC_SMTP_HOST: "{{ .EXTERNAL_SMTP_HOST }}"
+        NC_SMTP_PORT: "{{ .EXTERNAL_SMTP_PORT }}"
+        NC_SMTP_USERNAME: "{{ .EXTERNAL_SMTP_USER }}"
+        NC_SMTP_PASSWORD: "{{ .EXTERNAL_SMTP_PASS }}"
+        NC_SMTP_FROM: "{{ .NCDB_EMAIL_SENDER }}"
+        NC_SMTP_SECURE: "{{ .EXTERNAL_SMTP_SSL }}"
+        NC_SMTP_IGNORE_TLS: "{{ .EXTERNAL_SMTP_IGNORE_TLS }}"
+  dataFrom:
+    - extract:
+        key: nocodb
+    - extract:
+        key: external-smtp
+    - extract:
+        key: dragonfly
+    - extract:
+        key: cloudnative-pg
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: nocodb-dbinit
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword
+  target:
+    name: nocodb-dbinit-secret
+    creationPolicy: Owner
+    template:
+      data:
+        INIT_POSTGRES_DBNAME: "{{ .NCDB_PG_DB }}"
+        INIT_POSTGRES_HOST: "{{ .PG_RW_INTERNAL_HOST }}"
+        INIT_POSTGRES_SUPER_PASS: "{{ .POSTGRES_SUPER_PASS }}"
+        INIT_POSTGRES_USER: "{{ .NCDB_PG_USER }}"
+        INIT_POSTGRES_PASS: "{{ .NCDB_PG_PASS }}"
+  dataFrom:
+    - extract:
+        key: nocodb
+    - extract:
+        key: cloudnative-pg

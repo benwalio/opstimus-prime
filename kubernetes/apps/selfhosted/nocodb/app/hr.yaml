@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app n8n
+  name: &app nocodb
 spec:
   interval: 30m
   chart:
@@ -20,7 +20,7 @@ spec:
       namespace: rook-ceph
   values:
     controllers:
-      n8n:
+      nocodb:
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
@@ -30,7 +30,7 @@ spec:
               tag: 17
             envFrom:
               - secretRef:
-                  name: n8n-dbinit-secret
+                  name: nocodb-dbinit-secret
 
         pod:
           securityContext:
@@ -42,36 +42,17 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/n8n-io/n8n
-              tag: 1.80.1
+              repository: docker.io/nocodb/nocodb
+              tag: 0.262.0@sha256:07174da59a9cb4bbdc8d033460d10e46807092dc06ea19ba302e34f32896322e
             env:
-              EXECUTIONS_DATA_PRUNE: true
-              EXECUTIONS_DATA_MAX_AGE: 7
-              EXECUTIONS_DATA_PRUNE_MAX_COUNT: 50000
-              GENERIC_TIMEZONE: "${TIMEZONE}"
-              TZ: "${TIMEZONE}"
-              N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: false
-
-              N8N_PROTOCOL: "https"
-              N8N_PORT: &port 8080
-              N8N_HOST: &host n8n.${SECRET_DOMAIN}
-              WEBHOOK_URL: "https://n8n.${SECRET_DOMAIN}"
-              N8N_EDITOR_BASE_URL: *host
-
-              N8N_VERSION_NOTIFICATIONS_ENABLED: false
-              N8N_HIRING_BANNER_ENABLED: false
-              N8N_METRICS: true
-              N8N_RUNNERS_ENABLED: true
-              N8N_ONBOARDING_FLOW_DISABLED: true
-
-              N8N_LOG_LEVEL: info
-              N8N_LOG_OUTPUT: console
-
-              DB_TYPE: "postgresdb"
+              NC_JWT_EXPIRES_IN: 48h
+              PORT: &port 8080
+              NC_PUBLIC_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
 
             envFrom:
               - secretRef:
-                  name: n8n-secret
+                  name: nocodb-secret
+
             resources:
               requests:
                 cpu: 5m
@@ -81,7 +62,7 @@ spec:
 
     service:
       app:
-        controller: n8n
+        controller: nocodb
         ports:
           http:
             port: *port
@@ -92,12 +73,12 @@ spec:
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: apps
-          gethomepage.dev/name: n8n
-          gethomepage.dev/icon: n8n.png
-          gethomepage.dev/description: IPAAS
+          gethomepage.dev/name: nocodb
+          gethomepage.dev/icon: nocodb.png
+          gethomepage.dev/description: airtable alt
 
         hosts:
-          - host: *host
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
@@ -108,6 +89,6 @@ spec:
       data:
         existingClaim: *app
         advancedMounts:
-          n8n:
+          nocodb:
             app:
-              - path: /home/node/.n8n
+              - path: /usr/app/data
