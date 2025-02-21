@@ -22,7 +22,7 @@ spec:
         NC_ADMIN_PASSWORD: "{{ .NCDB_ADMIN_PASS }}"
 
         # TODO: setup s3
-        NC_S3_ENDPOINT: "{{ .MINIO_ENDPOINT }}"
+        NC_S3_ENDPOINT: "http://{{ .MINIO_ENDPOINT }}:{{ .MINIO_PORT }}"
         NC_S3_BUCKET_NAME: "{{ .MINIO_BUCKET }}"
         NC_S3_REGION: "{{ .MINIO_S3_REGION }}"
         NC_S3_ACCESS_KEY: "{{ .MINIO_ACCESS_KEY }}"

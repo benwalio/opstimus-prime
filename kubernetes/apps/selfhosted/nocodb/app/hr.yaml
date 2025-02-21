@@ -48,6 +48,7 @@ spec:
               NC_JWT_EXPIRES_IN: 48h
               PORT: &port 8080
               NC_PUBLIC_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
+              NC_S3_FORCE_PATH_STYLE: true
 
             envFrom:
               - secretRef:
