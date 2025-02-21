@@ -14,8 +14,8 @@ spec:
       data:
         RESTIC_REPOSITORY: "s3:http://{{ .MINIO_ENDPOINT }}:{{ .MINIO_PORT }}/{{ .MINIO_BUCKET }}/${APP}"
         RESTIC_PASSWORD: "{{ .VSYNC_RESTIC_PASS }}"
-        AWS_ACCESS_KEY_ID: "{{ .MINIO_VOLSYNC_KEY }}"
-        AWS_SECRET_ACCESS_KEY: "{{ .MINIO_VOLSYNC_SECRET }}"
+        AWS_ACCESS_KEY_ID: "{{ .MINIO_ACCESS_KEY }}"
+        AWS_SECRET_ACCESS_KEY: "{{ .MINIO_SECRET_KEY }}"
   dataFrom:
     - extract:
         key: volsync-tfm-minio

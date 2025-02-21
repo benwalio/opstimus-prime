@@ -14,8 +14,8 @@ spec:
       data:
         username: "{{ .POSTGRES_SUPER_USER }}"
         password: "{{ .POSTGRES_SUPER_PASS }}"
-        MINIO_CNPG_KEY: "{{ .MINIO_CNPG_KEY }}"
-        MINIO_CNPG_SECRET: "{{ .MINIO_CNPG_SECRET }}"
+        MINIO_CNPG_KEY: "{{ .MINIO_ACCESS_KEY }}"
+        MINIO_CNPG_SECRET: "{{ .MINIO_SECRET_KEY }}"
       metadata:
         labels:
           cnpg.io/reload: "true"
@@ -23,4 +23,30 @@ spec:
     - extract:
         key: minio
     - extract:
-        key: cloudnative-pg
+        key: postgres-tfm-minio
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: cloudnative-pg16
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword
+  target:
+    name: cloudnative-pg16-secret
+    creationPolicy: Owner
+    template:
+      data:
+        username: "{{ .POSTGRES_SUPER_USER }}"
+        password: "{{ .POSTGRES_SUPER_PASS }}"
+        MINIO_CNPG_KEY: "{{ .MINIO_ACCESS_KEY }}"
+        MINIO_CNPG_SECRET: "{{ .MINIO_SECRET_KEY }}"
+      metadata:
+        labels:
+          cnpg.io/reload: "true"
+  dataFrom:
+    - extract:
+        key: minio
+    - extract:
+        key: postgres16-tfm-minio
