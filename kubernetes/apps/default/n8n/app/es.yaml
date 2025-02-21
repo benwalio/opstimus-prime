@@ -23,12 +23,11 @@ spec:
         DB_POSTGRESDB_USER: "{{ .N8N_PG_USER }}"
         DB_POSTGRESDB_PASSWORD: "{{ .N8N_PG_PASS }}"
 
-        # TODO: setup s3
-        # N8N_EXTERNAL_STORAGE_S3_HOST: ""
-        # N8N_EXTERNAL_STORAGE_S3_BUCKET_NAME: ""
-        # N8N_EXTERNAL_STORAGE_S3_BUCKET_REGION: ""
-        # N8N_EXTERNAL_STORAGE_S3_ACCESS_KEY: ""
-        # N8N_EXTERNAL_STORAGE_S3_ACCESS_SECRET: ""
+        N8N_EXTERNAL_STORAGE_S3_HOST: "http://{{ .MINIO_ENDPOINT }}:{{ .MINIO_PORT }}"
+        N8N_EXTERNAL_STORAGE_S3_BUCKET_NAME: "{{ .MINIO_BUCKET }}"
+        N8N_EXTERNAL_STORAGE_S3_BUCKET_REGION: "{{ .MINIO_S3_REGION }}"
+        N8N_EXTERNAL_STORAGE_S3_ACCESS_KEY: "{{ .MINIO_ACCESS_KEY }}"
+        N8N_EXTERNAL_STORAGE_S3_ACCESS_SECRET: "{{ .MINIO_SECRET_KEY }}"
 
         N8N_SMTP_HOST: "{{ .EXTERNAL_SMTP_HOST }}"
         N8N_SMTP_PORT: "{{ .EXTERNAL_SMTP_PORT }}"
@@ -40,6 +39,10 @@ spec:
   dataFrom:
     - extract:
         key: n8n
+    - extract:
+        key: n8n-tfm-minio
+    - extract:
+        key: minio
     - extract:
         key: external-smtp
 ---
