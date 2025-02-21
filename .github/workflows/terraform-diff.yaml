@@ -66,8 +66,8 @@ jobs:
         with:
           export-env: true
         env:
-          MINIO_ACCESS_KEY: op://${{env.OP_VAULT}}/minio/MINIO_ACCESS_KEY
-          MINIO_SECRET_KEY: op://${{env.OP_VAULT}}/minio/MINIO_SECRET_KEY
+          MINIO_ACCESS_KEY: op://${{env.OP_VAULT}}/minio/MINIO_ROOT_ACCESS_KEY
+          MINIO_SECRET_KEY: op://${{env.OP_VAULT}}/minio/MINIO_ROOT_SECRET_KEY
 
       - name: Generate Token
         uses: actions/create-github-app-token@v1
