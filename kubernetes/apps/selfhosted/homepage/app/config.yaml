@@ -27,6 +27,7 @@ data:
       dev:
       data:
       automation:
+      iot:
       document:
       apps:
         style: row
