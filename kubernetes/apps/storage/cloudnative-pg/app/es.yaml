@@ -23,6 +23,8 @@ spec:
     - extract:
         key: minio
     - extract:
+        key: cloudnative-pg
+    - extract:
         key: postgres-tfm-minio
 ---
 apiVersion: external-secrets.io/v1beta1
@@ -48,5 +50,7 @@ spec:
   dataFrom:
     - extract:
         key: minio
+    - extract:
+        key: cloudnative-pg
     - extract:
         key: postgres16-tfm-minio
