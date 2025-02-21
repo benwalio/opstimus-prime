@@ -45,6 +45,26 @@ tasks:
   #     # - kubectl get namespaces {{.NODE}}
   #     - which kubectl
 
+  get-secrets:
+    desc: Get ExternalSecrets [NS=defaunt]
+    cmds:
+      - kubectl get externalsecret --namespace {{.NS}}  --no-headers --output=jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
+    vars:
+      NS: '{{.NS | default "default"}}'
+    preconditions:
+      - which kubectl
+
+  sync-secret:
+    desc: Sync ExternalSecret [NS=required] [SEC=required]
+    cmds:
+      - kubectl --namespace {{.NS}} annotate externalsecret {{.SEC}} force-sync="{{now | unixEpoch}}" --overwrite
+    requires:
+      vars:
+        - NS
+        - SEC
+    preconditions:
+      - which kubectl
+
   sync-secrets:
     desc: Sync all ExternalSecrets
     cmds:
