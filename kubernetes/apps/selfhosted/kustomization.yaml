@@ -6,4 +6,9 @@ namespace: selfhosted
 components:
   - ../../flux/components/common
 resources:
+  - ./atuin/ks.yaml
+  - ./hoarder/ks.yaml
+  - ./homepage/ks.yaml
+  - ./it-tools/ks.yaml
+  - ./n8n/ks.yaml
   - ./nocodb/ks.yaml

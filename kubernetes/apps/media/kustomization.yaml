@@ -7,3 +7,6 @@ components:
   - ../../flux/components/common
 resources:
   - ./calibre-web/ks.yaml
+  - ./paperless/ks.yaml
+  - ./pinchflat/ks.yaml
+  - ./theme-park/ks.yaml

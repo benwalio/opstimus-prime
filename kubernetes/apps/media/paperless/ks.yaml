@@ -1,10 +1,10 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+# yaml-language-server: $schema=https://kube-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app pinchflat
-  namespace: &namespace default
+  name: &app paperless
+  namespace: &namespace media
 spec:
   commonMetadata:
     labels:
@@ -13,14 +13,20 @@ spec:
     - ../../../../flux/components/gatus/guarded
     - ../../../../flux/components/volsync
   dependsOn:
+    - name: cloudnative-pg-cluster
+      namespace: storage
+    - name: dragonfly-cluster
+      namespace: storage
+    - name: onepassword-store
+      namespace: security
     - name: volsync
       namespace: storage
   interval: 30m
-  path: ./kubernetes/apps/default/pinchflat/app
+  path: ./kubernetes/apps/media/paperless/app
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 5Gi
+      VOLSYNC_CAPACITY: 15Gi
       APP_UID: "1003"
       APP_GID: "100"
   prune: true

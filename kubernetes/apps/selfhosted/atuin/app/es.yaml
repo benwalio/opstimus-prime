@@ -12,9 +12,9 @@ spec:
     name: atuin-secret
     template:
       data:
-        ATUIN_DB_URI: "postgres://{{ .ATUIN_DB_USER }}:{{ .ATUIN_DB_PASS }}@postgres-rw.storage.svc.cluster.local/{{ .ATUIN_DB_NAME }}"
+        ATUIN_DB_URI: "postgres://{{ .ATUIN_DB_USER }}:{{ .ATUIN_DB_PASS }}@{{ .PG_RW_INTERNAL_HOST }}/{{ .ATUIN_DB_NAME }}"
         INIT_POSTGRES_DBNAME: "{{ .ATUIN_DB_NAME }}"
-        INIT_POSTGRES_HOST: postgres-rw.storage.svc.cluster.local
+        INIT_POSTGRES_HOST: "{{ .PG_RW_INTERNAL_HOST }}"
         INIT_POSTGRES_SUPER_PASS: "{{ .POSTGRES_SUPER_PASS }}"
         INIT_POSTGRES_USER: "{{ .ATUIN_DB_USER }}"
         INIT_POSTGRES_PASS: "{{ .ATUIN_DB_PASS }}"

@@ -185,8 +185,8 @@ data:
             - abbr: HD
               href: https://gethomepage.dev/configs/
         - ProxmoxHelperScripts:
-          - abbr: PHS
-            href: https://community-scripts.github.io/ProxmoxVE/
+            - abbr: PHS
+              href: https://community-scripts.github.io/ProxmoxVE/
 
   docker.yaml: |
     ---

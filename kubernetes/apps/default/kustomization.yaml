@@ -5,14 +5,4 @@ kind: Kustomization
 namespace: default
 components:
   - ../../flux/components/common
-resources:
-  - ./atuin/ks.yaml
-  # - ./calibre/ks.yaml
-  - ./echo-server/ks.yaml
-  - ./hoarder/ks.yaml
-  - ./homepage/ks.yaml
-  - ./it-tools/ks.yaml
-  - ./n8n/ks.yaml
-  - ./paperless/ks.yaml
-  - ./pinchflat/ks.yaml
-  - ./theme-park/ks.yaml
+# resources:
