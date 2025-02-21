@@ -68,6 +68,15 @@ spec:
             proxy_set_header Accept-Encoding "";
             sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.${SECRET_DOMAIN}/css/base/calibreweb/nord.css"></head>';
             sub_filter_once on;
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: media
+          gethomepage.dev/name: calibre-web rodeo
+          gethomepage.dev/icon: sh-calibre-web.svg
+          gethomepage.dev/description: ebooks
+          gethomepage.dev/widget.type: calibreweb
+          gethomepage.dev/widget.url: http://calibre-web.media:8083
+          gethomepage.dev/widget.username: "{{ `{{HOMEPAGE_VAR_SVC_CWEB_USER }}` }}"
+          gethomepage.dev/widget.password: "{{ `{{HOMEPAGE_VAR_SVC_CWEB_PASS }}` }}"
         hosts:
           - host: books.${SECRET_DOMAIN}
             paths:
