@@ -1,6 +1,8 @@
 locals {
   buckets = [
     "dragonfly",
+    "nocodb",
+    "n8n",
     "postgres",
     "postgres16",
     "volsync"

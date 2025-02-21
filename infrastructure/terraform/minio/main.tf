@@ -30,7 +30,7 @@ module "onepassword_minio" {
 
 provider "minio" {
   minio_server   = var.minio_url
-  minio_user     = module.onepassword_minio.fields["MINIO_ACCESS_KEY"]
-  minio_password = module.onepassword_minio.fields["MINIO_SECRET_KEY"]
+  minio_user     = module.onepassword_minio.fields["MINIO_ROOT_ACCESS_KEY"]
+  minio_password = module.onepassword_minio.fields["MINIO_ROOT_SECRET_KEY"]
   minio_ssl      = true
 }

@@ -22,11 +22,11 @@ spec:
         NC_ADMIN_PASSWORD: "{{ .NCDB_ADMIN_PASS }}"
 
         # TODO: setup s3
-        # NC_S3_ENDPOINT: ""
-        # NC_S3_BUCKET_NAME: ""
-        # NC_S3_REGION: ""
-        # NC_S3_ACCESS_KEY: ""
-        # NC_S3_ACCESS_SECRET: ""
+        NC_S3_ENDPOINT: "{{ .MINIO_ENDPOINT }}"
+        NC_S3_BUCKET_NAME: "{{ .MINIO_BUCKET }}"
+        NC_S3_REGION: "{{ .MINIO_S3_REGION }}"
+        NC_S3_ACCESS_KEY: "{{ .MINIO_ACCESS_KEY }}"
+        NC_S3_ACCESS_SECRET: "{{ .MINIO_SECRET_KEY }}"
 
         NC_SMTP_HOST: "{{ .EXTERNAL_SMTP_HOST }}"
         NC_SMTP_PORT: "{{ .EXTERNAL_SMTP_PORT }}"
@@ -38,6 +38,10 @@ spec:
   dataFrom:
     - extract:
         key: nocodb
+    - extract:
+        key: nocodb-tfm-minio
+    - extract:
+        key: minio
     - extract:
         key: external-smtp
     - extract:
