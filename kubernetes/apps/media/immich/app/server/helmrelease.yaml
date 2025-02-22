@@ -56,15 +56,29 @@ spec:
 
         initContainers:
           01-init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 14
             envFrom: &envFrom
               - configMapRef:
                   name: *configMap
               - secretRef:
                   name: *secret
 
+          02-init-extensions:
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: "16.6"
+              tag: 14
+            envFrom: *envFrom
+            command:
+              - /bin/bash
+              - -c
+              - |
+                psql <<'EOF'
+                  CREATE EXTENSION IF NOT EXISTS "vectors";
+                  CREATE EXTENSION IF NOT EXISTS "cube";
+                  CREATE EXTENSION IF NOT EXISTS "earthdistance";
+                EOF
 
         containers:
           app:
@@ -148,6 +162,7 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /usr/src/app/.reverse-geocoding-dump
+
       transformers-cache:
         enabled: true
         type: emptyDir

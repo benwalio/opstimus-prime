@@ -5,6 +5,7 @@ locals {
     "n8n",
     "postgres",
     "postgres16",
+    "postgres-immich",
     "volsync"
   ]
 }

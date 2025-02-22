@@ -11,6 +11,8 @@ data:
   IMMICH_WEB_URL: http://immich-web.media.svc.cluster.local:3000
   LOG_LEVEL: verbose
 
+  TZ: ${TIMEZONE}
+
   REDIS_HOSTNAME: dragonfly.storage.svc.cluster.local
   REDIS_PORT: "6379"
 
