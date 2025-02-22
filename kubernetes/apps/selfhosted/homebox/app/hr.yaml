@@ -72,8 +72,8 @@ spec:
             )
           gethomepage.dev/widget.type: homebox
           gethomepage.dev/widget.url: http://homebox.selfhosted:7745
-          gethomepage.dev/widget.username: "{{HOMEPAGE_VAR_SVC_HBX_USER}}"
-          gethomepage.dev/widget.password: "{{HOMEPAGE_VAR_SVC_HBX_PASS}}"
+          gethomepage.dev/widget.username: "{{ `{{HOMEPAGE_VAR_SVC_HBX_USER}}` }}"
+          gethomepage.dev/widget.password: "{{ `{{HOMEPAGE_VAR_SVC_HBX_PASS}}` }}"
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
