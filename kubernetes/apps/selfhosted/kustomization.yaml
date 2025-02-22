@@ -8,6 +8,7 @@ components:
 resources:
   - ./atuin/ks.yaml
   - ./hoarder/ks.yaml
+  - ./homebox/ks.yaml
   - ./homepage/ks.yaml
   - ./it-tools/ks.yaml
   - ./n8n/ks.yaml
