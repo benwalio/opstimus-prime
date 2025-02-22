@@ -137,7 +137,7 @@ spec:
           gethomepage.dev/name: zigbee2mqtt
           nginx.ingress.kubernetes.io/rewrite-target: /$1
         hosts:
-          - host: zigbee2mqtt.${SECRET_DOMAIN}
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /(.*)
                 service:
