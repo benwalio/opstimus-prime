@@ -57,7 +57,7 @@ spec:
           01-init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: 14
+              tag: 16
             envFrom: &envFrom
               - configMapRef:
                   name: *configMap
@@ -67,7 +67,7 @@ spec:
           02-init-extensions:
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: 14
+              tag: 16
             envFrom: *envFrom
             command:
               - /bin/bash
