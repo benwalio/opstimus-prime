@@ -54,7 +54,7 @@ spec:
         gethomepage.dev/name: headlamp
         gethomepage.dev/app: *app
       hosts:
-        - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        - host: headlamp.${SECRET_DOMAIN}
           paths:
             - path: /
               type: Prefix
