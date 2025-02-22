@@ -6,5 +6,5 @@ namespace: iot
 components:
   - ../../flux/components/common
 resources:
-  - ./emqx/ks.yaml
+  # - ./emqx/ks.yaml
   - ./zigbee2mqtt/ks.yaml
