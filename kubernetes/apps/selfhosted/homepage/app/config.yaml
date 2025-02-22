@@ -182,12 +182,15 @@ data:
           icon: todoist.svg
 
     - dev:
-        - HomepageDocs:
-            - abbr: HD
-              href: https://gethomepage.dev/configs/
-        - ProxmoxHelperScripts:
-            - abbr: PHS
-              href: https://community-scripts.github.io/ProxmoxVE/
+      - HomepageDocs:
+        - abbr: HD
+          href: https://gethomepage.dev/configs/
+      - ProxmoxHelperScripts:
+        - abbr: PHS
+          href: https://community-scripts.github.io/ProxmoxVE/
+      - kubesearch:
+        - abbr: KS
+          href: https://kubesearch.dev/
 
   docker.yaml: |
     ---
