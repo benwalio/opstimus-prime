@@ -180,7 +180,7 @@ spec:
           gethomepage.dev/icon: sh-hoarder.svg
           gethomepage.dev/name: Hoarder
         hosts:
-          - host: hoarder.${SECRET_DOMAIN}
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
