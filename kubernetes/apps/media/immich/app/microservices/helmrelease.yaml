@@ -31,11 +31,13 @@ spec:
   values:
     defaultPodOptions:
       securityContext:
-        runAsUser: 1003
-        runAsGroup: 100
-        fsGroup: 100
-        fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [44, 105]
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        supplementalGroups:
+          - 100
+          - 44
+          - 105
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
