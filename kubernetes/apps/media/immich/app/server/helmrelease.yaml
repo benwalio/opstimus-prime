@@ -33,25 +33,22 @@ spec:
     keepHistory: false
 
   values:
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        supplementalGroups:
-          - 100
-        fsGroupChangePolicy: OnRootMismatch
-
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app.kubernetes.io/name: *app
-
     controllers:
       immich-server:
+        pod:
+          securityContext:
+            runAsUser: 1003
+            runAsGroup: 100
+            fsGroup: 100
+            fsGroupChangePolicy: OnRootMismatch
+
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: *app
         annotations:
           configmap.reloader.stakater.com/reload: &configMap immich-configmap
           secret.reloader.stakater.com/reload: &secret immich-secret
