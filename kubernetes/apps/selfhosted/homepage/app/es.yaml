@@ -67,7 +67,12 @@ spec:
         HOMEPAGE_VAR_SVC_GFN_USER: "{{ .GRAFANA_ADMIN_USERNAME }}"
         HOMEPAGE_VAR_SVC_GFN_PASS: "{{ .GRAFANA_ADMIN_PASSWORD }}"
 
+        ### authentik
         HOMEPAGE_VAR_SVC_AK_TOKEN: "{{ .AK_TOKEN }}"
+
+        ### homebox
+        HOMEPAGE_VAR_SVC_HBX_USER: "{{ .HBX_LOGIN_USER }}"
+        HOMEPAGE_VAR_SVC_HBX_PASS: "{{ .HBX_LOGIN_PASS }}"
 
   dataFrom:
     - extract:
@@ -102,3 +107,5 @@ spec:
         key: calibre-web
     - extract:
         key: grafana
+    - extract:
+        key: homebox

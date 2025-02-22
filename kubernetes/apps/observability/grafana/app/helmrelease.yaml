@@ -311,8 +311,8 @@ spec:
         gethomepage.dev/app: *app
         gethomepage.dev/widget.type: grafana
         gethomepage.dev/widget.url: http://grafana.observability
-        gethomepage.dev/widget.username: "{{ `{{HOMEPAGE_VAR_SVC_GFN_USER }}` }}"
-        gethomepage.dev/widget.password: "{{ `{{HOMEPAGE_VAR_SVC_GFN_PASS }}` }}"
+        gethomepage.dev/widget.username: "{{ `{{HOMEPAGE_VAR_SVC_GFN_USER}}` }}"
+        gethomepage.dev/widget.password: "{{ `{{HOMEPAGE_VAR_SVC_GFN_PASS}}` }}"
       hosts:
         - "grafana.${SECRET_DOMAIN}"
     persistence:

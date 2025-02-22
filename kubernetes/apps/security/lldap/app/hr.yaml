@@ -79,7 +79,7 @@ spec:
           gethomepage.dev/name: lldap
           gethomepage.dev/description: Light LDAP implementation
           gethomepage.dev/group: infra
-          gethomepage.dev/icon: lldap.png
+          gethomepage.dev/icon: sh-valkey.svg
           gethomepage.dev/pod-selector: >-
             app in (
               lldap
