@@ -11,6 +11,7 @@ resources:
   - ./cloudnative-pg.yaml
   - ./controlplaneio.yaml
   - ./coredns.yaml
+  - ./crunchydata.yaml
   - ./csi-driver-nfs.yaml
   - ./descheduler.yaml
   - ./dragonfly.yaml

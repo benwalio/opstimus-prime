@@ -10,3 +10,12 @@ data:
   GHUB_HTTP_URL: https://github.com/benwalio/opstimus-prime
   GHUB_SSH_URL: ssh://git@github.com:benwalio/opstimus-prime.git
   INTERNAL_DOMAIN: home.internal
+
+  # cilium
+  CILIUM_SVC_NGINX_INT_ADDR: 10.10.10.25
+  CILIUM_SVC_NGINX_EXT_ADDR: 10.10.10.26
+  CILIUM_SVC_KUBE_GATE_ADDR: 10.10.10.30
+  CILIUM_SVC_EMQX_ADDR: 10.10.10.100
+  CILIUM_SVC_DF_ADDR: 10.10.10.101
+  CILIUM_SVC_CPGO_ADDR: 10.10.10.102
+  CILIUM_SVC_CPGO_VECTOR_ADDR: 10.10.10.103
