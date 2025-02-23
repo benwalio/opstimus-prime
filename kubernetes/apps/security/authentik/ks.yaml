@@ -16,7 +16,7 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn:
-    - name: cloudnative-pg-cluster16
+    - name: crunchy-postgres
       namespace: storage
     - name: dragonfly-cluster
       namespace: storage

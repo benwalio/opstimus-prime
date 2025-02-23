@@ -27,21 +27,15 @@ kind: ExternalSecret
 metadata:
   name: lldap-db
 spec:
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: onepassword
   target:
     name: lldap-db-secret
     template:
       data:
-        LLDAP_DATABASE_URL: "postgres://{{ .LLDAP_PG_USER }}:{{ .LLDAP_PG_PASS }}@{{ .PG16_RW_INTERNAL_HOST }}:{{ .PG_PORT }}/{{ .LLDAP_PG_DB }}"
-        INIT_POSTGRES_DBNAME: "{{ .LLDAP_PG_DB }}"
-        INIT_POSTGRES_HOST: "{{ .PG16_RW_INTERNAL_HOST }}"
-        INIT_POSTGRES_USER: "{{ .LLDAP_PG_USER }}"
-        INIT_POSTGRES_PASS: "{{ .LLDAP_PG_PASS }}"
-        INIT_POSTGRES_SUPER_PASS: "{{ .POSTGRES_SUPER_PASS }}"
+        LLDAP_DATABASE_URL: 'postgres://{{ index . "user" }}:{{ index . "password" }}@{{ index . "host" }}:{{ index . "port" }}/{{ index . "dbname" }}'
   dataFrom:
     - extract:
-        key: lldap
-    - extract:
-        key: cloudnative-pg
+        key: crunchy-postgres-pguser-lldap
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: crunchy-postgres

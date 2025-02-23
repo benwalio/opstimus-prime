@@ -35,10 +35,6 @@ spec:
       redis:
         host: dragonfly.storage.svc.cluster.local
     server:
-      initContainers:
-        - name: init-db
-          image: ghcr.io/onedr0p/postgres-init:16.8@sha256:31864a9350264f10f25dae1e90db3c6705a9bbb90644a28600afe197b3bf917f
-          envFrom: *envFrom
       autoscaling:
         enabled: true
         minReplicas: 1
