@@ -3,7 +3,7 @@
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
-  name: &name postgres-vector
+  name: &name crunchy-postgres-vector
 spec:
   metadata:
     labels:
@@ -35,7 +35,7 @@ spec:
           - hostssl all all all md5
 
   instances:
-    - name: postgres-vector
+    - name: crunchy-postgres-vector
       metadata:
         labels:
           app.kubernetes.io/name: crunchy-postgres-vector

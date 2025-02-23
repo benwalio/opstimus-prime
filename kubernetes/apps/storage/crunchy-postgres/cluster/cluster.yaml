@@ -3,7 +3,7 @@
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
-  name: &name postgres
+  name: &name crunchy-postgres
 spec:
   metadata:
     labels:
@@ -28,7 +28,7 @@ spec:
         parameters:
           max_connections: 500
   instances:
-    - name: postgres
+    - name: crunchy-postgres
       metadata:
         labels:
           app.kubernetes.io/name: crunchy-postgres
