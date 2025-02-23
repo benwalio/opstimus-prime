@@ -46,11 +46,9 @@ tasks:
   #     - which kubectl
 
   get-secrets:
-    desc: Get ExternalSecrets [NS=defaunt]
+    desc: Get ExternalSecrets
     cmds:
-      - kubectl get externalsecret --namespace {{.NS}}  --no-headers --output=jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
-    vars:
-      NS: '{{.NS | default "default"}}'
+      - kubectl get externalsecret --all-namespaces --no-headers --output=jsonpath='{range .items[*]}{.metadata.namespace},{.metadata.name}{"\n"}{end}'
     preconditions:
       - which kubectl
 
