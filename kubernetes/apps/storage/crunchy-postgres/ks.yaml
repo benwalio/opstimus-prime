@@ -96,7 +96,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: crunchy-postgres-cluster
+    - name: crunchy-postgres-operator
       namespace: *namespace
   healthCheckExprs:
     - apiVersion: external-secrets.io/v1beta1
