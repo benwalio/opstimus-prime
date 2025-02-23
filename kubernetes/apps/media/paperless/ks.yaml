@@ -13,7 +13,7 @@ spec:
     - ../../../../flux/components/gatus/guarded
     - ../../../../flux/components/volsync
   dependsOn:
-    - name: crunchy-postgres
+    - name: crunchy-postgres-cluster
       namespace: storage
     - name: dragonfly-cluster
       namespace: storage

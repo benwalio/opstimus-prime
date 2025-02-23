@@ -27,7 +27,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: crunchy-postgres-vector
+    - name: crunchy-postgres-vector-cluster
       namespace: storage
     - name: immich-shared
       namespace: media

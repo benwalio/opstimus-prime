@@ -5,21 +5,15 @@ kind: ExternalSecret
 metadata:
   name: atuin
 spec:
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: onepassword
   target:
     name: atuin-secret
     template:
       data:
-        ATUIN_DB_URI: "postgres://{{ .ATUIN_DB_USER }}:{{ .ATUIN_DB_PASS }}@{{ .PG_RW_INTERNAL_HOST }}/{{ .ATUIN_DB_NAME }}"
-        INIT_POSTGRES_DBNAME: "{{ .ATUIN_DB_NAME }}"
-        INIT_POSTGRES_HOST: "{{ .PG_RW_INTERNAL_HOST }}"
-        INIT_POSTGRES_SUPER_PASS: "{{ .POSTGRES_SUPER_PASS }}"
-        INIT_POSTGRES_USER: "{{ .ATUIN_DB_USER }}"
-        INIT_POSTGRES_PASS: "{{ .ATUIN_DB_PASS }}"
+        ATUIN_DB_URI: 'postgres://{{ index . "user" }}:{{ index . "password" }}@{{ index . "host" }}:{{ index . "port" }}/{{ index . "dbname" }}'
   dataFrom:
     - extract:
-        key: atuin
-    - extract:
-        key: cloudnative-pg
+        key: crunchy-postgres-pguser-atuin
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: crunchy-postgres
