@@ -1,11 +1,12 @@
 locals {
   buckets = [
     "dragonfly",
+    "crunchy-pgo",
+    "crunchy-pgo-vector",
     "nocodb",
     "n8n",
     "postgres",
     "postgres16",
-    "postgres-immich",
     "volsync"
   ]
 }
