@@ -6,7 +6,7 @@ metadata:
   name: postgres-immich
 spec:
   instances: 3
-  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs::16.4-v0.3.0
+  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.4-v0.3.0
   primaryUpdateStrategy: unsupervised
   storage:
     size: 20Gi
