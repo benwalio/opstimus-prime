@@ -16,27 +16,6 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
-# ---
-# apiVersion: kustomize.toolkit.fluxcd.io/v1
-# kind: Kustomization
-# metadata:
-#   name: &app immich-database
-#   namespace: &namespace media
-# spec:
-#   targetNamespace: *namespace
-#   dependsOn:
-#     - name: immich-shared
-#       namespace: media
-#   path: ./kubernetes/apps/media/immich/database
-#   prune: true
-#   sourceRef:
-#     kind: GitRepository
-#     name: flux-system
-#     namespace: flux-system
-#   wait: true
-#   interval: 30m
-#   retryInterval: 1m
-#   timeout: 5m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -48,8 +27,6 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    # - name: immich-database
-    #   namespace: media
     - name: crunchy-postgres-vector
       namespace: storage
     - name: immich-shared
