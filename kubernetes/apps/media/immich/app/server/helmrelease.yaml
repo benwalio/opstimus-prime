@@ -58,33 +58,20 @@ spec:
           01-init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: 14
+              tag: 16.6
+              pullPolicy: IfNotPresent
             envFrom: &envFrom
               - configMapRef:
                   name: *configMap
               - secretRef:
                   name: *secret
 
-          02-init-extensions:
-            image:
-              repository: ghcr.io/onedr0p/postgres-init
-              tag: 14
-            envFrom: *envFrom
-            command:
-              - /bin/bash
-              - -c
-              - |
-                psql <<'EOF'
-                  CREATE EXTENSION IF NOT EXISTS "vectors";
-                  CREATE EXTENSION IF NOT EXISTS "cube";
-                  CREATE EXTENSION IF NOT EXISTS "earthdistance";
-                EOF
-
         containers:
           app:
             image:
               repository: ghcr.io/immich-app/immich-server
               tag: v1.126.1
+              pullPolicy: IfNotPresent
 
             env:
               # Ports
