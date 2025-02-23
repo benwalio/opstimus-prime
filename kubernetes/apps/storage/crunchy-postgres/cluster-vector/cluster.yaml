@@ -116,7 +116,7 @@ spec:
           volume: &nfs
             volumeClaimSpec:
               storageClassName: nfs-csi #csi-driver-nfs
-              volumeName: crunchy-postgres-vector-nfs
+              volumeName: crunchy-postgres-nfs
               accessModes: ["ReadWriteMany"]
               resources:
                 requests:
