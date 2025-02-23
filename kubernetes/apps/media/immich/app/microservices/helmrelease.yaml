@@ -29,23 +29,20 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    defaultPodOptions:
+      enableServiceLinks: false
+      securityContext:
+        runAsUser: ${SECRET_NAS_UID}
+        runAsGroup: ${SECRET_NAS_GID}
+        fsGroup: ${SECRET_NAS_GID}
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 1000
+          - 568
+
     controllers:
       immich-microservices:
         pod:
-          securityContext:
-            runAsUser: 1003
-            runAsGroup: 100
-            fsGroup: 100
-            fsGroupChangePolicy: OnRootMismatch
-
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: *app
-
           nodeSelector:
             intel.feature.node.kubernetes.io/gpu: "true"
 
