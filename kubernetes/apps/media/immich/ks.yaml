@@ -50,7 +50,7 @@ spec:
   dependsOn:
     # - name: immich-database
     #   namespace: media
-    - name: cloudnative-pg-cluster
+    - name: crunchy-postgres-vector
       namespace: storage
     - name: immich-shared
       namespace: media

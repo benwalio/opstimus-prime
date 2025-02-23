@@ -50,18 +50,6 @@ spec:
           configmap.reloader.stakater.com/reload: &configMap immich-configmap
           secret.reloader.stakater.com/reload: &secret immich-secret
 
-        initContainers:
-          01-init-db:
-            image:
-              repository: ghcr.io/onedr0p/postgres-init
-              tag: 16
-              pullPolicy: IfNotPresent
-            envFrom: &envFrom
-              - configMapRef:
-                  name: *configMap
-              - secretRef:
-                  name: *secret
-
         containers:
           app:
             image:
@@ -73,7 +61,11 @@ spec:
               # Ports
               SERVER_PORT: &port 2283
 
-            envFrom: *envFrom
+            envFrom: &envFrom
+              - configMapRef:
+                  name: *configMap
+              - secretRef:
+                  name: *secret
 
             resources:
               requests:
