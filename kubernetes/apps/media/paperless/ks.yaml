@@ -29,6 +29,7 @@ spec:
       VOLSYNC_CAPACITY: 15Gi
       APP_UID: "1003"
       APP_GID: "100"
+      GATUS_SUBDOMAIN: docs
   prune: true
   sourceRef:
     kind: GitRepository
