@@ -3,6 +3,8 @@ endpoints:
     group: external
     url: "https://${GATUS_SUBDOMAIN:=${APP}}.${SECRET_DOMAIN}${GATUS_PATH:=/}"
     interval: 1m
+    ui:
+      hide-url: true
     client:
       dns-resolver: tcp://1.1.1.1:53
     conditions:
