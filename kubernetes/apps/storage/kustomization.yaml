@@ -6,7 +6,7 @@ namespace: storage
 components:
   - ../../flux/components/common
 resources:
-  - ./cloudnative-pg/ks.yaml
+  # - ./cloudnative-pg/ks.yaml
   - ./crunchy-postgres/ks.yaml
   - ./csi-driver-nfs/ks.yaml
   - ./dragonfly-operator/ks.yaml

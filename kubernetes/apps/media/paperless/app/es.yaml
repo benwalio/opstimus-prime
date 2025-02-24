@@ -48,12 +48,6 @@ spec:
           kind: ClusterSecretStore
           name: onepassword
     - extract:
-        key: cloudnative-pg
-      sourceRef:
-        storeRef:
-          kind: ClusterSecretStore
-          name: onepassword
-    - extract:
         key: crunchy-postgres-pguser-paperless
       sourceRef:
         storeRef:
