@@ -2,8 +2,8 @@
 web:
   port: ${WEB_PORT}
 storage:
-  type: sqlite
-  path: /config/sqlite.db
+  type: postgres
+  path: $${POSTGRES_URI}?sslmode=require
   caching: true
 metrics: true
 debug: false
