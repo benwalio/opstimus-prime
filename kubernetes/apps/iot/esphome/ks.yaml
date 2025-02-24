@@ -20,6 +20,8 @@ spec:
     namespace: flux-system
   wait: false
   dependsOn:
+    - name: multus-networks
+      namespace: network
     - name: volsync
       namespace: storage
   components:
