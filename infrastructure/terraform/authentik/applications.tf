@@ -3,6 +3,7 @@ locals {
     "grafana",
     "headlamp",
     "hoarder",
+    "immich",
     "paperless",
   ]
 }
@@ -39,6 +40,14 @@ locals {
       icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/hoarder.png"
       redirect_uri  = "https://hoarder.${var.cluster_domain}/api/auth/callback/custom"
       launch_url    = "https://hoarder.${var.cluster_domain}/api/auth/callback/custom"
+    },
+    immich = {
+      client_id     = module.onepassword_application["immich"].fields["IMMICH_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["immich"].fields["IMMICH_AK_CLIENT_SECRET"]
+      group         = "home"
+      icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/immich.png"
+      redirect_uri  = "https://photos.${var.cluster_domain}/auth/login"
+      launch_url    = "https://photos.${var.cluster_domain}/auth/login"
     },
     paperless = {
       client_id     = module.onepassword_application["paperless"].fields["PPRL_AK_CLIENT_ID"]
