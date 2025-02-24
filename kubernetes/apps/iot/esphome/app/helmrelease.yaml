@@ -30,14 +30,11 @@ spec:
       esphome:
         pod:
           annotations:
-            k8s.v1.cni.cncf.io/networks:
-              multus-iot
-              # [{
-              #   "name":"multus-iot",
-              #   "namespace": "network",
-              #   "ips": ["10.25.0.11/16"],
-              #   "mac": "69:69:69:69:69:01"
-              # }]
+            k8s.v1.cni.cncf.io/networks: |
+              [{
+                "name":"multus-iot",
+                "namespace": "network"
+              }]
 
         containers:
           app:
