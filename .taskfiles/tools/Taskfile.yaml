@@ -3,18 +3,18 @@
 version: "3"
 
 tasks:
-  gen-jwt:
-    desc: Generate jwt (rand hex 32)
+  gen-32:
+    desc: Generate rand hex 32
     cmds:
       - openssl rand -hex 32
 
-  gen-oauth:
-    desc: Generate oauth secret (rand hex 64)
+  gen-64:
+    desc: Generate rand hex 64
     cmds:
       - openssl rand -hex 64
 
-  gen-oidc:
-    desc: Generate oidc pairs
+  gen-pair:
+    desc: Generate oidc/ oauth pairs
     cmds:
       - echo "Client ID"
       - openssl rand -hex 32
