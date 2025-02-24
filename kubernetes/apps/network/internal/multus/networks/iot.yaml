@@ -14,10 +14,14 @@ spec:
           "master": "bond0.25",
           "mode": "bridge",
           "ipam": {
-            "type": "static",
+            "type": "host-local",
+            "subnet": "10.25.0.0/16",
+            "rangeStart": "10.25.0.5",
+            "rangeEnd": "10.25.0.45",
             "routes": [
-              { "dst": "10.25.0.0/16", "gw": "10.25.0.1" }
-            ]
+              { "dst": "0.0.0.0/0" }
+            ],
+            "gateway": "10.25.0.1"
           }
         }
       ]
