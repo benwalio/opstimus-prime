@@ -7,9 +7,9 @@ endpoints:
       hide-url: true
       hide-hostname: true
     client:
-      dns-resolver: "tcp://${CILIUM_SVC_KUBE_GATE_ADDR}:53"
+      dns-resolver: tcp://${CILIUM_SVC_KUBE_GATE_ADDR}:53
     conditions:
       # - "len([BODY]) == 0"
       - "[STATUS] == ${GATUS_STATUS:=200}"
-    alerts:
-      - type: pushover
+    # alerts:
+    #   - type: pushover
