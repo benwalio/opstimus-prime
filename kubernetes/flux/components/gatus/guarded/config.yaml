@@ -1,7 +1,7 @@
 endpoints:
   - name: "${APP}"
     group: guarded
-    url: ${CILIUM_SVC_KUBE_GATE_ADDR}
+    url: 1.1.1.1
     interval: 1m
     ui:
       hide-hostname: true
