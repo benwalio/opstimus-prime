@@ -47,6 +47,10 @@ spec:
           name: onepassword
     - extract:
         key: minio
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: onepassword
     - extract:
         key: external-smtp
       sourceRef:
