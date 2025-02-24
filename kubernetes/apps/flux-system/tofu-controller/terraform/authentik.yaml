@@ -11,7 +11,7 @@ spec:
       backend "s3" {
         bucket   = "terraform-state"
         key      = "authentik/authentik.tfstate"
-        region   = "main"
+        region   = "us-east-1"
         endpoints = {
           s3 = "https://s3.${SECRET_DOMAIN}"
         }

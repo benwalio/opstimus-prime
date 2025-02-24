@@ -11,7 +11,7 @@ spec:
       backend "s3" {
         bucket = "terraform-state"
         key    = "minio/minio.tfstate"
-        region   = "main"
+        region   = "us-east-1"
         endpoints = {
           s3 = "http://minio.storage.svc.cluster.local:9000"
         }
