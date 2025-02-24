@@ -6,9 +6,6 @@ metadata:
   name: n8n
 spec:
   refreshInterval: 5m
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: onepassword
   target:
     name: n8n-secret
     creationPolicy: Owner
@@ -17,11 +14,11 @@ spec:
         N8N_ENCRYPTION_KEY: "{{ .N8N_ENC_KEY }}"
         N8N_USER_MANAGEMENT_JWT_SECRET: "{{ .N8N_JWT }}"
 
-        DB_POSTGRESDB_DATABASE: "{{ .N8N_PG_DB }}"
-        DB_POSTGRESDB_HOST: "{{ .PG_RW_INTERNAL_HOST }}"
-        DB_POSTGRESDB_PORT: "{{ .PG_PORT }}"
-        DB_POSTGRESDB_USER: "{{ .N8N_PG_USER }}"
-        DB_POSTGRESDB_PASSWORD: "{{ .N8N_PG_PASS }}"
+        DB_POSTGRESDB_DATABASE: '{{ index . "dbname" }}'
+        DB_POSTGRESDB_HOST: '{{ index . "host" }}'
+        DB_POSTGRESDB_PORT: '{{ index . "port" }}'
+        DB_POSTGRESDB_USER: '{{ index . "user" }}'
+        DB_POSTGRESDB_PASSWORD: '{{ index . "password" }}'
 
         N8N_EXTERNAL_STORAGE_S3_HOST: "http://{{ .MINIO_ENDPOINT }}:{{ .MINIO_PORT }}"
         N8N_EXTERNAL_STORAGE_S3_BUCKET_NAME: "{{ .MINIO_BUCKET }}"
@@ -39,37 +36,31 @@ spec:
   dataFrom:
     - extract:
         key: n8n
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: onepassword
     - extract:
         key: n8n-tfm-minio
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: onepassword
     - extract:
         key: minio
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: onepassword
     - extract:
         key: external-smtp
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: onepassword
     - extract:
-        key: cloudnative-pg
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/external-secrets.io/externalsecret_v1beta1.json
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  name: n8n-dbinit
-spec:
-  refreshInterval: 5m
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: onepassword
-  target:
-    name: n8n-dbinit-secret
-    creationPolicy: Owner
-    template:
-      data:
-        INIT_POSTGRES_DBNAME: "{{ .N8N_PG_DB }}"
-        INIT_POSTGRES_HOST: "{{ .PG_RW_INTERNAL_HOST }}"
-        INIT_POSTGRES_SUPER_PASS: "{{ .POSTGRES_SUPER_PASS }}"
-        INIT_POSTGRES_USER: "{{ .N8N_PG_USER }}"
-        INIT_POSTGRES_PASS: "{{ .N8N_PG_PASS }}"
-  dataFrom:
-    - extract:
-        key: n8n
-    - extract:
-        key: cloudnative-pg
+        key: crunchy-postgres-pguser-n8n
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: crunchy-postgres

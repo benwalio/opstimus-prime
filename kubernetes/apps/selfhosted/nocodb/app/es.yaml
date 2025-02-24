@@ -6,15 +6,12 @@ metadata:
   name: nocodb
 spec:
   refreshInterval: 5m
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: onepassword
   target:
     name: nocodb-secret
     creationPolicy: Owner
     template:
       data:
-        NC_DB: "pg://{{ .PG_RW_INTERNAL_HOST }}:{{ .PG_PORT }}?u={{ .NCDB_PG_USER }}&p={{ .NCDB_PG_PASS }}&d={{ .NCDB_PG_DB}}"
+        NC_DB: 'pg://{{ index . "host" }}:{{ index . "port" }}?u={{ index . "user" }}&p={{ index . "password" }}&d={{ index . "dbname" }}'
         NC_REDIS_URL: "redis://{{ .DF_HOST }}:{{ .DF_REDIS_PORT }}/{{ .DF_REDIS_NCDB_DB }}"
         NC_AUTH_JWT_SECRET: "{{ .NCDB_JWT }}"
 
@@ -38,39 +35,33 @@ spec:
   dataFrom:
     - extract:
         key: nocodb
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: onepassword
     - extract:
         key: nocodb-tfm-minio
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: onepassword
     - extract:
         key: minio
     - extract:
         key: external-smtp
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: onepassword
     - extract:
         key: dragonfly
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: onepassword
     - extract:
-        key: cloudnative-pg
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/external-secrets.io/externalsecret_v1beta1.json
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  name: nocodb-dbinit
-spec:
-  refreshInterval: 5m
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: onepassword
-  target:
-    name: nocodb-dbinit-secret
-    creationPolicy: Owner
-    template:
-      data:
-        INIT_POSTGRES_DBNAME: "{{ .NCDB_PG_DB }}"
-        INIT_POSTGRES_HOST: "{{ .PG_RW_INTERNAL_HOST }}"
-        INIT_POSTGRES_SUPER_PASS: "{{ .POSTGRES_SUPER_PASS }}"
-        INIT_POSTGRES_USER: "{{ .NCDB_PG_USER }}"
-        INIT_POSTGRES_PASS: "{{ .NCDB_PG_PASS }}"
-  dataFrom:
-    - extract:
-        key: nocodb
-    - extract:
-        key: cloudnative-pg
+        key: crunchy-postgres-pguser-nocodb
+      sourceRef:
+        storeRef:
+          kind: ClusterSecretStore
+          name: crunchy-postgres
