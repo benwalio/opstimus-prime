@@ -11,6 +11,7 @@ spec:
   replicas: 3
   args:
     - --maxmemory=$(MAX_MEMORY)Mi
+    - --default_lua_flags=allow-undeclared-keys #https://github.com/immich-app/immich/issues/2542
     - --proactor_threads=2
     - --cluster_mode=emulated
     - --lock_on_hashtags
