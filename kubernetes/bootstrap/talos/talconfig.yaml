@@ -46,6 +46,19 @@ nodes:
         mtu: 1500
         vip:
           ip: "10.10.10.20"
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - permanentAddr: "58:47:ca:7a:b0:3f"
+        dhcp: true
+        vlans:
+          - &vlan25
+            vlanId: 25
+            mtu: 1500
+            dhcpOptions:
+              routeMetric: 4096
+
   - hostname: "controller-2"
     ipAddress: "10.10.10.51"
     installDiskSelector:
@@ -69,6 +82,15 @@ nodes:
         mtu: 1500
         vip:
           ip: "10.10.10.20"
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - permanentAddr: "58:47:ca:7a:ac:7f"
+        dhcp: true
+        vlans:
+          - *vlan25
+
   - hostname: "controller-3"
     ipAddress: "10.10.10.52"
     installDiskSelector:
@@ -92,6 +114,14 @@ nodes:
         mtu: 1500
         vip:
           ip: "10.10.10.20"
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - permanentAddr: "58:47:ca:7a:c5:eb"
+        dhcp: true
+        vlans:
+          - *vlan25
 
 # Global patches
 patches:
