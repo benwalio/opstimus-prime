@@ -6,4 +6,4 @@ resources:
   - ./pvc.yaml
   - ./server
   - ./machine-learning
-  - ./microservices
+  # - ./microservices

@@ -110,6 +110,13 @@ spec:
       app:
         className: external
         annotations:
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
+          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+          nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            chunked_transfer_encoding off;
+
+          ## homepage
           gethomepage.dev/enabled: "true"
           gethomepage.dev/description: Photo management and backup
           gethomepage.dev/group: media
