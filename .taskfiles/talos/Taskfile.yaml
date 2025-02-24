@@ -56,6 +56,17 @@ tasks:
       - test -f {{.TALOSCONFIG}}
       - which talhelper talosctl yq
 
+  reboot-node:
+    desc: Reboot Talos on a single node [IP=required] [MODE=powercycle]
+    cmd: talosctl --nodes {{.IP}} reboot --mode={{.MODE}}
+    vars:
+      MODE: '{{.MODE | default "powercycle"}}'
+    requires:
+      vars: [IP]
+    preconditions:
+      - talosctl --nodes {{.IP}} get machineconfig
+      - which talosctl
+
   reset:
     desc: Resets nodes back to maintenance mode
     dir: "{{.TALHELPER_DIR}}"
