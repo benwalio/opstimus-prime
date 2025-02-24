@@ -28,15 +28,15 @@ spec:
   values:
     controllers:
       esphome:
-        # pod:
-        #   annotations:
-        #     k8s.v1.cni.cncf.io/networks: |
-        #       [{
-        #         "name":"multus-iot",
-        #         "namespace": "network",
-        #         "ips": ["10.25.0.11/16"],
-        #         "mac": "69:69:69:69:69:01"
-        #       }]
+        pod:
+          annotations:
+            k8s.v1.cni.cncf.io/networks: |
+              [{
+                "name":"multus-iot",
+                "namespace": "network",
+                "ips": ["10.25.0.11/16"],
+                "mac": "69:69:69:69:69:01"
+              }]
 
         containers:
           app:
