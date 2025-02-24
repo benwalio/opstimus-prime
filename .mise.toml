@@ -5,6 +5,7 @@ MINIJINJA_CONFIG_FILE = '{{config_root}}/.config/.minijinja.toml'
 KUBECONFIG = "{{config_root}}/kubeconfig"
 SOPS_AGE_KEY_FILE = "{{config_root}}/age.key"
 TALOSCONFIG = "{{config_root}}/kubernetes/bootstrap/talos/clusterconfig/talosconfig"
+_.file  = '.env.sops.json'
 
 [tasks.deps]
 description = "Install dependencies"
@@ -14,6 +15,8 @@ run = "uv pip install -r .config/requirements.txt"
 # Template tools
 python = "3.13"
 uv = "latest"
+age = "latest"
+sops = "latest"
 # Operations tools
 "aqua:budimanjojo/talhelper" = "3.0.18"
 "aqua:cloudflare/cloudflared" = "2025.2.0"

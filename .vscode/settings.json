@@ -47,5 +47,6 @@
   "yaml.schemaStore.enable": true,
   "yaml.schemas": {
     "kubernetes": "./kubernetes/**/*.yaml"
-  }
+  },
+  "sops.creationEnabled": true
 }
