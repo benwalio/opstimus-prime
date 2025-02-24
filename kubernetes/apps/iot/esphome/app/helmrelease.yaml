@@ -103,14 +103,14 @@ spec:
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
-              - path: /(.*)
+              - path: /
                 service:
                   identifier: app
                   port: http
-              - path: /code/(.*)
-                service:
-                  identifier: app
-                  port: code-server
+              # - path: /code/(.*)
+              #   service:
+              #     identifier: app
+              #     port: code-server
 
     persistence:
       config:
