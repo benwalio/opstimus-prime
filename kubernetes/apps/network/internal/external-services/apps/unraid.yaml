@@ -27,7 +27,7 @@ endpoints:
   - addresses:
       - "10.20.13.10"
 ---
-apiVersion: network.k8s.io/v1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: &app unraid

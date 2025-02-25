@@ -27,7 +27,7 @@ endpoints:
   - addresses:
       - "192.168.0.1"
 ---
-apiVersion: network.k8s.io/v1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: &app unifi
