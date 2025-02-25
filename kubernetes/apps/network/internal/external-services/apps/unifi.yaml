@@ -5,33 +5,53 @@ metadata:
   name: unifi
   namespace: network
 spec:
+  type: ClusterIP
   ports:
     - protocol: TCP
+      port: 443
+      name: admin
+    - protocol: TCP
       port: 8080
-      targetPort: 8080
+      name: controller
+    - protocol: TCP
+      port: 8880
+      name: portal-http
+    - protocol: TCP
+      port: 8843
+      name: portal-https
+    - protocol: TCP
+      port: 6789
+      name: speedtest
+    - protocol: UDP
+      port: 3478
+      name: stun
+    - protocol: UDP
+      port: 5514
+      name: syslog
+    - protocol: UDP
+      port: 10001
+      name: discovery
 ---
-apiVersion: discovery.k8s.io/v1
-kind: EndpointSlice
+apiVersion: v1
+kind: Endpoints
 metadata:
   name: unifi
   namespace: network
-  labels:
-    kubernetes.io/service-name: unifi
-addressType: IPv4
-ports:
-  - name: http
-    appProtocol: http
-    protocol: TCP
-    port: 8080
-endpoints:
+subsets:
   - addresses:
-      - "192.168.0.1"
+      - ip: 192.168.0.1
+    ports:
+      - port: 443
+        protocol: TCP
+        name: admin
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: &app unifi
   namespace: network
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
   labels:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
@@ -45,6 +65,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: *app
+                name: unifi-console
                 port:
-                  number: 8080
+                  number: 443
