@@ -22,7 +22,7 @@ locals {
       client_secret = module.onepassword_application["grafana"].fields["GF_AK_CLIENT_SECRET"]
       group         = "monitoring"
       icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/grafana.png"
-      redirect_uri  = "https://grafana.${var.cluster_domain}/login/generic_oauth"
+      redirect_uris = ["https://grafana.${var.cluster_domain}/login/generic_oauth"]
       launch_url    = "https://grafana.${var.cluster_domain}/login/generic_oauth"
     },
     headlamp = {
@@ -30,7 +30,7 @@ locals {
       client_secret = module.onepassword_application["headlamp"].fields["HL_AK_CLIENT_SECRET"]
       group         = "infrastructure"
       icon_url      = "https://raw.githubusercontent.com/headlamp-k8s/headlamp/refs/heads/main/frontend/src/resources/icon-dark.svg"
-      redirect_uri  = "https://headlamp.${var.cluster_domain}/oidc-callback"
+      redirect_uris = ["https://headlamp.${var.cluster_domain}/oidc-callback"]
       launch_url    = "https://headlamp.${var.cluster_domain}/"
     },
     hoarder = {
@@ -38,7 +38,7 @@ locals {
       client_secret = module.onepassword_application["hoarder"].fields["HDR_AK_CLIENT_SECRET"]
       group         = "monitoring"
       icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/hoarder.png"
-      redirect_uri  = "https://hoarder.${var.cluster_domain}/api/auth/callback/custom"
+      redirect_uris = ["https://hoarder.${var.cluster_domain}/api/auth/callback/custom"]
       launch_url    = "https://hoarder.${var.cluster_domain}/api/auth/callback/custom"
     },
     immich = {
@@ -46,7 +46,7 @@ locals {
       client_secret = module.onepassword_application["immich"].fields["IMMICH_AK_CLIENT_SECRET"]
       group         = "home"
       icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/immich.png"
-      redirect_uri  = "https://photos.${var.cluster_domain}/auth/login"
+      redirect_uris = ["https://photos.${var.cluster_domain}/auth/login", "https://photos.${var.cluster_domain}/user-settings", "app.immich:///oauth-callback"]
       launch_url    = "https://photos.${var.cluster_domain}/auth/login"
     },
     paperless = {
@@ -54,7 +54,7 @@ locals {
       client_secret = module.onepassword_application["paperless"].fields["PPRL_AK_CLIENT_SECRET"]
       group         = "home"
       icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/paperless.png"
-      redirect_uri  = "https://docs.${var.cluster_domain}/accounts/oidc/authentik/login/callback/"
+      redirect_uris = ["https://docs.${var.cluster_domain}/accounts/oidc/authentik/login/callback/"]
       launch_url    = "https://docs.${var.cluster_domain}/"
     },
   }
@@ -71,12 +71,29 @@ resource "authentik_provider_oauth2" "oauth2" {
   property_mappings     = data.authentik_property_mapping_provider_scope.oauth2.ids
   access_token_validity = "hours=4"
   signing_key           = data.authentik_certificate_key_pair.generated.id
-  allowed_redirect_uris = [
-    {
-      matching_mode = "strict",
-      url           = each.value.redirect_uri,
-    }
-  ]
+
+  allowed_redirect_uris = toset(
+    [for uri in each.value.redirect_uris :
+      {
+        matching_mode = "strict",
+        url           = uri
+      }
+    ]
+  )
+
+  # dynamic "allowed_redirect_uris" {
+  #   for_each = each.value.redirect_uris
+  #   content = {
+  #     matching_mode = "strict",
+  #     url           = allowed_redirect_uris.value
+  #   }
+  # }
+  # allowed_redirect_uris = [
+  #   {
+  #     matching_mode = "strict",
+  #     url           = each.value.redirect_uri,
+  #   }
+  # ]
 }
 
 resource "authentik_application" "application" {
