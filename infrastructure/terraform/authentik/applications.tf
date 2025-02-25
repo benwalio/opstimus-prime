@@ -1,5 +1,6 @@
 locals {
   oauth_apps = [
+    "cloudflare",
     "grafana",
     "headlamp",
     "hoarder",
@@ -17,6 +18,14 @@ module "onepassword_application" {
 
 locals {
   applications = {
+    cloudflare-access = {
+      client_id     = module.onepassword_application["cloudflare"].fields["CFZT_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["cloudflare"].fields["CFZT_AK_CLIENT_SECRET"]
+      group         = "infrastructure"
+      icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/cloudflare-zero-trust.svg"
+      redirect_uris = ["https://benwal.cloudflareaccess.com/cdn-cgi/access/callback"]
+      launch_url    = "https://benwal.cloudflareaccess.com/#/Launcher"
+    },
     grafana = {
       client_id     = module.onepassword_application["grafana"].fields["GF_AK_CLIENT_ID"]
       client_secret = module.onepassword_application["grafana"].fields["GF_AK_CLIENT_SECRET"]
