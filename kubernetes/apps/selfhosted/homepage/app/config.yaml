@@ -176,7 +176,7 @@ data:
                 range: LastDay
 
         - ns2-internal:
-            icon: sh-technitium-light.svg
+            icon: sh-technitium.svg
             href: {{HOMEPAGE_VAR_SVC_TNTM_2_URL}}
             siteMonitor: {{HOMEPAGE_VAR_SVC_TNTM_2_URL}}
             widget:
