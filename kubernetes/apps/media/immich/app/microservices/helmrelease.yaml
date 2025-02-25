@@ -32,9 +32,9 @@ spec:
     defaultPodOptions:
       enableServiceLinks: false
       securityContext:
-        runAsUser: ${SECRET_NAS_UID}
-        runAsGroup: ${SECRET_NAS_GID}
-        fsGroup: ${SECRET_NAS_GID}
+        runAsUser: 1003
+        runAsGroup: 100
+        fsGroup: 100
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups:
           - 1000
