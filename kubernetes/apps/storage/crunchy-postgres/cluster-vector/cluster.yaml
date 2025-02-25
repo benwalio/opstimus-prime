@@ -21,7 +21,7 @@ metadata:
         }
       ]
 spec:
-  image: ghcr.io/drag0n141/cdpgvector:0.4.0@sha256:ca37863376a24565fb4db5a0951737adb5f7a06f715702ce90c00f1abc98eae8
+  image: ghcr.io/chkpwd/cdpgvecto.rs:16@sha256:7e9d275f1dbf8750b7b8e601e2b0c0e7bc8206080b8dcef6a456768c954c2ab4
   postgresVersion: 16
   monitoring:
     pgmonitor:
