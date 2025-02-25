@@ -151,7 +151,7 @@ data:
             siteMonitor: {{HOMEPAGE_VAR_SVC_AGSYNC_URL}}
             widget:
                 type: customapi
-                url: {{HOMEPAGE_VAR_SVC_AGSYNC_URL}}/api/v1/status
+                url: {{HOMEPAGE_VAR_SVC_AGSYNC_API_URL}}
                 method: GET
                 refreshInterval: 10000
                 mappings:
