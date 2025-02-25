@@ -90,7 +90,7 @@ data:
                 password: {{HOMEPAGE_VAR_SVC_PROX_PASS}}
 
         - portainer-swarm:
-            icon: portainer
+            icon: sh-portainer.svg
             href: {{HOMEPAGE_VAR_SVC_PORT_URL}}
             siteMonitor: {{HOMEPAGE_VAR_SVC_PORT_URL}}
             widget:
@@ -98,6 +98,11 @@ data:
                 url: {{HOMEPAGE_VAR_SVC_PORT_URL}}
                 env: {{HOMEPAGE_VAR_SVC_PORT_ENV}}
                 key: {{HOMEPAGE_VAR_SVC_PORT_PASS}}
+
+        - tower:
+            icon: sh-unraid.svg
+            href: {{HOMEPAGE_VAR_SVC_UNRAID_URL}}
+            siteMonitor: {{HOMEPAGE_VAR_SVC_UNRAID_URL}}
 
     - network:
         - unifi:
@@ -110,9 +115,17 @@ data:
                 username: {{HOMEPAGE_VAR_WID_UBI_USER}}
                 password: {{HOMEPAGE_VAR_WID_UBI_PASS}}
 
+        - traefik:
+            icon: traefik
+            href: {{HOMEPAGE_VAR_SVC_TRAEFIK_URL}}
+            siteMonitor: {{HOMEPAGE_VAR_SVC_TRAEFIK_URL}}
+            widget:
+                type: traefik
+                url: {{HOMEPAGE_VAR_SVC_TRAEFIK_URL}}
+
     - dns:
         - adguard-a:
-            icon: adguard-home
+            icon: sh-adguard-home.svg
             href: {{HOMEPAGE_VAR_SVC_AGH_A_URL}}
             siteMonitor: {{HOMEPAGE_VAR_SVC_AGH_A_URL}}
             widget:
@@ -120,6 +133,66 @@ data:
                 url: {{HOMEPAGE_VAR_SVC_AGH_A_URL}}
                 username: {{HOMEPAGE_VAR_SVC_AGH_A_USER}}
                 password: {{HOMEPAGE_VAR_SVC_AGH_A_PASS}}
+
+        - adguard-b:
+            icon: sh-adguard-home.svg
+            href: {{HOMEPAGE_VAR_SVC_AGH_B_URL}}
+            siteMonitor: {{HOMEPAGE_VAR_SVC_AGH_B_URL}}
+            widget:
+                type: adguard
+                url: {{HOMEPAGE_VAR_SVC_AGH_B_URL}}
+                username: {{HOMEPAGE_VAR_SVC_AGH_B_USER}}
+                password: {{HOMEPAGE_VAR_SVC_AGH_B_PASS}}
+
+
+        - adguard-sync:
+            icon: sh-adguard-home-light.svg
+            href: {{HOMEPAGE_VAR_SVC_AGSYNC_URL}}
+            siteMonitor: {{HOMEPAGE_VAR_SVC_AGSYNC_URL}}
+            widget:
+                type: customapi
+                url: {{HOMEPAGE_VAR_SVC_AGSYNC_URL}}api/v1/status
+                method: GET
+                refreshInterval: 10000
+                mappings:
+                    - field:
+                        origin: status
+                      label: Get adguard-a config
+                    - field:
+                        replicas:
+                            '0': status
+                      format: text
+                      label: Replicate to adguard-b
+
+
+        - ns1-internal:
+            icon: sh-technitium.svg
+            href: {{HOMEPAGE_VAR_SVC_TNTM_1_URL}}
+            siteMonitor: {{HOMEPAGE_VAR_SVC_TNTM_1_URL}}
+            widget:
+                type: technitium
+                url: {{HOMEPAGE_VAR_SVC_TNTM_1_URL}}
+                key: {{HOMEPAGE_VAR_SVC_TNTM_1_PASS}}
+                range: LastDay
+
+        - ns2-internal:
+            icon: sh-technitium-light.svg
+            href: {{HOMEPAGE_VAR_SVC_TNTM_2_URL}}
+            siteMonitor: {{HOMEPAGE_VAR_SVC_TNTM_2_URL}}
+            widget:
+                type: technitium
+                url: {{HOMEPAGE_VAR_SVC_TNTM_2_URL}}
+                key: {{HOMEPAGE_VAR_SVC_TNTM_2_PASS}}
+                range: LastDay
+
+        - nextdns:
+            icon: sh-nextdns.svg
+            href: {{HOMEPAGE_VAR_SVC_NDNS_URL}}
+            siteMonitor: {{HOMEPAGE_VAR_SVC_NDNS_URL}}
+            widget:
+                type: nextdns
+                profile: {{HOMEPAGE_VAR_SVC_NDNS_PROFILE}}
+                key: {{HOMEPAGE_VAR_SVC_NDNS_PASS}}
 
     - observe:
         - uptime-kuma:
@@ -171,6 +244,22 @@ data:
                 type: paperlessngx
                 url: {{HOMEPAGE_VAR_SVC_PPRL_URL}}
                 key: {{HOMEPAGE_VAR_SVC_PPRL_PASS}}
+
+        - netbox:
+            icon: sh-netbox.svg
+            href: {{HOMEPAGE_VAR_SVC_NETBOX_EXT_URL}}
+            siteMonitor: {{HOMEPAGE_VAR_SVC_NETBOX_URL}}
+            widget:
+                type: glances
+                url: {{HOMEPAGE_VAR_SVC_NETBOX_GLANCE_URL}}
+                version: 4
+                metric: memory
+
+    - apps:
+        - cups:
+            icon: sh-cups.svg
+            href: {{HOMEPAGE_VAR_SVC_CUPS_URL}}
+            siteMonitor: {{HOMEPAGE_VAR_SVC_CUPS_URL}}
 
   bookmarks.yaml: |
     ---
