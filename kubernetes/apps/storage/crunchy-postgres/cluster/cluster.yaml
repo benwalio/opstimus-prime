@@ -90,6 +90,10 @@ spec:
       databases: ["paperless"]
       password:
         type: AlphaNumeric
+    - name: "shlink"
+      databases: ["shlink"]
+      password:
+        type: AlphaNumeric
 
   backups:
     pgbackrest:
