@@ -83,6 +83,7 @@ spec:
           io.cilium/lb-ipam-ips: ${CILIUM_SVC_MINIO_ADDR}
         ports:
           http:
+            enabled: true
             port: &port-console 9001
           api:
             enabled: true
@@ -100,6 +101,7 @@ spec:
 
     ingress:
       app:
+        enabled: true
         className: internal
         annotations:
           gethomepage.dev/enabled: "true"
