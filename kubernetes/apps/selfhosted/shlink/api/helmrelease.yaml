@@ -46,7 +46,7 @@ spec:
               tag: 4.4.4@sha256:b8e852c02de5defd6de1003f7448ed1275c078a5132ee02fda60dff9f75e29ec
             env:
               DB_DRIVER: postgres
-              DEFAULT_DOMAIN: &host "ln.${SECRET_DOMAIN}"
+              DEFAULT_DOMAIN: &host "ln.${SECRET_HOME_DOMAIN}"
               DISABLE_TRACKING_FROM: 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
               ENABLE_PERIODIC_VISIT_LOCATE: "true"
               IS_HTTPS_ENABLED: "true"
@@ -67,6 +67,12 @@ spec:
         className: external
         hosts:
           - host: *host
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+          - host: "ln.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
