@@ -12,6 +12,8 @@ spec:
   dependsOn:
     - name: onepassword-store
       namespace: security
+    - name: csi-driver-nfs
+      namespace: storage
   # components:
   #   - ../../../../flux/components/gatus/external
   interval: 30m
