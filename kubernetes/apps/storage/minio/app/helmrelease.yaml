@@ -116,9 +116,9 @@ spec:
                   identifier: app
                   port: *port-console
 
-      s3:
+      s3-internal:
         enabled: true
-        className: external
+        className: internal
         annotations:
           nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
           nginx.ingress.kubernetes.io/proxy-body-size: 1024m
