@@ -38,6 +38,48 @@
 - name: type/break
   color: "f6412d"
 
+# issues
+
+- name: bug
+  color: "e11d21"
+
+- name: feat
+  color: "009800"
+  aliases:
+    - "enhancement"
+    - "feature"
+
+- name: question
+  color: "cc317c"
+  aliases:
+    - "discussion"
+
+- name: doc
+  color: "207de5"
+  aliases:
+    - "documentation"
+
+- name: prio/low
+  color: "009800"
+
+- name: prio/med
+  color: "fbca04"
+
+- name: prio/high
+  color: "eb6420"
+
+- name: prio/critical
+  color: "e11d21"
+
+- name: status/starter
+  color: "bfe5bf"
+  aliases:
+    - "beginner"
+    - "good-starter-issue"
+
+- name: status/blocked
+  color: "990000"
+
 # Uncategorized
 - name: hold
   color: "ee0701"
