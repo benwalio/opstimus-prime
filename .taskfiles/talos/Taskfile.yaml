@@ -67,6 +67,17 @@ tasks:
       - talosctl --nodes {{.IP}} get machineconfig
       - which talosctl
 
+  shutdown-cluster:
+    desc: Shutdown Talos across the whole cluster
+    prompt: Shutdown the Talos cluster ... continue?
+    cmd: talosctl shutdown --nodes {{.NODES}} --force
+    vars:
+      NODES:
+        sh: talosctl config info --output json | jq --exit-status --join-output '[.nodes[]] | join(",")'
+    preconditions:
+      - talosctl --nodes {{.NODES}} get machineconfig
+      - which jq talosctl
+
   reset:
     desc: Resets nodes back to maintenance mode
     dir: "{{.TALHELPER_DIR}}"

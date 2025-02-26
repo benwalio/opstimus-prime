@@ -7,7 +7,7 @@ locals {
     "n8n",
     "postgres",
     "postgres16",
-    "PUBLIC",
+    "public",
     "volsync"
   ]
 }
