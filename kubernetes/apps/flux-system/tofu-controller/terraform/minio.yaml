@@ -13,7 +13,7 @@ spec:
         key    = "minio/minio.tfstate"
         region   = "us-east-1"
         endpoints = {
-          s3 = "http://minio.storage.svc.cluster.local:9000"
+          s3 = "https://s3.${SECRET_DOMAIN}"
         }
 
         skip_credentials_validation = true

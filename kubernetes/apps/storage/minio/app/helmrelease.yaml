@@ -78,6 +78,9 @@ spec:
     service:
       app:
         controller: minio
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: ${CILIUM_SVC_MINIO_ADDR}
         ports:
           http:
             port: &port-console 9001
