@@ -33,6 +33,10 @@ spec:
   dependsOn:
     - name: external-external-dns
       namespace: network
+    - name: external-ingress-nginx
+      namespace: network
+    - name: onepassword-store
+      namespace: security
   interval: 30m
   path: ./kubernetes/apps/network/external/cloudflared
   prune: true

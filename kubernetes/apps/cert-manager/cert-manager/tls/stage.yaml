@@ -13,3 +13,18 @@ spec:
   dnsNames:
     - "${SECRET_DOMAIN}"
     - "*.${SECRET_DOMAIN}"
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/cert-manager.io/certificate_v1.json
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "${SECRET_HOME_DOMAIN/./-}-staging"
+spec:
+  secretName: "${SECRET_HOME_DOMAIN/./-}-staging-tls"
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  commonName: "${SECRET_HOME_DOMAIN}"
+  dnsNames:
+    - "${SECRET_HOME_DOMAIN}"
+    - "*.${SECRET_HOME_DOMAIN}"
