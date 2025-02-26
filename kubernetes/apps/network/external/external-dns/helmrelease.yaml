@@ -43,7 +43,7 @@ spec:
     triggerLoopOnEvent: true
     policy: sync
     sources: ["crd", "ingress"]
-    txtPrefix: k8s.
+    txtPrefix: ops.
     txtOwnerId: default
     domainFilters: ["${SECRET_DOMAIN}", "${SECRET_HOME_DOMAIN}"]
     serviceMonitor:
