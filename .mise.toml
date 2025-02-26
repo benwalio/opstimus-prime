@@ -5,7 +5,6 @@ MINIJINJA_CONFIG_FILE = '{{config_root}}/.config/.minijinja.toml'
 KUBECONFIG = "{{config_root}}/kubeconfig"
 SOPS_AGE_KEY_FILE = "{{config_root}}/age.key"
 TALOSCONFIG = "{{config_root}}/kubernetes/bootstrap/talos/clusterconfig/talosconfig"
-_.file  = '.env.sops.json'
 
 [tasks.deps]
 description = "Install dependencies"
