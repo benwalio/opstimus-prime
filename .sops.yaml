@@ -13,7 +13,7 @@ creation_rules:
       - age:
           - "age1dpqnl792jazq3qsd547zpltjsd07qyt65zj4ks75fvlrsy9ftsmsjkd4hl"
   - path_regex: \.env\.sops\.json
-    encrypted_regex: "^(AWS_ACCESS_KEY_ID|AWS_SECRET_ACCESS_KEY)$"
+    encrypted_regex: "^(AWS_ACCESS_KEY_ID|AWS_SECRET_ACCESS_KEY|AWS_REGION)$"
     mac_only_encrypted: true
     key_groups:
       - age:
