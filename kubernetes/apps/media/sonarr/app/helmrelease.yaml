@@ -90,7 +90,7 @@ spec:
           gethomepage.dev/icon: sh-sonarr.svg
           gethomepage.dev/description: TV Downloads
           gethomepage.dev/widget.type: sonarr
-          gethomepage.dev/widget.url: http://sonarr.selfhosted
+          gethomepage.dev/widget.url: http://sonarr.media
           gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_SONARR_TOKEN}}` }}"
         hosts:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
