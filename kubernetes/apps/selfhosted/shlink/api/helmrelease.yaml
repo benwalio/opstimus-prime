@@ -64,7 +64,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: external
+        className: external-home
         hosts:
           - host: *host
             paths:
@@ -72,6 +72,10 @@ spec:
                 service:
                   identifier: main
                   port: http
+      home:
+        enabled: true
+        className: external
+        hosts:
           - host: "ln.${SECRET_DOMAIN}"
             paths:
               - path: /

@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app external-ingress-nginx
+  name: &app external-ingress-nginx-home
 spec:
   interval: 30m
   chart:
@@ -26,11 +26,11 @@ spec:
     controller:
       service:
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: &hostname external.${SECRET_DOMAIN}
-          lbipam.cilium.io/ips: ${CILIUM_SVC_NGINX_EXT_ADDR}
-        # externalTrafficPolicy: Cluster
+          external-dns.alpha.kubernetes.io/hostname: &hostname external.${SECRET_HOME_DOMAIN}
+          lbipam.cilium.io/ips: ${CILIUM_SVC_NGINX_EXT_HOME_ADDR}
+        externalTrafficPolicy: Cluster
       ingressClassResource:
-        name: external
+        name: external-home
         default: false
         controllerValue: k8s.io/external
       admissionWebhooks:
@@ -38,7 +38,7 @@ spec:
           matchExpressions:
             - key: ingress-class
               operator: In
-              values: ["external"]
+              values: ["external-home"]
       config:
         allow-snippet-annotations: true
         annotations-risk-level: Critical
@@ -73,7 +73,7 @@ spec:
           namespaceSelector:
             any: true
       extraArgs:
-        default-ssl-certificate: "cert-manager/${SECRET_DOMAIN/./-}-production-tls"
+        default-ssl-certificate: "cert-manager/${SECRET_HOME_DOMAIN/./-}-production-tls"
         publish-status-address: *hostname
       terminationGracePeriodSeconds: 120
       publishService:
