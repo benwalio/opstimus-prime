@@ -136,15 +136,15 @@ sonarr:
           - a4c51febd4d8b2a0db10a3c974f21d92 # FR WEB Tier 02
           - dbfc0a4b5cb4cbd693311c4482ae9683 # FR WEB Tier 03
         assign_scores_to:
-          - name: Web 1080p
-          - name: Web 720p
+          - name: WEB-1080p
+          - name: WEB-720p
       - trash_ids: [9965a052eb87b0d10313b1cea89eb451] # Remux Tier 01
         assign_scores_to:
-          - name: Web 1080p
+          - name: WEB-1080p
             score: 1900
       - trash_ids: [8a1d0c3d7497e741736761a1da866a2e] # Remux Tier 02
         assign_scores_to:
-          - name: Web 1080p
+          - name: WEB-1080p
             score: 1850
 radarr:
   radarr:
