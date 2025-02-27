@@ -62,10 +62,10 @@ spec:
       databases: ["atuin"]
       password:
         type: AlphaNumeric
-    # - name: "authentik"
-    #   databases: ["authentik"]
-    #   password:
-    #     type: AlphaNumeric
+    - name: "authentik"
+      databases: ["authentik"]
+      password:
+        type: AlphaNumeric
     - name: "gatus"
       databases: ["gatus"]
       password:
