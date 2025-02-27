@@ -134,6 +134,10 @@ spec:
                         operator: In
                         values:
                           - hoarder
+                      - key: app.kubernetes.io/component
+                        operator: In
+                        values:
+                          - hoarder
                   topologyKey: kubernetes.io/hostname
         containers:
           app:
@@ -195,6 +199,7 @@ spec:
             app:
               - path: /data
                 subPath: hoarder
+
           meilisearch:
             app:
               - path: /meili_data
