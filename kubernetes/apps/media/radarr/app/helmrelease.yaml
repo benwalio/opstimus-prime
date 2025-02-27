@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sabnzbd
+  name: radarr
 spec:
   interval: 30m
   chart:
@@ -24,34 +24,34 @@ spec:
       retries: 3
   values:
     controllers:
-      sabnzbd:
+      radarr:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/sabnzbd
-              tag: 4.4.1@sha256:b7380cd5a93a0a232c5ce25803531b1575453953e99de4e6b8a1398e73442e5b
+              repository: ghcr.io/onedr0p/radarr-develop
+              tag: 5.19.3.9730@sha256:dd64f1786f50ae79013822ce196e3e7bd20db369bd51d63d63c42f7821b77317
             env:
+              RADARR__APP__INSTANCENAME: Radarr
+              RADARR__APP__THEME: dark
+              RADARR__AUTH__METHOD: External
+              RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              RADARR__LOG__DBENABLED: "False"
+              RADARR__LOG__LEVEL: info
+              RADARR__SERVER__PORT: &port 80
+              RADARR__UPDATE__BRANCH: develop
               TZ: ${TIMEZONE}
-              SABNZBD__PORT: &port 80
-              SABNZBD__HOST_WHITELIST_ENTRIES: >-
-                sabnzbd,
-                sabnzbd.media,
-                sabnzbd.media.svc,
-                sabnzbd.media.svc.cluster,
-                sabnzbd.media.svc.cluster.local,
-                sab.${SECRET_DOMAIN}
             envFrom:
               - secretRef:
-                  name: sabnzbd-secret
+                  name: radarr-secret
             probes:
               liveness: &probes
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /api?mode=version
+                    path: /ping
                     port: *port
                   initialDelaySeconds: 0
                   periodSeconds: 10
@@ -66,17 +66,17 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 12Gi
+                memory: 4Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1003
-        runAsGroup: 100
-        fsGroup: 100
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: sabnzbd
+        controller: radarr
         ports:
           http:
             port: *port
@@ -86,14 +86,14 @@ spec:
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: media
-          gethomepage.dev/name: sabnzbd
-          gethomepage.dev/icon: sh-sabnzbd.svg
-          gethomepage.dev/description: usenet
-          gethomepage.dev/widget.type: sabnzbd
-          gethomepage.dev/widget.url: http://sabnzbd.media
-          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_SABNZBD_TOKEN}}` }}"
+          gethomepage.dev/name: radarr
+          gethomepage.dev/icon: sh-radarr.svg
+          gethomepage.dev/description: movie Downloads
+          gethomepage.dev/widget.type: radarr
+          gethomepage.dev/widget.url: http://radarr.media
+          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_RADARR_TOKEN}}` }}"
         hosts:
-          - host: sab.${SECRET_DOMAIN}
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
@@ -101,13 +101,28 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: sabnzbd
+        existingClaim: radarr
+
+      config-cache:
+        existingClaim: radarr-cache
+        globalMounts:
+          - path: /config/MediaCover
+
       # scripts:
       #   type: configMap
-      #   name: sabnzbd-scripts
+      #   name: radarr-configmap
       #   defaultMode: 0775
       #   globalMounts:
-      #     - readOnly: true
+      #     - path: /scripts/pushover-notifier.sh
+      #       subPath: pushover-notifier.sh
+      #       readOnly: true
+
+      media:
+        type: nfs
+        server: ${SECRET_NFS_SERVER}
+        path: ${SECRET_NFS_MOUNT_MEDIA}
+        globalMounts:
+          - path: /mnt/media
 
       media-swap:
         type: nfs
@@ -115,24 +130,6 @@ spec:
         path: ${SECRET_NFS_MOUNT_MEDIA_SWAP}
         globalMounts:
           - path: /mnt/mediaswap
-
-      ephemeral:
-        type: custom
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes:
-                  - ReadWriteOnce
-                storageClassName: "openebs-hostpath"
-                resources:
-                  requests:
-                    storage: 100Gi
-        advancedMounts:
-          sabnzbd:
-            app:
-              - path: /incomplete
-                subPath: incomplete
 
       tmp:
         type: emptyDir
