@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sabnzbd
+  name: prowlarr
 spec:
   interval: 30m
   chart:
@@ -24,34 +24,34 @@ spec:
       retries: 3
   values:
     controllers:
-      sabnzbd:
+      prowlarr:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/sabnzbd
-              tag: 4.4.1@sha256:b7380cd5a93a0a232c5ce25803531b1575453953e99de4e6b8a1398e73442e5b
+              repository: ghcr.io/onedr0p/prowlarr-develop
+              tag: 1.31.2.4975@sha256:fa776c72b6cdd900f36df88a8c3980ac91da16830157ae19eb1c044e2c09e2a7
             env:
+              PROWLARR__APP__INSTANCENAME: Prowlarr
+              PROWLARR__APP__THEME: dark
+              PROWLARR__AUTH__METHOD: External
+              PROWLARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              PROWLARR__LOG__DBENABLED: "False"
+              PROWLARR__LOG__LEVEL: info
+              PROWLARR__SERVER__PORT: &port 80
+              PROWLARR__UPDATE__BRANCH: develop
               TZ: ${TIMEZONE}
-              SABNZBD__PORT: &port 80
-              SABNZBD__HOST_WHITELIST_ENTRIES: >-
-                sabnzbd,
-                sabnzbd.media,
-                sabnzbd.media.svc,
-                sabnzbd.media.svc.cluster,
-                sabnzbd.media.svc.cluster.local,
-                sab.${SECRET_DOMAIN}
             envFrom:
               - secretRef:
-                  name: sabnzbd-secret
+                  name: prowlarr-secret
             probes:
               liveness: &probes
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /api?mode=version
+                    path: /ping
                     port: *port
                   initialDelaySeconds: 0
                   periodSeconds: 10
@@ -66,7 +66,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 12Gi
+                memory: 1Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -76,7 +76,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: sabnzbd
+        controller: prowlarr
         ports:
           http:
             port: *port
@@ -85,54 +85,24 @@ spec:
         className: internal
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: media-process
-          gethomepage.dev/name: sabnzbd
-          gethomepage.dev/icon: sh-sabnzbd.svg
-          gethomepage.dev/description: usenet
-          gethomepage.dev/widget.type: sabnzbd
-          gethomepage.dev/widget.url: http://sabnzbd.media
-          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_SVC_SABNZBD_TOKEN}}` }}"
+          gethomepage.dev/group: media-get
+          gethomepage.dev/name: prowlarr
+          gethomepage.dev/icon: sh-prowlarr.svg
+          gethomepage.dev/description: nzb index manager
+          gethomepage.dev/widget.type: prowlarr
+          gethomepage.dev/widget.url: http://prowlarr.media
+          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_SVC_PROWLARR_TOKEN}}` }}"
         hosts:
-          - host: sab.${SECRET_DOMAIN}
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
+
     persistence:
       config:
-        existingClaim: sabnzbd
-      # scripts:
-      #   type: configMap
-      #   name: sabnzbd-scripts
-      #   defaultMode: 0775
-      #   globalMounts:
-      #     - readOnly: true
-
-      media-swap:
-        type: nfs
-        server: ${SECRET_NFS_SERVER}
-        path: ${SECRET_NFS_MOUNT_MEDIA_SWAP}
-        globalMounts:
-          - path: /mnt/mediaswap
-
-      ephemeral:
-        type: custom
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes:
-                  - ReadWriteOnce
-                storageClassName: "openebs-hostpath"
-                resources:
-                  requests:
-                    storage: 100Gi
-        advancedMounts:
-          sabnzbd:
-            app:
-              - path: /incomplete
-                subPath: incomplete
+        existingClaim: prowlarr
 
       tmp:
         type: emptyDir
