@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: radarr
+  name: bazarr
 spec:
   interval: 30m
   chart:
@@ -24,59 +24,66 @@ spec:
       retries: 3
   values:
     controllers:
-      radarr:
+      bazarr:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/radarr-develop
-              tag: 5.19.3.9730@sha256:dd64f1786f50ae79013822ce196e3e7bd20db369bd51d63d63c42f7821b77317
+              repository: ghcr.io/onedr0p/bazarr
+              tag: 1.5.1@sha256:b8fa3c3c2a5b7fe045e8f8eb95feac3c50b37837478ecc11d49db8fa8ddff683
             env:
-              RADARR__APP__INSTANCENAME: Radarr
-              RADARR__APP__THEME: dark
-              RADARR__AUTH__METHOD: External
-              RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
-              RADARR__LOG__DBENABLED: "False"
-              RADARR__LOG__LEVEL: info
-              RADARR__SERVER__PORT: &port 80
-              RADARR__UPDATE__BRANCH: develop
               TZ: ${TIMEZONE}
             envFrom:
               - secretRef:
-                  name: radarr-secret
+                  name: bazarr-secret
             probes:
               liveness: &probes
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /ping
-                    port: *port
+                    path: /health
+                    port: &port 6767
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
                   failureThreshold: 3
               readiness: *probes
-            securityContext:
+            securityContext: &securityContext
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                cpu: 100m
+                cpu: 10m
               limits:
-                memory: 4Gi
+                memory: 1Gi
+          subcleaner:
+            image:
+              repository: registry.k8s.io/git-sync/git-sync
+              tag: v4.4.0@sha256:0330739a707a2969d617e859f096659ab6d149212658ac0ad7e550b59482ebf0
+            env:
+              GITSYNC_REPO: https://github.com/KBlixt/subcleaner
+              GITSYNC_REF: master
+              GITSYNC_PERIOD: 24h
+              GITSYNC_ROOT: /subcleaner
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 128Mi
+            securityContext: *securityContext
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+        runAsUser: 1003
+        runAsGroup: 100
+        fsGroup: 100
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: radarr
+        controller: bazarr
         ports:
           http:
             port: *port
@@ -85,13 +92,13 @@ spec:
         className: internal
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: media-get
-          gethomepage.dev/name: radarr
-          gethomepage.dev/icon: sh-radarr.svg
-          gethomepage.dev/description: movie Downloads
-          gethomepage.dev/widget.type: radarr
-          gethomepage.dev/widget.url: http://radarr.media
-          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_RADARR_TOKEN}}` }}"
+          gethomepage.dev/group: media-process
+          gethomepage.dev/name: bazarr
+          gethomepage.dev/icon: sh-bazarr.svg
+          gethomepage.dev/description: subtitles
+          gethomepage.dev/widget.type: bazarr
+          gethomepage.dev/widget.url: http://bazarr.media:6767
+          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_SVC_BAZARR_TOKEN}}` }}"
         hosts:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
@@ -101,21 +108,17 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: radarr
+        existingClaim: bazarr
 
       config-cache:
-        existingClaim: radarr-cache
+        type: emptyDir
         globalMounts:
-          - path: /config/MediaCover
+          - path: /config/cache
 
-      # scripts:
-      #   type: configMap
-      #   name: radarr-configmap
-      #   defaultMode: 0775
-      #   globalMounts:
-      #     - path: /scripts/pushover-notifier.sh
-      #       subPath: pushover-notifier.sh
-      #       readOnly: true
+      config-log:
+        type: emptyDir
+        globalMounts:
+          - path: /config/log
 
       media:
         type: nfs
@@ -124,12 +127,17 @@ spec:
         globalMounts:
           - path: /mnt/media
 
-      media-swap:
-        type: nfs
-        server: ${SECRET_NFS_SERVER}
-        path: ${SECRET_NFS_MOUNT_MEDIA_SWAP}
+      scripts:
+        type: configMap
+        name: bazarr-scripts
+        defaultMode: 0775
         globalMounts:
-          - path: /mnt/mediaswap
+          - path: /scripts/subcleaner.sh
+            subPath: subcleaner.sh
+            readOnly: true
+
+      subcleaner:
+        type: emptyDir
 
       tmp:
         type: emptyDir

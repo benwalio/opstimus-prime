@@ -85,7 +85,7 @@ spec:
         className: internal
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: media
+          gethomepage.dev/group: media-get
           gethomepage.dev/name: sonarr
           gethomepage.dev/icon: sh-sonarr.svg
           gethomepage.dev/description: TV Downloads
