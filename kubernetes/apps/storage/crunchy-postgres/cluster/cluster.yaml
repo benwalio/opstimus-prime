@@ -74,6 +74,10 @@ spec:
       databases: ["grafana"]
       password:
         type: AlphaNumeric
+    - name: "lidarr"
+      databases:
+        - lidarr
+        - lidarr_log
     - name: "lldap"
       databases: ["lldap"]
       password:
@@ -90,6 +94,10 @@ spec:
       databases: ["paperless"]
       password:
         type: AlphaNumeric
+    - name: "radarr"
+      databases:
+        - radarr
+        - radarr_log
     - name: "shlink"
       databases: ["shlink"]
       password:
