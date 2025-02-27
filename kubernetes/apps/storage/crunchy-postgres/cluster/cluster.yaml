@@ -94,6 +94,12 @@ spec:
       databases: ["shlink"]
       password:
         type: AlphaNumeric
+    - name: "sonarr"
+      databases:
+        - sonarr
+        - sonarr_log
+      password:
+        type: AlphaNumeric
 
   backups:
     pgbackrest:
