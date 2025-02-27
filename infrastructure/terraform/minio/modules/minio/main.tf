@@ -4,11 +4,6 @@ terraform {
       source  = "aminueza/minio"
       version = "3.3.0"
     }
-
-    onepassword = {
-      source  = "1Password/onepassword"
-      version = "2.1.2"
-    }
   }
 }
 
@@ -54,47 +49,70 @@ resource "minio_iam_service_account" "service_account" {
   description = minio_iam_user.user.name
 }
 
-resource "onepassword_item" "item" {
-  vault    = var.onepassword_vault
-  title    = "${var.onepassword_item}-tfm-minio"
-  category = "login"
+# resource "onepassword_item" "item" {
+#   vault    = var.onepassword_vault
+#   title    = "${var.onepassword_item}-tfm-minio"
+#   category = "login"
 
-  username = var.user_name
-  password = var.user_secret
+#   username = var.user_name
+#   password = var.user_secret
 
-  url  = "https://s3.benwal.rodeo"
-  tags = ["automation/terraform"]
+#   tags = ["automation/terraform"]
 
-  section {
-    label = "MINIO"
+#   section {
+#     label = "MINIO"
 
-    field {
-      label = "MINIO_UI_USER"
-      type  = "STRING"
-      value = var.user_name
-    }
+#     field {
+#       label = "MINIO_UI_USER"
+#       type  = "STRING"
+#       value = var.user_name
+#     }
 
-    field {
-      label = "MINIO_UI_PASS"
-      type  = "CONCEALED"
-      value = var.user_secret
-    }
+#     field {
+#       label = "MINIO_UI_PASS"
+#       type  = "CONCEALED"
+#       value = var.user_secret
+#     }
 
-    field {
-      label = "MINIO_ACCESS_KEY"
-      type  = "STRING"
-      value = minio_iam_service_account.service_account.access_key
-    }
-    field {
-      label = "MINIO_SECRET_KEY"
-      type  = "CONCEALED"
-      value = minio_iam_service_account.service_account.secret_key
-    }
+#     field {
+#       label = "MINIO_ACCESS_KEY"
+#       type  = "STRING"
+#       value = minio_iam_service_account.service_account.access_key
+#     }
+#     field {
+#       label = "MINIO_SECRET_KEY"
+#       type  = "CONCEALED"
+#       value = minio_iam_service_account.service_account.secret_key
+#     }
 
-    field {
-      label = "MINIO_BUCKET"
-      type  = "STRING"
-      value = var.bucket_name
-    }
-  }
+#     field {
+#       label = "MINIO_BUCKET"
+#       type  = "STRING"
+#       value = var.bucket_name
+#     }
+#   }
+# }
+
+output "username" {
+  value = var.user_name
+}
+
+output "password" {
+  value = var.user_secret
+}
+
+output "access_key" {
+  value = minio_iam_service_account.service_account.access_key
+}
+
+output "secret_key" {
+  value = minio_iam_service_account.service_account.secret_key
+}
+
+output "service_account" {
+  value = minio_iam_service_account.service_account.id
+}
+
+output "bucket" {
+  value = var.user_name
 }

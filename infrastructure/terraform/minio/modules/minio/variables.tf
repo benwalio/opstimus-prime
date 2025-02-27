@@ -12,12 +12,12 @@ variable "user_secret" {
   sensitive = true
 }
 
-variable "onepassword_vault" {
-  type        = string
-  description = "Name of the 1password vault"
-}
+# variable "onepassword_vault" {
+#   type        = string
+#   description = "Name of the 1password vault"
+# }
 
-variable "onepassword_item" {
-  type        = string
-  description = "Name of the 1password item (name-tfm-minio)"
-}
+# variable "onepassword_item" {
+#   type        = string
+#   description = "Name of the 1password item (name-tfm-minio)"
+# }

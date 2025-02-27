@@ -89,20 +89,6 @@ resource "authentik_provider_oauth2" "oauth2" {
       }
     ]
   )
-
-  # dynamic "allowed_redirect_uris" {
-  #   for_each = each.value.redirect_uris
-  #   content = {
-  #     matching_mode = "strict",
-  #     url           = allowed_redirect_uris.value
-  #   }
-  # }
-  # allowed_redirect_uris = [
-  #   {
-  #     matching_mode = "strict",
-  #     url           = each.value.redirect_uri,
-  #   }
-  # ]
 }
 
 resource "authentik_application" "application" {
