@@ -12,12 +12,12 @@ sonarr:
       type: series
 
     quality_profiles:
-      - name: WEB-1080p
+      - name: 1080p
         # reset_unmatched_scores:
         #   enabled: true
         upgrade:
           allowed: true
-          until_quality: WEBDL-1080p
+          until_quality: WEB-1080p
           until_score: 10000
         min_format_score: 0
         quality_sort: top
@@ -40,12 +40,12 @@ sonarr:
               - WEBRip-480p
           - name: DVD
           - name: SDTV
-      - name: WEB-720p
+      - name: 720p
         reset_unmatched_scores:
           enabled: true
         upgrade:
           allowed: true
-          until_quality: WEBDL-720p
+          until_quality: WEB-720p
           until_score: 10000
         min_format_score: 0
         quality_sort: top
@@ -61,7 +61,7 @@ sonarr:
               - WEBRip-480p
           - name: DVD
           - name: SDTV
-      - name: WEB-480p
+      - name: 480p
         reset_unmatched_scores:
           enabled: true
         upgrade:
@@ -136,15 +136,15 @@ sonarr:
           - a4c51febd4d8b2a0db10a3c974f21d92 # FR WEB Tier 02
           - dbfc0a4b5cb4cbd693311c4482ae9683 # FR WEB Tier 03
         assign_scores_to:
-          - name: WEB-1080p
-          - name: WEB-720p
+          - name: 1080p
+          - name: 720p
       - trash_ids: [9965a052eb87b0d10313b1cea89eb451] # Remux Tier 01
         assign_scores_to:
-          - name: WEB-1080p
+          - name: 1080p
             score: 1900
       - trash_ids: [8a1d0c3d7497e741736761a1da866a2e] # Remux Tier 02
         assign_scores_to:
-          - name: WEB-1080p
+          - name: 1080p
             score: 1850
 radarr:
   radarr:
