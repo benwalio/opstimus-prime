@@ -10,5 +10,6 @@ resources:
   - ./immich/ks.yaml
   - ./paperless/ks.yaml
   - ./pinchflat/ks.yaml
+  - ./sabnzbd/ks.yaml
   - ./sonarr/ks.yaml
   - ./theme-park/ks.yaml
