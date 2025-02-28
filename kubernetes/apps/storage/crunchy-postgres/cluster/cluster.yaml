@@ -42,7 +42,7 @@ spec:
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 20G
+            storage: 20Gi
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: "kubernetes.io/hostname"
@@ -132,7 +132,7 @@ spec:
               accessModes: ["ReadWriteMany"]
               resources:
                 requests:
-                  storage: 1M
+                  storage: 1Mi
           schedules:
             full: "30 1 * * 0" # Sunday at 01:30
             differential: "30 1 * * 1-6" # Mon-Sat at 01:30

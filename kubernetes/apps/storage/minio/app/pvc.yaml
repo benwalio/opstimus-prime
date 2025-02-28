@@ -11,5 +11,5 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 100G
+      storage: 100Gi
   storageClassName: nfs-csi

@@ -52,7 +52,7 @@ spec:
               storageClassName: ceph-block
               resources:
                 requests:
-                  storage: 1G
+                  storage: 1Gi
     kubeApiServer:
       serviceMonitor:
         selector:
@@ -106,7 +106,7 @@ spec:
               storageClassName: ceph-block
               resources:
                 requests:
-                  storage: 50G
+                  storage: 50Gi
     prometheus-node-exporter:
       fullnameOverride: node-exporter
       prometheus:
