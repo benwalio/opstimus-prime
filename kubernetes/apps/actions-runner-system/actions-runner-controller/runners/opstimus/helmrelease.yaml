@@ -51,7 +51,7 @@ spec:
         storageClassName: openebs-hostpath
         resources:
           requests:
-            storage: 25Gi
+            storage: 25G
     controllerServiceAccount:
       name: actions-runner-controller
       namespace: actions-runner-system

@@ -10,7 +10,7 @@ spec:
   image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.27.1@sha256:e1bdd6ff1ed32efdfb5a07ddf954689a3d69791ae905a1f2197d8aa381ef8e7c
   replicas: 3
   args:
-    - --maxmemory=$(MAX_MEMORY)Mi
+    - --maxmemory=$(MAX_MEMORY)M
     - --default_lua_flags=allow-undeclared-keys #https://github.com/immich-app/immich/issues/2542
     - --proactor_threads=2
     - --cluster_mode=emulated
@@ -21,7 +21,7 @@ spec:
       valueFrom:
         resourceFieldRef:
           resource: limits.memory
-          divisor: 1Mi
+          divisor: 1M
     - name: AWS_ACCESS_KEY_ID
       valueFrom:
         secretKeyRef:
@@ -35,9 +35,9 @@ spec:
   resources:
     requests:
       cpu: 100m
-      memory: 128Mi
+      memory: 128M
     limits:
-      memory: 512Mi
+      memory: 512M
   snapshot:
     dir: "s3://dragonfly"
   serviceSpec:

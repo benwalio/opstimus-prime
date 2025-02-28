@@ -91,7 +91,7 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 4Gi
+                memory: 2G
 
       chrome:
         annotations:
@@ -119,7 +119,7 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 1Gi
+                memory: 1G
 
       meilisearch:
         annotations:
@@ -155,7 +155,7 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 2Gi
+                memory: 8G
 
     service:
       app:

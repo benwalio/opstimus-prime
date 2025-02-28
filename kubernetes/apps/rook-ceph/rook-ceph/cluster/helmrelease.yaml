@@ -137,9 +137,9 @@ spec:
             resources:
               requests:
                 cpu: 100m
-                memory: 1Gi
+                memory: 1G
               limits:
-                memory: 4Gi
+                memory: 4G
         storageClass:
           enabled: true
           isDefault: false
@@ -180,9 +180,9 @@ spec:
             resources:
               requests:
                 cpu: 100m
-                memory: 1Gi
+                memory: 1G
               limits:
-                memory: 2Gi
+                memory: 2G
             instances: 2
             priorityClassName: system-cluster-critical
           healthCheck:

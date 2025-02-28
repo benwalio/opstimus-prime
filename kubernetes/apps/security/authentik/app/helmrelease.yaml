@@ -42,7 +42,7 @@ spec:
         requests:
           cpu: 200m
         limits:
-          memory: 1Gi
+          memory: 1G
       metrics:
         prometheus:
           serviceMonitor:
@@ -71,4 +71,4 @@ spec:
         requests:
           cpu: 200m
         limits:
-          memory: 1Gi
+          memory: 1G

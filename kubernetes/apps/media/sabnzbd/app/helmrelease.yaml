@@ -66,7 +66,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 12Gi
+                memory: 8G
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -127,7 +127,7 @@ spec:
                 storageClassName: "openebs-hostpath"
                 resources:
                   requests:
-                    storage: 100Gi
+                    storage: 100G
         advancedMounts:
           sabnzbd:
             app:

@@ -5,7 +5,7 @@ metadata:
   name: crunchy-postgres-nfs
 spec:
   capacity:
-    storage: 1Mi
+    storage: 1M
   accessModes: ["ReadWriteMany"]
   storageClassName: nfs-csi #csi-driver-nfs
   nfs:
@@ -27,7 +27,7 @@ metadata:
   name: crunchy-postgres-vector-nfs
 spec:
   capacity:
-    storage: 1Mi
+    storage: 1M
   accessModes: ["ReadWriteMany"]
   storageClassName: nfs-csi #csi-driver-nfs
   nfs:

@@ -56,7 +56,7 @@ spec:
             resources:
               requests:
                 cpu: 25m
-                memory: 105M
+                memory: 128M
               limits:
                 memory: 2G
     serviceAccount:

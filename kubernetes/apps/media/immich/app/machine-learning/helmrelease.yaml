@@ -72,9 +72,9 @@ spec:
             resources:
               requests:
                 cpu: 100m
-                memory: 274M
+                memory: 256M
               limits:
-                memory: 3949M
+                memory: 3G
 
     service:
       app:

@@ -46,7 +46,7 @@ spec:
                 memory: 64M
               limits:
                 cpu: 2000m
-                memory: 1024M
+                memory: 1G
     service:
       app:
         controller: syncthing

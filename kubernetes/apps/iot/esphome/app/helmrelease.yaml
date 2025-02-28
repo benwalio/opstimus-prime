@@ -58,7 +58,7 @@ spec:
                 cpu: 20m
                 memory: 64M
               limits:
-                memory: 2048M
+                memory: 2G
 
           code-server:
             image:
@@ -80,7 +80,7 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 512Mi
+                memory: 512M
 
     service:
       app:

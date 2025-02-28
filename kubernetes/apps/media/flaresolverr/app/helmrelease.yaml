@@ -37,7 +37,7 @@ spec:
             resources:
               requests:
                 cpu: 15m
-                memory: 150Mi
+                memory: 150M
             env:
               TZ: ${TIMEZONE}
               PROMETHEUS_ENABLED: true

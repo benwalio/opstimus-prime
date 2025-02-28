@@ -62,7 +62,7 @@ spec:
       enabled: true
       accessModes:
         - ReadWriteMany
-      size: 1Gi
+      size: 1G
       storageClassName: ceph-filesystem
     volumeMounts:
       - mountPath: /build/plugins

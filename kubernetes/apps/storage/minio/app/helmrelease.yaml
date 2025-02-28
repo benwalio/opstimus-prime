@@ -70,10 +70,10 @@ spec:
 
             resources:
               requests:
-                memory: 100Mi
+                memory: 128M
                 cpu: 100m
               limits:
-                memory: 4000Mi
+                memory: 4G
 
     service:
       app:

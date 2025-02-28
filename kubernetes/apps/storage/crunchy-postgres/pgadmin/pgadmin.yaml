@@ -15,7 +15,7 @@ spec:
       - ReadWriteOnce
     resources:
       requests:
-        storage: 1Gi
+        storage: 1G
   serverGroups:
     - name: supply
       postgresClusterSelector: {}
