@@ -55,49 +55,41 @@ spec:
     - name: *superuser
       databases: ["postgres"]
       options: "SUPERUSER"
-      password:
+      password: &password
         type: AlphaNumeric
     # Applications
     - name: "atuin"
       databases: ["atuin"]
-      password:
-        type: AlphaNumeric
+      password: *password
     - name: "authentik"
       databases: ["authentik"]
-      password:
-        type: AlphaNumeric
+      password: *password
     - name: "gatus"
       databases: ["gatus"]
-      password:
-        type: AlphaNumeric
+      password: *password
     - name: "grafana"
       databases: ["grafana"]
-      password:
-        type: AlphaNumeric
+      password: *password
     - name: lidarr
       databases:
         - lidarr_main
         - lidarr_log
+      password: *password
     - name: "lldap"
       databases: ["lldap"]
-      password:
-        type: AlphaNumeric
+      password: *password
     - name: "n8n"
       databases: ["n8n"]
-      password:
-        type: AlphaNumeric
+      password: *password
     - name: "nocodb"
       databases: ["nocodb"]
-      password:
-        type: AlphaNumeric
+      password: *password
     - name: "paperless"
       databases: ["paperless"]
-      password:
-        type: AlphaNumeric
+      password: *password
     - name: "shlink"
       databases: ["shlink"]
-      password:
-        type: AlphaNumeric
+      password: *password
 
   backups:
     pgbackrest:
