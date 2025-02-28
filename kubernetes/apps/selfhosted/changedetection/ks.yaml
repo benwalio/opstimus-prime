@@ -26,7 +26,7 @@ spec:
     substitute:
       APP: *app
       VOLSYNC_CLAIM: *app
-      VOLSYNC_CAPACITY: 1G
+      VOLSYNC_CAPACITY: 1Gi
   prune: true
   wait: false
   interval: 30m
