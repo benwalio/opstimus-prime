@@ -105,26 +105,26 @@ spec:
         repo3-retention-full-type: "time"
         repo3-s3-uri-style: path
       manual:
-        repoName: repo1
+        repoName: repo3
         options:
           - --type=full
       metadata:
         labels:
           app.kubernetes.io/name: crunchy-postgres-vector-backup
       repos:
-        - name: repo1
-          volume: &nfs
-            volumeClaimSpec:
-              storageClassName: nfs-csi #csi-driver-nfs
-              volumeName: crunchy-postgres-vector-nfs
-              accessModes: ["ReadWriteMany"]
-              resources:
-                requests:
-                  storage: 1Mi
-          schedules:
-            full: "30 1 * * 0" # Sunday at 01:30
-            differential: "30 1 * * 1-6" # Mon-Sat at 01:30
-            incremental: "30 3-23 * * *" # Every hour except 01:30-2:30
+        # - name: repo1
+        #   volume: &nfs
+        #     volumeClaimSpec:
+        #       storageClassName: nfs-csi #csi-driver-nfs
+        #       volumeName: crunchy-postgres-vector-nfs
+        #       accessModes: ["ReadWriteMany"]
+        #       resources:
+        #         requests:
+        #           storage: 1Mi
+        #   schedules:
+        #     full: "30 1 * * 0" # Sunday at 01:30
+        #     differential: "30 1 * * 1-6" # Mon-Sat at 01:30
+        #     incremental: "30 3-23 * * *" # Every hour except 01:30-2:30
         - name: repo2
           s3: &r2
             bucket: crunchy-pgo-vector
