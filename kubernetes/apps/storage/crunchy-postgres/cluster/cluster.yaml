@@ -74,6 +74,10 @@ spec:
       databases: ["grafana"]
       password:
         type: AlphaNumeric
+    - name: lidarr
+      databases:
+        - lidarr_main
+        - lidarr_log
     - name: "lldap"
       databases: ["lldap"]
       password:
