@@ -65,7 +65,7 @@ spec:
           whenUnsatisfiable: "DoNotSchedule"
           labelSelector:
             matchLabels:
-              postgres-operator.crunchydata.com/data: postgres-vector
+              postgres-operator.crunchydata.com/data: crunchy-postgres-vector
   users:
     # Superuser
     - name: *superuser
