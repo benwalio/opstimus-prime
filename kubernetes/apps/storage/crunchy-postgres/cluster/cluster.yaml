@@ -78,6 +78,9 @@ spec:
     - name: "lldap"
       databases: ["lldap"]
       password: *password
+    - name: "lubelog"
+      databases: ["lubelog"]
+      password: *password
     - name: "n8n"
       databases: ["n8n"]
       password: *password

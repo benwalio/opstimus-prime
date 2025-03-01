@@ -13,6 +13,7 @@ resources:
   - ./homebox/ks.yaml
   - ./homepage/ks.yaml
   - ./it-tools/ks.yaml
+  - ./lubelog/ks.yaml
   - ./n8n/ks.yaml
   - ./nocodb/ks.yaml
   - ./shlink/ks.yaml

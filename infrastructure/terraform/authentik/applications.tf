@@ -5,6 +5,7 @@ locals {
     "headlamp",
     "hoarder",
     "immich",
+    "lubelog",
     "paperless",
   ]
 }
@@ -57,6 +58,14 @@ locals {
       icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/immich.png"
       redirect_uris = ["https://photos.${var.cluster_domain}/auth/login", "https://photos.${var.cluster_domain}/user-settings", "app.immich:///oauth-callback"]
       launch_url    = "https://photos.${var.cluster_domain}/auth/login"
+    },
+    lubelog = {
+      client_id     = module.onepassword_application["lubelog"].fields["LUBEL_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["lubelog"].fields["LUBEL_AK_CLIENT_SECRET"]
+      group         = "home"
+      icon_url      = "https://demo.lubelogger.com/defaults/lubelogger_icon_72.png"
+      redirect_uris = ["https://lubelog.${var.cluster_domain}/Login/RemoteAuth"]
+      launch_url    = "https://lubelog.${var.cluster_domain}/Login/RemoteAuth"
     },
     paperless = {
       client_id     = module.onepassword_application["paperless"].fields["PPRL_AK_CLIENT_ID"]
