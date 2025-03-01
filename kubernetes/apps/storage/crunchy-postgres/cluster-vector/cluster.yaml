@@ -21,7 +21,7 @@ metadata:
         }
       ]
 spec:
-  image: ghcr.io/chkpwd/cdpgvecto.rs:16@sha256:7e9d275f1dbf8750b7b8e601e2b0c0e7bc8206080b8dcef6a456768c954c2ab4
+  image: benwalio/cdpgvecto.rs:ubi8-16.6-2-v0.3.0@sha256:5357f1251f76590bc036d1375f82ee5a7f0702336505d62d7408162018e7b4f6
   postgresVersion: 16
   monitoring:
     pgmonitor:
