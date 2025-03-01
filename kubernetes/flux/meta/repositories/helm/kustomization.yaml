@@ -12,6 +12,7 @@ resources:
   - ./controlplaneio.yaml
   - ./coredns.yaml
   - ./crunchy-userinit.yaml
+  - ./crunchy-users.yaml
   - ./crunchydata.yaml
   - ./csi-driver-nfs.yaml
   - ./descheduler.yaml
