@@ -31,13 +31,12 @@ spec:
             cpu: 10m
             memory: 64M
           limits:
-            memory: 1G
+            memory: 512M
 
   patroni: # turn on sync writes to at least 1 other replica
     dynamicConfiguration:
       synchronous_mode: true
       postgresql:
-        max_wal_size: 5GB
         synchronous_commit: "on"
         parameters:
           max_connections: 500
@@ -86,6 +85,7 @@ spec:
       options: "SUPERUSER"
       password:
         type: AlphaNumeric
+
   backups:
     pgbackrest:
       configuration: &backupConfig
@@ -94,7 +94,6 @@ spec:
       global: &backupFlag # Global
         compress-type: "lz4"
         compress-level: "9"
-        archive-timeout: "60"
         archive-push-queue-max: 8GiB
         # PVC
         repo1-retention-full: "30" # days
@@ -163,6 +162,7 @@ spec:
   #       name: repo3
   #       # volume: *nfs
   #       s3: *minio
+
   proxy:
     pgBouncer:
       service:
