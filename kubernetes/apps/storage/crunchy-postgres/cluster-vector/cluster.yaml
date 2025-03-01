@@ -153,15 +153,15 @@ spec:
       jobs:
         ttlSecondsAfterFinished: 600
 
-  # dataSource:
-  #   pgbackrest:
-  #     stanza: db
-  #     configuration: *backupConfig
-  #     global: *backupFlag
-  #     repo:
-  #       name: repo3
-  #       # volume: *nfs
-  #       s3: *minio
+  dataSource:
+    pgbackrest:
+      stanza: db
+      configuration: *backupConfig
+      global: *backupFlag
+      repo:
+        name: repo1
+        volume: *nfs
+        # s3: *minio
 
   proxy:
     pgBouncer:
