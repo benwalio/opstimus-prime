@@ -2,6 +2,10 @@
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: "3"
 
+vars:
+  KUBERNETES_RESOURCES_DIR: "{{.ROOT_DIR}}/.taskfiles/kubernetes/resources"
+  MINIJINJA_CONFIG_FILE: "{{.CONFIG_DIR}}/.minijinja.toml"
+
 tasks:
   browse-pvc:
     desc: Mount a PVC to an temp container [NS=default] [CLAIM=required]
@@ -26,6 +30,27 @@ tasks:
       - kubectl get nodes {{.NODE}}
       - kubectl node-shell --version
       - which kubectl
+
+  new-app:
+    desc: Creates a template for a new app [NS=default] [APP=required]
+    summary: |-
+      NS: Namespace the app is in (default: default)
+      APP: Application name to creat (required)
+    cmds:
+      - mkdir -p {{.KUBERNETES_DIR}}/apps/{{.NS}}/{{.APP}}/app
+      - minijinja-cli --config-file={{.MINIJINJA_CONFIG_FILE}} {{.KUBERNETES_RESOURCES_DIR}}/new-app/ks.yaml.j2 -o {{.KUBERNETES_DIR}}/apps/{{.NS}}/{{.APP}}/ks.yaml
+      - minijinja-cli --config-file={{.MINIJINJA_CONFIG_FILE}} {{.KUBERNETES_RESOURCES_DIR}}/new-app/app/helmrelease.yaml.j2 -o {{.KUBERNETES_DIR}}/apps/{{.NS}}/{{.APP}}/app/helmrelease.yaml
+      - minijinja-cli --config-file={{.MINIJINJA_CONFIG_FILE}} {{.KUBERNETES_RESOURCES_DIR}}/new-app/app/kustomization.yaml.j2 -o {{.KUBERNETES_DIR}}/apps/{{.NS}}/{{.APP}}/app/kustomization.yaml
+    vars:
+      NS: '{{.NS | default "default"}}'
+    env:
+      NS: "{{.NS}}"
+      APP: "{{.APP}}"
+    requires:
+      vars: [APP]
+    preconditions:
+      - test -f {{.KUBERNETES_RESOURCES_DIR}}/new-app/ks.yaml.j2
+    silent: true
 
   # clean-pods-error:
   #   desc: Clean 'Error' state pods [NS=default]
