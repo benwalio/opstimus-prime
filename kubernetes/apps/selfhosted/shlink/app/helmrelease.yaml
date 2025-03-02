@@ -63,6 +63,12 @@ spec:
       main:
         enabled: true
         className: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: apps
+          gethomepage.dev/name: shlink
+          gethomepage.dev/icon: sh-shlink.svg
+          gethomepage.dev/description: url shortener
         hosts:
           - host: "shlink.${SECRET_DOMAIN}"
             paths:

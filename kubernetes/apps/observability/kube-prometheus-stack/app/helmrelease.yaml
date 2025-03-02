@@ -38,6 +38,12 @@ spec:
       ingress:
         enabled: true
         ingressClassName: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: infra
+          gethomepage.dev/name: alertmanager
+          gethomepage.dev/icon: sh-alertmanager.svg
+          gethomepage.dev/description: alerts
         hosts: ["alertmanager.${SECRET_DOMAIN}"]
         pathType: Prefix
       alertmanagerSpec:

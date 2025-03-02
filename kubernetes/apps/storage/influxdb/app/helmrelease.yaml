@@ -1,0 +1,78 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app influxdb
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: influxdb2
+      version: 2.1.2
+      sourceRef:
+        kind: HelmRepository
+        name: influxdata
+        namespace: flux-system
+      interval: 30m
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  # Values link: https://github.com/influxdata/helm-charts/blob/master/charts/influxdb2/values.yaml
+  values:
+    image:
+      repository: influxdb
+      tag: 2.7.11-alpine
+
+    env:
+      - name: TZ
+        value: "${TIMEZONE}"
+
+    pdb:
+      create: false
+
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+    adminUser:
+      organization: "homelab"
+      user: "admin"
+      retention_policy: "0s"
+      bucket: "default"
+      existingSecret: "influxdb-secret"
+
+    persistence:
+      enabled: true
+      useExisting: true
+      name: *app
+
+    ingress:
+      enabled: true
+      className: internal
+      annotations:
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/description: timeseries db
+        gethomepage.dev/group: data
+        gethomepage.dev/icon: sh-influxdb.svg
+        gethomepage.dev/name: influxdb
+        gethomepage.dev/app: *app
+      hostname: influx.${SECRET_DOMAIN}
+      path: /
+      tls: true
+
+    service:
+      type: LoadBalancer
+      annotations:
+        lbipam.cilium.io/ips: ${CILIUM_SVC_INFLUX_ADDR}
