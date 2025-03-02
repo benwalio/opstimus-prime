@@ -93,6 +93,9 @@ spec:
     - name: "shlink"
       databases: ["shlink"]
       password: *password
+    - name: "vikunja"
+      databases: ["vikunja"]
+      password: *password
 
   backups:
     pgbackrest:

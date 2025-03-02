@@ -7,6 +7,7 @@ locals {
     "immich",
     "lubelog",
     "paperless",
+    "vikunja",
   ]
 }
 
@@ -74,6 +75,14 @@ locals {
       icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/paperless.png"
       redirect_uris = ["https://docs.${var.cluster_domain}/accounts/oidc/authentik/login/callback/"]
       launch_url    = "https://docs.${var.cluster_domain}/"
+    },
+    vikunja = {
+      client_id     = module.onepassword_application["vikunja"].fields["VIKUNJA_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["vikunja"].fields["VIKUNJA_AK_CLIENT_SECRET"]
+      group         = "home"
+      icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/vikunja.png"
+      redirect_uris = ["https://vikunja.${var.cluster_domain}/auth/openid/authentik"]
+      launch_url    = "https://vikunja.${var.cluster_domain}/"
     },
   }
 }
