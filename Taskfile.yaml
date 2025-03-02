@@ -6,6 +6,7 @@ set: [pipefail]
 shopt: [globstar]
 
 vars:
+  CONFIG_DIR: "{{.ROOT_DIR}}/.config"
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
   INFRASTRUCTURE_DIR: "{{.ROOT_DIR}}/infrastructure"
   PRIVATE_DIR: "{{.ROOT_DIR}}/.private"
