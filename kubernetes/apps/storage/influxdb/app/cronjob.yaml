@@ -40,7 +40,7 @@ spec:
                       name: influxdb-secret
                       key: admin-token
                 - name: INFLUX_HOST
-                  value: http://influxdb.storage
+                  value: https://influx.${SECRET_DOMAIN}
               volumeMounts:
                 - name: backup-script
                   mountPath: /scripts
