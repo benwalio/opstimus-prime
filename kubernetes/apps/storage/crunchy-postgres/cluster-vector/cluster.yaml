@@ -5,21 +5,8 @@ kind: PostgresCluster
 metadata:
   name: &name crunchy-postgres-vector
   labels:
-    crunchy-users.henrywhitaker3.github.com/watch: "true"
-  annotations:
-    crunchy-users.henrywhitaker3.github.com/superuser: &superuser "postgres"
-    crunchy-users.henrywhitaker3.github.com/extensions: |
-      [
-        {
-          "database": "immich",
-          "extension": "vectors"
-        },
-        {
-          "database": "immich",
-          "extension": "earthdistance",
-          "cascade": true
-        }
-      ]
+    crunchy-userinit.ramblurr.github.com/enabled: "true"
+    crunchy-userinit.ramblurr.github.com/superuser: &superuser "postgres"
 spec:
   image: ghcr.io/benwalio/cdpgvecto.rs:ubi8-16.6-2-v0.3.0@sha256:5357f1251f76590bc036d1375f82ee5a7f0702336505d62d7408162018e7b4f6
   postgresVersion: 16
