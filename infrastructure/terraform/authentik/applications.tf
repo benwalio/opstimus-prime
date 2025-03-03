@@ -6,6 +6,7 @@ locals {
     "hoarder",
     "immich",
     "lubelog",
+    "nextcloud",
     "paperless",
     "vikunja",
   ]
@@ -67,6 +68,14 @@ locals {
       icon_url      = "https://demo.lubelogger.com/defaults/lubelogger_icon_72.png"
       redirect_uris = ["https://lubelog.${var.cluster_domain}/Login/RemoteAuth"]
       launch_url    = "https://lubelog.${var.cluster_domain}/Login/RemoteAuth"
+    },
+    nextcloud = {
+      client_id     = module.onepassword_application["nextcloud"].fields["NXC_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["nextcloud"].fields["NXC_AK_CLIENT_SECRET"]
+      group         = "monitoring"
+      icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/nextcloud.png"
+      redirect_uris = ["https://nextcloud.${var.cluster_domain}/login"]
+      launch_url    = "https://nextcloud.${var.cluster_domain}/login"
     },
     paperless = {
       client_id     = module.onepassword_application["paperless"].fields["PPRL_AK_CLIENT_ID"]

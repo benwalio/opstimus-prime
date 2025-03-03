@@ -22,6 +22,8 @@ spec:
   dependsOn:
     - name: crunchy-postgres-cluster
       namespace: storage
+    - name: dragonfly-cluster
+      namespace: storage
     - name: onepassword-store
       namespace: security
     - name: volsync
