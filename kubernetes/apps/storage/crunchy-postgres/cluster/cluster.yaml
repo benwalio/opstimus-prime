@@ -70,6 +70,12 @@ spec:
     - name: "grafana"
       databases: ["grafana"]
       password: *password
+    - name: "gramps"
+      databases:
+        - gramps
+        - gramps_users
+        - gramps_search
+      password: *password
     - name: lidarr
       databases:
         - lidarr_main
