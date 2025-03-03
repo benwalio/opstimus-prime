@@ -24,10 +24,9 @@ spec:
       retries: 5
   values:
     fullnameOverride: *app
-    # image:
-    #   repository: nextcloud
-    #   tag: 30.0.6-fpm-alpine
-    #   flavor: fpm-alpine
+
+    image:
+      flavor: fpm
 
     ingress:
       enabled: true
