@@ -270,6 +270,7 @@ spec:
                 'use_path_style' => true,
                 'bucket'         => getenv('S3_BUCKET'),
                 'autocreate'     => false,
+                'region'     => 'us-east-1',
                 'key'            => getenv('S3_ACCESS_KEY'),
                 'secret'         => getenv('S3_SECRET_KEY'),
                 'use_ssl'        => true,
