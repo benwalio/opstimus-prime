@@ -16,7 +16,7 @@ resources:
   - ./it-tools/ks.yaml
   - ./lubelog/ks.yaml
   - ./n8n/ks.yaml
-  # - ./nextcloud/ks.yaml
+  - ./nextcloud/ks.yaml
   - ./nocodb/ks.yaml
   - ./radicale/ks.yaml
   - ./shlink/ks.yaml
