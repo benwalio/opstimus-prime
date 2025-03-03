@@ -73,10 +73,10 @@ spec:
     nextcloud:
       host: &host nextcloud.${SECRET_DOMAIN}
 
-      securityContext:
-        runAsUser: &uid 1003
-        runAsGroup: &gid 100
-        runAsNonRoot: true
+      # securityContext:
+      #   runAsUser: &uid 1003
+      #   runAsGroup: &gid 100
+      #   runAsNonRoot: true
 
       existingSecret:
         enabled: true
@@ -292,10 +292,10 @@ spec:
         headers:
           "Strict-Transport-Security": "max-age=15768000; includeSubDomains;"
 
-      securityContext:
-        runAsUser: *uid
-        runAsGroup: *gid
-        runAsNonRoot: true
+      # securityContext:
+      #   runAsUser: *uid
+      #   runAsGroup: *gid
+      #   runAsNonRoot: true
 
     internalDatabase:
       enabled: false
