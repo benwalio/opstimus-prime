@@ -74,8 +74,8 @@ locals {
       client_secret = module.onepassword_application["nextcloud"].fields["NXC_AK_CLIENT_SECRET"]
       group         = "monitoring"
       icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/nextcloud.png"
-      redirect_uris = ["https://nextcloud.${var.cluster_domain}/login"]
-      launch_url    = "https://nextcloud.${var.cluster_domain}/login"
+      redirect_uris = ["https://nextcloud.${var.cluster_domain}/apps/user_oidc/code"]
+      launch_url    = "https://nextcloud.${var.cluster_domain}/apps/user_oidc/code"
     },
     paperless = {
       client_id     = module.onepassword_application["paperless"].fields["PPRL_AK_CLIENT_ID"]
