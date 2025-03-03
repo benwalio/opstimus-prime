@@ -23,6 +23,9 @@ spec:
     remediation:
       retries: 5
   values:
+    deploymentAnnotations:
+      secret.reloader.stakater.com/reload: &secret nextcloud-secret
+
     fullnameOverride: *app
 
     image:
@@ -70,9 +73,14 @@ spec:
     nextcloud:
       host: &host nextcloud.${SECRET_DOMAIN}
 
+      securityContext:
+        runAsUser: &uid 1003
+        runAsGroup: &gid 100
+        runAsNonRoot: true
+
       existingSecret:
         enabled: true
-        secretName: &secret nextcloud-secret
+        secretName: *secret
         usernameKey: ADMIN_USER
         passwordKey: ADMIN_PASS
         tokenKey: METRICS_TOKEN
@@ -81,6 +89,7 @@ spec:
         smtpHostKey: SMTP_HOST
 
       datadir: /var/www/data
+
       extraEnv:
         - name: REDIS_HOST
           valueFrom:
@@ -191,6 +200,7 @@ spec:
             array (
               0 => 'HTTP_X_FORWARDED_FOR',
             ),
+            'default_timezone' => '${TIMEZONE}',
             'default_phone_region' => 'US',
             'trashbin_retention_obligation' => 'auto, 30',
             'auth.bruteforce.protection.enabled' => true,
@@ -281,6 +291,11 @@ spec:
       config:
         headers:
           "Strict-Transport-Security": "max-age=15768000; includeSubDomains;"
+
+      securityContext:
+        runAsUser: *uid
+        runAsGroup: *gid
+        runAsNonRoot: true
 
     internalDatabase:
       enabled: false
