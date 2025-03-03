@@ -51,7 +51,6 @@ spec:
             env: &envs
               GRAMPSWEB_TREE: "benwal" # will create a new tree if not exists
               GRAMPSWEB_BASE_URL: "https://gramps.${SECRET_DOMAIN}"
-              NEW_DB_BACKEND: "sharedpostgresql"
             resources:
               requests:
                 cpu: 10m
