@@ -12,7 +12,7 @@ data "onepassword_vault" "vault" {
 }
 
 resource "onepassword_item" "item" {
-  vault    = var.onepassword_vault
+  vault    = data.onepassword_vault.vault.uuid
   title    = var.item_title
   category = "login"
 
