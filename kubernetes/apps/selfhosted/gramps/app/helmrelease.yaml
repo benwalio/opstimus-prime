@@ -61,7 +61,13 @@ spec:
           worker:
             image: *image
             command:
-              ["celery", "-A", "gramps_webapi", "worker", "--loglevel=INFO"]
+              [
+                "celery",
+                "-A",
+                "gramps_webapi.celery",
+                "worker",
+                "--loglevel=INFO",
+              ]
             envFrom:
               - secretRef:
                   name: gramps-secret
