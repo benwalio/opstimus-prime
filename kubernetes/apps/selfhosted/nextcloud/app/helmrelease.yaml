@@ -88,11 +88,11 @@ spec:
             secretKeyRef:
               name: *secret
               key: REDIS_HOST
-        - name: REDIS_HOST_PORT
+        - name: REDIS_PORT
           valueFrom:
             secretKeyRef:
               name: *secret
-              key: REDIS_HOST_PORT
+              key: REDIS_PORT
         - name: REDIS_DB
           valueFrom:
             secretKeyRef:
@@ -159,7 +159,7 @@ spec:
           args:
             - -c
             - >-
-              until nc -w 1 -v $REDIS_HOST:$REDIS_HOST_PORT;
+              until nc -w 1 -v $REDIS_HOST:$REDIS_PORT;
               do echo "Waiting for Redis";
               done
           env:
@@ -168,11 +168,11 @@ spec:
                 secretKeyRef:
                   name: *secret
                   key: REDIS_HOST
-            - name: REDIS_HOST_PORT
+            - name: REDIS_PORT
               valueFrom:
                 secretKeyRef:
                   name: *secret
-                  key: REDIS_HOST_PORT
+                  key: REDIS_PORT
 
       defaultConfigs:
         redis.config.php: false
@@ -212,7 +212,7 @@ spec:
               'memcache.locking' => '\OC\Memcache\Redis',
               'redis' => array(
                 'host' => getenv('REDIS_HOST'),
-                'port' => getenv('REDIS_HOST_PORT') ?: 6379,
+                'port' => getenv('REDIS_PORT') ?: 6379,
                 'dbindex' => getenv('REDIS_DB'),
               )
             );
