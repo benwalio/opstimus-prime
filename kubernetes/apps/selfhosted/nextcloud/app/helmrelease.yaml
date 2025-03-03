@@ -113,16 +113,16 @@ spec:
             secretKeyRef:
               name: *secret
               key: S3_SECRET_KEY
-        - name: NEXTCLOUD_OAUTH_CLIENT_SECRET
+        - name: OIDC_CLIENT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: *secret
-              key: NEXTCLOUD_OAUTH_CLIENT_SECRET
-        - name: NEXTCLOUD_OAUTH_CLIENT_ID
+              key: OIDC_CLIENT_PASSWORD
+        - name: OIDC_CLIENT_ID
           valueFrom:
             secretKeyRef:
               name: *secret
-              key: NEXTCLOUD_OAUTH_CLIENT_ID
+              key: OIDC_CLIENT_ID
 
       mail:
         enabled: true
