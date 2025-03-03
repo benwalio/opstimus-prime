@@ -18,7 +18,7 @@ spec:
       namespace: security
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: nfs-csi
+    - name: csi-driver-nfs
       namespace: storage
     - name: volsync
       namespace: storage
