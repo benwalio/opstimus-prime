@@ -78,7 +78,7 @@ spec:
         passwordKey: ADMIN_PASS
         tokenKey: METRICS_TOKEN
         smtpUsernameKey: SMTP_USERNAME
-        smtpPasswordKey: EXTERNAL_SMTP_PASS
+        smtpPasswordKey: SMTP_PASSWORD
         smtpHostKey: SMTP_HOST
 
       datadir: /var/www/data
