@@ -28,12 +28,6 @@ spec:
 
     fullnameOverride: *app
 
-    # image:
-    #   flavor: fpm
-
-    # nginx:
-    #   enabled: true
-
     ingress:
       enabled: true
       className: external
@@ -48,6 +42,9 @@ spec:
         nginx.ingress.kubernetes.io/proxy-body-size: 512M
         nginx.ingress.kubernetes.io/proxy-buffering: "off"
         nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+        nginx.ingress.kubernetes.io/enable-cors: "true"
+        nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
+        nginx.ingress.kubernetes.io/affinity: cookie
         nginx.ingress.kubernetes.io/server-snippet: |
           server_tokens off;
           proxy_hide_header X-Powered-By;
@@ -72,6 +69,8 @@ spec:
           location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
             deny all;
           }
+      path: /
+      pathType: Prefix
 
     nextcloud:
       host: &host nextcloud.${SECRET_DOMAIN}
@@ -198,10 +197,18 @@ spec:
               0 => '127.0.0.1',
               1 => '172.16.0.0/16',
               2 => '10.96.0.0/16',
+              3 => '10.69.0.0/16',
             ),
+            'trusted_domains' =>
+              [
+                'nextcloud',
+                'nextcloud.selfhosted',
+                'nextcloud.${SECRET_DOMAIN}'
+              ],
             'forwarded_for_headers' =>
             array (
               0 => 'HTTP_X_FORWARDED_FOR',
+              1 => 'X-Forwarded-For',
             ),
             'default_timezone' => '${TIMEZONE}',
             'default_phone_region' => 'US',
