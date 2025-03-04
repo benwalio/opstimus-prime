@@ -53,6 +53,7 @@ spec:
             - name: backup-script
               configMap:
                 name: influxdb-backup-script
+
             - name: influxdb-backup-nfs
               persistentVolumeClaim:
                 claimName: influxdb-nfs
