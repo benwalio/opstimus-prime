@@ -24,6 +24,8 @@ spec:
       namespace: security
     - name: volsync
       namespace: storage
+    - name: crunchy-postgres-cluster
+      namespace: storage
   components:
     - ../../../../flux/components/volsync
   postBuild:
