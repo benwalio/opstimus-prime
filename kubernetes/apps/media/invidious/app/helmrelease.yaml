@@ -49,21 +49,6 @@ spec:
                 cpu: 50m
                 memory: 256Mi
 
-          inv-sig-helper:
-            image:
-              repository: quay.io/invidious/inv-sig-helper
-              tag: latest
-              pullPolicy: IfNotPresent
-            command: ["/app/inv_sig_helper_rust", "--tcp", "0.0.0.0:12999"]
-            env:
-              RUST_LOG: debug
-              RUST_BACKTRACE: full
-            restartPolicy: Always
-            securityContext:
-              capabilities:
-                drop:
-                  - ALL
-
     service:
       main:
         controller: main
@@ -76,6 +61,7 @@ spec:
         enabled: true
         className: internal
         annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 100.90.0.0/10"
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: media
           gethomepage.dev/name: invidious
