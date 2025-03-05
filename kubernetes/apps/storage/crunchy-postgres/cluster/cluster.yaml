@@ -79,6 +79,9 @@ spec:
     - name: "homebox"
       databases: ["homebox"]
       password: *password
+    - name: "invidious"
+      databases: ["invidious"]
+      password: *password
     - name: lidarr
       databases:
         - lidarr_main
