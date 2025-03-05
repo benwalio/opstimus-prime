@@ -23,7 +23,7 @@ spec:
     - name: onepassword-store
       namespace: security
   components:
-    - ../../../../flux/components/gatus/external
+    - ../../../../components/gatus/external
   postBuild:
     substitute:
       APP: authentik

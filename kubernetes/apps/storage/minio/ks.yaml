@@ -15,7 +15,7 @@ spec:
     - name: csi-driver-nfs
       namespace: storage
   # components:
-  #   - ../../../../flux/components/gatus/external
+  #   - ../../../../components/gatus/external
   interval: 30m
   postBuild:
     substitute:

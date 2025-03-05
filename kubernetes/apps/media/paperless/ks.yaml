@@ -10,8 +10,8 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   components:
-    - ../../../../flux/components/gatus/external
-    - ../../../../flux/components/volsync
+    - ../../../../components/gatus/external
+    - ../../../../components/volsync
   dependsOn:
     - name: crunchy-postgres-cluster
       namespace: storage
@@ -50,7 +50,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   components:
-    - ../../../../flux/components/volsync
+    - ../../../../components/volsync
   dependsOn:
     - name: volsync
       namespace: storage
