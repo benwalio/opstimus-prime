@@ -1,15 +1,13 @@
 endpoints:
   - name: "${APP}"
     group: guarded
-    url: "https://${GATUS_SUBDOMAIN:=${APP}}.${SECRET_DOMAIN}${GATUS_PATH:=/}"
+    url: ${CILIUM_SVC_KUBE_GATE_ADDR}
     interval: 1m
     ui:
       hide-url: true
       hide-hostname: true
-    client:
-      dns-resolver: tcp://${CILIUM_SVC_KUBE_GATE_ADDR}:53
+    dns:
+      query-name: "https://${GATUS_SUBDOMAIN:=${APP}}.${GATUS_DOMAIN:=${SECRET_DOMAIN}}${GATUS_PATH:=/}"
+      query-type: A
     conditions:
-      # - "len([BODY]) == 0"
-      - "[STATUS] == ${GATUS_STATUS:=200}"
-    # alerts:
-    #   - type: pushover
+      - "len([BODY]) == 0"
