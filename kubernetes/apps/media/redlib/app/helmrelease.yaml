@@ -45,7 +45,7 @@ spec:
               REDLIB_ROBOTS_DISABLE_INDEXING: "on"
               REDLIB_DEFAULT_THEME: "gruvboxdark"
               REDLIB_DEFAULT_FRONT_PAGE: "default"
-              REDLIB_DEFAULT_LAYOUT: "compact"
+              REDLIB_DEFAULT_LAYOUT: "card"
               REDLIB_DEFAULT_WIDE: "on"
               REDLIB_DEFAULT_POST_SORT: "hot"
               REDLIB_DEFAULT_COMMENT_SORT: "confidence"
