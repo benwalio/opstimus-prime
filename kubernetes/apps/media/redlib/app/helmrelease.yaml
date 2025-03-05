@@ -52,6 +52,9 @@ spec:
               REDLIB_DEFAULT_DISABLE_VISIT_REDDIT_CONFIRMATION: "false"
               REDLIB_ENABLE_RSS: "on"
               REDLIB_FULL_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
+            envFrom:
+              - secretRef:
+                  name: redlib-secret
 
             securityContext: &sc
               readOnlyRootFilesystem: true
