@@ -33,7 +33,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
-        containers:
+        initContainers:
           inv-sig-helper:
             image:
               repository: quay.io/invidious/inv-sig-helper
@@ -49,6 +49,7 @@ spec:
                 drop:
                   - ALL
 
+        containers:
           main:
             image:
               repository: quay.io/invidious/invidious
