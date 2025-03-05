@@ -6,6 +6,7 @@ locals {
     "hoarder",
     "immich",
     "lubelog",
+    "miniflux",
     "nextcloud",
     "paperless",
     "vikunja",
@@ -68,6 +69,14 @@ locals {
       icon_url      = "https://demo.lubelogger.com/defaults/lubelogger_icon_72.png"
       redirect_uris = ["https://lubelog.${var.cluster_domain}/Login/RemoteAuth"]
       launch_url    = "https://lubelog.${var.cluster_domain}/Login/RemoteAuth"
+    },
+    miniflux = {
+      client_id     = module.onepassword_application["miniflux"].fields["MNFX_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["miniflux"].fields["MNFX_AK_CLIENT_SECRET"]
+      group         = "home"
+      icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/miniflux.png"
+      redirect_uris = ["https://rss.${var.cluster_domain}/oauth2/oidc/callback"]
+      launch_url    = "https://rss.${var.cluster_domain}/auth/login"
     },
     nextcloud = {
       client_id     = module.onepassword_application["nextcloud"].fields["NXC_AK_CLIENT_ID"]
