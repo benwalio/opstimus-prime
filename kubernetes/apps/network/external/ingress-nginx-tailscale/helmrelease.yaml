@@ -27,9 +27,6 @@ spec:
     controller:
       replicaCount: 2
 
-      allowSnippetAnnotations: true
-      enableAnnotationValidations: true
-
       updateStrategy:
         type: RollingUpdate
 
