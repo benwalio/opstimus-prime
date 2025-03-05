@@ -26,7 +26,7 @@ tasks:
         cmd: kubectl create namespace {{base .ITEM}} --dry-run=client --output=yaml | kubectl apply --server-side --filename -
       - for: { var: APPLY_SECRETS }
         cmd: sops exec-file {{.ITEM}} "kubectl --namespace flux-system apply --server-side --filename {}"
-      - kubectl --namespace flux-system apply --server-side --filename {{.KUBERNETES_DIR}}/flux/components/substitutions/cluster-settings.yaml
+      - kubectl --namespace flux-system apply --server-side --filename {{.KUBERNETES_DIR}}/components/substitutions/cluster-settings.yaml
       - helmfile --file {{.KUBERNETES_DIR}}/bootstrap/apps/helmfile.yaml apply --skip-diff-on-install --suppress-diff
     vars:
       APPLY_NAMESPACES:
@@ -44,7 +44,7 @@ tasks:
     cmds:
       - for: { var: APPLY_SECRETS }
         cmd: sops exec-file {{.ITEM}} "kubectl --namespace flux-system apply --server-side --filename {}"
-      - kubectl --namespace flux-system apply --server-side --filename {{.KUBERNETES_DIR}}/flux/components/substitutions/cluster-settings.yaml
+      - kubectl --namespace flux-system apply --server-side --filename {{.KUBERNETES_DIR}}/components/substitutions/cluster-settings.yaml
       - helmfile --file {{.KUBERNETES_DIR}}/bootstrap/apps/helmfile.yaml apply --skip-diff-on-install --suppress-diff
     vars:
       APPLY_NAMESPACES:
