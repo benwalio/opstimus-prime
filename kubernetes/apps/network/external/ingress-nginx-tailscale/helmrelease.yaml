@@ -38,7 +38,7 @@ spec:
         externalTrafficPolicy: Local
 
       ingressClassResource:
-        name: ingress-nginx-tailscale
+        name: tailscale
         default: false
         controllerValue: k8s.io/ingress-nginx-tailscale
 
