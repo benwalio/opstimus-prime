@@ -49,6 +49,21 @@ spec:
                 cpu: 50m
                 memory: 256Mi
 
+          inv-sig-helper:
+            image:
+              repository: quay.io/invidious/inv-sig-helper
+              tag: latest
+              pullPolicy: IfNotPresent
+            command: ["/app/inv_sig_helper_rust", "--tcp", "0.0.0.0:12999"]
+            env:
+              RUST_LOG: debug
+              RUST_BACKTRACE: full
+            restartPolicy: Always
+            securityContext:
+              capabilities:
+                drop:
+                  - ALL
+
     service:
       main:
         controller: main
