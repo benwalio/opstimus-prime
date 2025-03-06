@@ -4,7 +4,6 @@ on:
 
 jobs:
   test-runner:
-    # You need to use the INSTALLATION_NAME from the previous step
     runs-on: opstimus-runner
     steps:
       - run: echo "🎉 This job uses runner scale set runners!"
