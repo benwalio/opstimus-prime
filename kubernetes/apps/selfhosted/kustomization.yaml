@@ -20,6 +20,6 @@ resources:
   - ./nextcloud/ks.yaml
   - ./nocodb/ks.yaml
   - ./radicale/ks.yaml
-  - ./shlink/ks.yaml
+  # - ./shlink/ks.yaml
   - ./syncthing/ks.yaml
   - ./vikunja/ks.yaml
