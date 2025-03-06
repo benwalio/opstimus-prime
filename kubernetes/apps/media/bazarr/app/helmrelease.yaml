@@ -94,7 +94,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: media-process
           gethomepage.dev/name: bazarr
-          gethomepage.dev/icon: sh-bazarr.svg
+          gethomepage.dev/icon: sh-bazarr.png
           gethomepage.dev/description: subtitles
           gethomepage.dev/widget.type: bazarr
           gethomepage.dev/widget.url: http://bazarr.media:6767
