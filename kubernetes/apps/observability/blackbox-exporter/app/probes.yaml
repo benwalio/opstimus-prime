@@ -10,5 +10,4 @@ spec:
   targets:
     staticConfig:
       static:
-        - tower.home.internal
         - pikvm.home.internal
