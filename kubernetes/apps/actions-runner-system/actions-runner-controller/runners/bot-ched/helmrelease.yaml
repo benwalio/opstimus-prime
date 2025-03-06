@@ -23,7 +23,7 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    githubConfigUrl: "https://github.com/benwalio"
+    githubConfigUrl: "${GHUB_HTTP_URL}"
     githubConfigSecret: ched-runner-secret
     minRunners: 1
     maxRunners: 3
