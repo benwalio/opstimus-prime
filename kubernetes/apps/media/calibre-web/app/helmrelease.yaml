@@ -54,7 +54,7 @@ spec:
                 memory: 512M
     service:
       app:
-        controller: app
+        controller: *app
         ports:
           http:
             port: 8083

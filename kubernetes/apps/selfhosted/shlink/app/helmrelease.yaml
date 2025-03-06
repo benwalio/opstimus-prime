@@ -53,12 +53,14 @@ spec:
             envFrom:
               - secretRef:
                   name: shlink-secret
+
     service:
       app:
-        controller: app
+        controller: *app
         ports:
           http:
             port: 8080
+
     ingress:
       app:
         enabled: true
