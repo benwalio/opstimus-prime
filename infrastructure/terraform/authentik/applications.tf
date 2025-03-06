@@ -8,6 +8,7 @@ locals {
     "lubelog",
     "miniflux",
     "nextcloud",
+    "opengist",
     "paperless",
     "vikunja",
   ]
@@ -85,6 +86,14 @@ locals {
       icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/nextcloud.png"
       redirect_uris = ["https://nextcloud.${var.cluster_domain}/apps/user_oidc/code"]
       launch_url    = "https://nextcloud.${var.cluster_domain}/apps/user_oidc/code"
+    },
+    opengist = {
+      client_id     = module.onepassword_application["opengist"].fields["OPNG_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["opengist"].fields["OPNG_AK_CLIENT_SECRET"]
+      group         = "home"
+      icon_url      = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/opengist.svg"
+      redirect_uris = ["https://gist.${var.cluster_domain}/oauth/openid-connect/callback"]
+      launch_url    = "https://gist.${var.cluster_domain}/"
     },
     paperless = {
       client_id     = module.onepassword_application["paperless"].fields["PPRL_AK_CLIENT_ID"]

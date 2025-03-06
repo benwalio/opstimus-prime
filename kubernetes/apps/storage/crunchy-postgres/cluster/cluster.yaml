@@ -105,6 +105,9 @@ spec:
     - name: "nocodb"
       databases: ["nocodb"]
       password: *password
+    - name: "opengist"
+      databases: ["opengist"]
+      password: *password
     - name: "paperless"
       databases: ["paperless"]
       password: *password

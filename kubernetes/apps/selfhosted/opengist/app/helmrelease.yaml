@@ -1,0 +1,100 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.0.1/charts/library/common/values.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app opengist
+spec:
+  releaseName: opengist
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.2
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  values:
+    controllers:
+      opengist:
+        strategy: Recreate
+        containers:
+          app:
+            image:
+              repository: ghcr.io/thomiceli/opengist
+              pullPolicy: IfNotPresent
+              tag: 1.9.1@sha256:75fc200bde38459be4e3aed5e40ef2e3076fddcca5eb6bd08ebd0c7d7a939d85
+
+            env:
+              TZ: ${TIMEZONE}
+              UID: &uid 1000
+              GID: &gid 1000
+              OG_GIT_DEFAULT_BRANCH: "main"
+              OG_EXTERNAL_URL: "https://gist.${SECRET_DOMAIN}"
+              OG_HTTP_PORT: &port 6157
+              OG_SSH_PORT: &sshport 2222
+              OG_OIDC_DISCOVERY_URL: "https://sso.${SECRET_DOMAIN}/application/o/opengist/.well-known/openid-configuration"
+              OG_GITEA_URL: "https://git.${SECRET_HOME_DOMAIN}/"
+              OG_GITEA_NAME: "githome"
+              OG_CUSTOM_NAME: "gisthome"
+
+            envFrom:
+              - secretRef:
+                  name: opengist-secret
+
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+
+    defaultPodOptions:
+      securityContext:
+        fsGroup: *gid
+        fsGroupChangePolicy: "Always"
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: *port
+          ssh:
+            port: *sshport
+
+    ingress:
+      app:
+        enabled: true
+        className: external
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: gists
+          gethomepage.dev/group: apps
+          gethomepage.dev/icon: sh-opengist.svg
+          gethomepage.dev/name: opengist
+        hosts:
+          - host: gist.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+          - host: ssh-gist.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: ssh
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: *app
+        globalMounts:
+          - path: /opengist
