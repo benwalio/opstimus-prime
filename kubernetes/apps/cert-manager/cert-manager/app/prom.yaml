@@ -6,7 +6,7 @@ metadata:
   name: cert-manager-rules
 spec:
   groups:
-    - name: cert-manager.rules
+    - name: cert-manager
       rules:
         - alert: CertManagerAbsent
           expr: |
