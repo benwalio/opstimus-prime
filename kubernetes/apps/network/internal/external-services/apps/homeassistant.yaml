@@ -37,7 +37,7 @@ metadata:
     app.kubernetes.io/instance: *app
   annotations:
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/icon: sh-homeassistant.svg
+    gethomepage.dev/icon: sh-home-assistant.svg
     gethomepage.dev/name: homeassistant
     gethomepage.dev/group: iot
 spec:

@@ -60,7 +60,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: media
           gethomepage.dev/name: paperless-ai
-          gethomepage.dev/icon: sh-paperless.svg
+          gethomepage.dev/icon: sh-paperless-ai.png
           gethomepage.dev/description: AI Agent for Paperless
         hosts:
           - host: &host "paperless-ai.${SECRET_DOMAIN}"

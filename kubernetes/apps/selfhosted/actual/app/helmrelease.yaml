@@ -57,9 +57,9 @@ spec:
         className: internal
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Home
-          gethomepage.dev/name: Actual
-          gethomepage.dev/icon: actual.png
+          gethomepage.dev/group: apps
+          gethomepage.dev/name: actual
+          gethomepage.dev/icon: sh-actual-budget.png
           gethomepage.dev/description: Budget Management Software
         hosts:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"

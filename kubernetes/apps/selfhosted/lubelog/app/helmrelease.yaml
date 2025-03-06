@@ -62,9 +62,9 @@ spec:
         className: internal
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Home
+          gethomepage.dev/group: apps
           gethomepage.dev/name: lubelog
-          gethomepage.dev/icon: https://demo.lubelogger.com/self-hosteds/lubelogger_icon_72.png
+          gethomepage.dev/icon: sh-lubelogger.png
           gethomepage.dev/description: Car Service Tracking
           gethomepage.dev/widget.type: lubelogger
           gethomepage.dev/widget.url: http://lubelog.selfhosted:8080
