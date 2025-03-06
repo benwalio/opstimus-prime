@@ -22,26 +22,10 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  dependsOn:
-    - name: actions-runner-controller
-      namespace: actions-runner-system
-    - name: openebs
-      namespace: storage
-  valuesFrom:
-    - targetPath: githubConfigSecret.github_app_id
-      kind: Secret
-      name: actions-runner-controller-secret
-      valuesKey: OB_ARC_GITHUB_APP_ID
-    - targetPath: githubConfigSecret.github_app_installation_id
-      kind: Secret
-      name: actions-runner-controller-secret
-      valuesKey: OB_ARC_GITHUB_INSTALLATION_ID
-    - targetPath: githubConfigSecret.github_app_private_key
-      kind: Secret
-      name: actions-runner-controller-secret
-      valuesKey: OB_ARC_GITHUB_PRIVATE_KEY
+
   values:
     githubConfigUrl: "${GHUB_HTTP_URL}"
+    githubConfigSecret: opstimus-runner-secret
     minRunners: 1
     maxRunners: 3
     containerMode:
@@ -52,9 +36,11 @@ spec:
         resources:
           requests:
             storage: 25Gi
+
     controllerServiceAccount:
       name: actions-runner-controller
       namespace: actions-runner-system
+
     template:
       spec:
         containers:
@@ -72,7 +58,9 @@ spec:
               - mountPath: /var/run/secrets/talos.dev
                 name: talos
                 readOnly: true
+
         serviceAccountName: *name
+
         volumes:
           - name: talos
             secret:
