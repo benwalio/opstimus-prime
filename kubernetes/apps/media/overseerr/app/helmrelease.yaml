@@ -71,6 +71,7 @@ spec:
                 service:
                   identifier: main
                   port: http
+
     persistence:
       config:
         enabled: true

@@ -38,7 +38,7 @@ spec:
               TZ: ${TIMEZONE}
             envFrom:
               - secretRef:
-                  name: "{{ .Release.Name }}-secret"
+                  name: "lubelog-secret"
             resources:
               requests:
                 cpu: 15m
@@ -78,6 +78,20 @@ spec:
                 service:
                   identifier: app
                   port: http
+
+      tailscale:
+        className: tailscale
+        hosts:
+          - host: &tshost "{{ .Release.Name }}.${SECRET_TS_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *tshost
+
     persistence:
       app:
         existingClaim: *app

@@ -76,3 +76,16 @@ spec:
                 service:
                   identifier: main
                   port: http
+
+      tailscale:
+        className: tailscale
+        hosts:
+          - host: &tshost "{{ .Release.Name }}.${SECRET_TS_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *tshost
