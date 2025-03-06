@@ -83,7 +83,7 @@ spec:
           gethomepage.dev/icon: sh-invidious.svg
           gethomepage.dev/description: yt frontend
         hosts:
-          - host: &host "invidious.${SECRET_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
