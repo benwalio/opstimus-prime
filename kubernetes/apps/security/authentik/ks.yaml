@@ -26,8 +26,7 @@ spec:
     - ../../../../components/gatus/external
   postBuild:
     substitute:
-      APP: authentik
-      GATUS_APP: authentik
+      APP: *app
       GATUS_SUBDOMAIN: sso
   prune: true
   wait: false

@@ -38,6 +38,12 @@ spec:
       namespace: iot
   interval: 30m
   path: ./kubernetes/apps/iot/emqx/cluster
+  components:
+    - ../../../../components/gatus/guarded
+  postBuild:
+    substitute:
+      APP: *app
+      GATUS_SUBDOMAIN: emqx
   prune: true
   sourceRef:
     kind: GitRepository
