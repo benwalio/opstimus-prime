@@ -41,6 +41,12 @@ spec:
       namespace: storage
   interval: 30m
   path: "./kubernetes/apps/media/immich/app"
+  components:
+    - ../../../../components/gatus/external
+  postBuild:
+    substitute:
+      APP: *app
+      GATUS_SUBDOMAIN: photos
   prune: true
   sourceRef:
     kind: GitRepository
