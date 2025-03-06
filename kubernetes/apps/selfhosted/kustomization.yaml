@@ -8,7 +8,7 @@ components:
 resources:
   - ./actual/ks.yaml
   - ./atuin/ks.yaml
-  # - ./changedetection/ks.yaml
+  - ./changedetection/ks.yaml
   - ./gramps/ks.yaml
   - ./hoarder/ks.yaml
   - ./homebox/ks.yaml
