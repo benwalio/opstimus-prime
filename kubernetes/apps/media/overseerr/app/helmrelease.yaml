@@ -77,8 +77,8 @@ spec:
         enabled: true
         existingClaim: *app
         advancedMounts:
-          main:
-            main:
+          overseerr:
+            app:
               - path: /app/config
 
       logs:

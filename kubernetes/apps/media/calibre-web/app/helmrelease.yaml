@@ -90,8 +90,8 @@ spec:
         enabled: true
         existingClaim: *app
         advancedMounts:
-          main:
-            main:
+          calibre-web:
+            app:
               - path: /config
 
       books:
