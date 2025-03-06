@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      shlink-api:
         replicas: 1
         annotations:
           secret.reloader.stakater.com/reload: shlink-secret
@@ -40,7 +40,7 @@ spec:
                 matchLabels:
                   app.kubernetes.io/name: *app
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/shlinkio/shlink
               tag: 4.4.5@sha256:83b1108bb0bee3a59768111b3a3a0e7c90abec61bb356acebd7dc9221d1ab272
@@ -56,13 +56,13 @@ spec:
               - secretRef:
                   name: shlink-secret
     service:
-      main:
-        controller: main
+      app:
+        controller: app
         ports:
           http:
             port: *port
     ingress:
-      main:
+      app:
         enabled: true
         className: external-home
         hosts:
@@ -70,7 +70,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: main
+                  identifier: app
                   port: http
       home:
         enabled: true
@@ -80,5 +80,5 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: main
+                  identifier: app
                   port: http

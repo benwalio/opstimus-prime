@@ -28,7 +28,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      calibre-web:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -39,7 +39,7 @@ spec:
             fsGroup: 100
             fsGroupChangePolicy: OnRootMismatch
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/benwalio/calibre-web
               tag: 0.6.24@sha256:4d0de3cfdcbb699e00d5c9ab00d4bf67b35adaf020781430f7321eb16974c680
@@ -53,14 +53,14 @@ spec:
               limits:
                 memory: 512M
     service:
-      main:
-        controller: main
+      app:
+        controller: app
         ports:
           http:
             port: 8083
 
     ingress:
-      main:
+      app:
         enabled: true
         className: external
         annotations:
@@ -82,7 +82,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: main
+                  identifier: app
                   port: http
 
     persistence:

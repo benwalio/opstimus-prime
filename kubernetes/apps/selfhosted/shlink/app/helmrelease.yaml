@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      shlink:
         replicas: 1
         strategy: RollingUpdate
         rollingUpdate:
@@ -44,7 +44,7 @@ spec:
                 matchLabels:
                   app.kubernetes.io/name: *app
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/shlinkio/shlink-web-client
               tag: 4.3.0@sha256:4a84d58508d0a327e6c383a0b57f624dd9a4f1a6e24f3cb538dec18dbaa9f7a1
@@ -54,13 +54,13 @@ spec:
               - secretRef:
                   name: shlink-secret
     service:
-      main:
-        controller: main
+      app:
+        controller: app
         ports:
           http:
             port: 8080
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
@@ -74,7 +74,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: main
+                  identifier: app
                   port: http
 
       tailscale:
@@ -84,7 +84,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
