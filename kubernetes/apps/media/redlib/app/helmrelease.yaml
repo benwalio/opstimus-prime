@@ -106,10 +106,6 @@ spec:
           gethomepage.dev/description: reddit frontend
           gethomepage.dev/group: media
           gethomepage.dev/icon: sh-redlib.svg
-          gethomepage.dev/pod-selector: >-
-            app in (
-              redlib
-            )
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
