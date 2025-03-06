@@ -112,7 +112,10 @@ spec:
           gethomepage.dev/description: RSS Reader
           gethomepage.dev/group: apps
           gethomepage.dev/icon: sh-miniflux.svg
-          gethomepage.dev/name: Miniflux
+          gethomepage.dev/name: miniflux
+          gethomepage.dev/widget.type: miniflux
+          gethomepage.dev/widget.url: http://miniflux.selfhosted:8080
+          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_SVC_MNFX_TOKEN}}` }}"
         hosts:
           - host: &host "rss.${SECRET_DOMAIN}"
             paths:
