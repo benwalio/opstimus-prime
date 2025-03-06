@@ -38,7 +38,8 @@ spec:
         gethomepage.dev/icon: sh-nextcloud.svg
         gethomepage.dev/widget.type: nextcloud
         gethomepage.dev/widget.url: https://nextcloud.${SECRET_DOMAIN}
-        gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_NEXTCLOUD_TOKEN}}"
+        gethomepage.dev/widget.username: "{{ `{{HOMEPAGE_VAR_SVC_NXC_USER}}` }}"
+        gethomepage.dev/widget.password: "{{ `{{HOMEPAGE_VAR_SVC_NXC_PASS}}` }}"
         nginx.ingress.kubernetes.io/proxy-body-size: 512M
         nginx.ingress.kubernetes.io/proxy-buffering: "off"
         nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
