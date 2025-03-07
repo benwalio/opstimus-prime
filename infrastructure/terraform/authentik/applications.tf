@@ -6,6 +6,7 @@ locals {
     "hoarder",
     "immich",
     "lubelog",
+    "mealie",
     "miniflux",
     "nextcloud",
     "opengist",
@@ -70,6 +71,14 @@ locals {
       icon_url      = "https://demo.lubelogger.com/defaults/lubelogger_icon_72.png"
       redirect_uris = ["https://lubelog.${var.cluster_domain}/Login/RemoteAuth"]
       launch_url    = "https://lubelog.${var.cluster_domain}/Login/RemoteAuth"
+    },
+    mealie = {
+      client_id     = module.onepassword_application["mealie"].fields["MEAL_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["mealie"].fields["MEAL_AK_CLIENT_SECRET"]
+      group         = "home"
+      icon_url      = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/mealie.svg"
+      redirect_uris = ["https://mealie.${var.cluster_domain}/login", "https://mealie.${var.cluster_domain}/login?direct=1"]
+      launch_url    = "https://mealie.${var.cluster_domain}/login"
     },
     miniflux = {
       client_id     = module.onepassword_application["miniflux"].fields["MNFX_AK_CLIENT_ID"]
