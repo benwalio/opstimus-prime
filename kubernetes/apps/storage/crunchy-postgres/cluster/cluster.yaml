@@ -93,6 +93,9 @@ spec:
     - name: "lubelog"
       databases: ["lubelog"]
       password: *password
+    - name: "mealie"
+      databases: ["mealie"]
+      password: *password
     - name: "miniflux"
       databases: ["miniflux"]
       password: *password
