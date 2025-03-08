@@ -30,7 +30,7 @@ spec:
       shlink-api:
         replicas: 1
         annotations:
-          secret.reloader.stakater.com/reload: shlink-secret
+          secret.reloader.stakater.com/reload: &secret shlink-secret
         pod:
           topologySpreadConstraints:
             - maxSkew: 1
@@ -54,7 +54,7 @@ spec:
               TIMEZONE: "${TIMEZONE}"
             envFrom:
               - secretRef:
-                  name: shlink-secret
+                  name: *secret
     service:
       app:
         controller: *app

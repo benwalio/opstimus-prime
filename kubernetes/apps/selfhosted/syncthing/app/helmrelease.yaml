@@ -35,6 +35,9 @@ spec:
 
     controllers:
       syncthing:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
         containers:
           syncthing:
             image:
