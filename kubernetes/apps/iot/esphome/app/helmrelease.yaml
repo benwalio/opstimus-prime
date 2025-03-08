@@ -31,10 +31,15 @@ spec:
         pod:
           annotations:
             k8s.v1.cni.cncf.io/networks: |
-              [{
-                "name":"multus-iot",
-                "namespace": "network"
-              }]
+              [
+                {
+                  "name":"multus-iot",
+                  "namespace": "network"
+                }, {
+                  "name":"multus-home",
+                  "namespace": "network"
+                }
+              ]
 
         annotations:
           reloader.stakater.com/auto: "true"
