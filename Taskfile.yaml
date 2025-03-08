@@ -10,8 +10,8 @@ vars:
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
   INFRASTRUCTURE_DIR: "{{.ROOT_DIR}}/infrastructure"
   PRIVATE_DIR: "{{.ROOT_DIR}}/.private"
-  TALHELPER_DIR: "{{.ROOT_DIR}}/kubernetes/bootstrap/talos"
-  TALOSCONFIG: "{{.ROOT_DIR}}/kubernetes/bootstrap/talos/clusterconfig/talosconfig"
+  TALHELPER_DIR: "{{.ROOT_DIR}}/infrastructure/talos"
+  TALOSCONFIG: "{{.ROOT_DIR}}/infrastructure/talos/clusterconfig/talosconfig"
 
 env:
   KUBERNETES_DIR: "{{.KUBERNETES_DIR}}"
