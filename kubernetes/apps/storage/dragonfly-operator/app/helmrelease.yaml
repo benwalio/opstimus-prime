@@ -29,5 +29,3 @@ spec:
       folder: storage
       annotations:
         name: grafana_folder
-      labels:
-        name: grafana_dashboard

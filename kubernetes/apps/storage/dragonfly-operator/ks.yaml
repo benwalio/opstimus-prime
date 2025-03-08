@@ -43,6 +43,10 @@ spec:
       namespace: rook-ceph
     - name: onepassword-store
       namespace: security
+  healthCheckExprs:
+    - apiVersion: dragonflydb.io/v1alpha1
+      kind: Dragonfly
+      current: status.phase == 'ready'
   prune: true
   wait: false
   interval: 30m
