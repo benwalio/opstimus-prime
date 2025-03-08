@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: ghcr.io/crutonjohn/lidarr-plugins
-              tag: 2.10.0.4575@sha256:6476d81e86902161349c8971bc6f5b1bebb941e538183d93be3e375c0a151cd4
+              tag: 2.10.1.4588@sha256:bc1df8d948fa9bd6962b9d254512980fba11d32d5ef5b69ebc2d6e649dfc8a55
             env:
               TZ: "${TIMEZONE}"
               LIDARR__APP__THEME: dark
