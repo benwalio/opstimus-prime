@@ -49,5 +49,6 @@
     "kubernetes": "./kubernetes/**/*.yaml"
   },
   "sops.creationEnabled": false,
-  "sops.configPath": "./.sops.yaml"
+  "sops.configPath": "./.sops.yaml",
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv"
 }
