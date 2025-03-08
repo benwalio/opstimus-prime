@@ -28,6 +28,9 @@ spec:
   values:
     controllers:
       theme-park:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
         replicas: 2
         strategy: RollingUpdate
         pod:

@@ -34,7 +34,7 @@ spec:
           unavailable: 2
           surge: 0
         annotations:
-          secret.reloader.stakater.com/reload: shlink-secret
+          secret.reloader.stakater.com/reload: &secret shlink-secret
         pod:
           topologySpreadConstraints:
             - maxSkew: 1
@@ -52,7 +52,7 @@ spec:
               SHLINK_SERVER_URL: "https://ln.${SECRET_DOMAIN}"
             envFrom:
               - secretRef:
-                  name: shlink-secret
+                  name: *secret
 
     service:
       app:

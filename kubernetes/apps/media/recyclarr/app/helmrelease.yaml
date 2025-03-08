@@ -25,6 +25,9 @@ spec:
   values:
     controllers:
       recyclarr:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
         type: cronjob
         cronjob:
           schedule: 0 0 * * *
