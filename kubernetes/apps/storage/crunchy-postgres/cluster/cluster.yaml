@@ -108,6 +108,14 @@ spec:
     - name: "nocodb"
       databases: ["nocodb"]
       password: *password
+    - name: readarraudio
+      databases:
+        - readarr_audio_main
+        - readarr_audio_log
+    - name: readarrbooks
+      databases:
+        - readarr_books_main
+        - readarr_books_log
     - name: "opengist"
       databases: ["opengist"]
       password: *password
