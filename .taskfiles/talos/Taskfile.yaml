@@ -9,7 +9,7 @@ tasks:
     cmd: talhelper genconfig
     preconditions:
       - test -f {{.TALHELPER_DIR}}/talconfig.yaml
-      - test -f {{.ROOT_DIR}}/.sops.yaml
+      - test -f {{.SOPS_CONFIG}}
       - test -f {{.SOPS_AGE_KEY_FILE}}
       - which talhelper
 
