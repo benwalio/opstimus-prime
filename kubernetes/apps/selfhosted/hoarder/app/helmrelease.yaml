@@ -64,7 +64,7 @@ spec:
 
             envFrom: &envFrom
               - secretRef:
-                  name: hoasder-secret
+                  name: hoarder-secret
 
             probes:
               liveness:
