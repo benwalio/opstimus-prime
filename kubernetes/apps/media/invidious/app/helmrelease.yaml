@@ -50,9 +50,6 @@ spec:
                   - ALL
 
         containers:
-          annotations:
-            reloader.stakater.com/auto: "true"
-
           app:
             image:
               repository: quay.io/invidious/invidious
