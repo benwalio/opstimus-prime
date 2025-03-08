@@ -9,4 +9,3 @@ spec:
   type: oci
   url: oci://ghcr.io/dragonflydb/dragonfly-operator/helm
   interval: 1h
-  timeout: 3m

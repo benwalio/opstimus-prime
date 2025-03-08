@@ -37,6 +37,16 @@ Coming Soon[TM]
 
 ---
 
+### Tools
+
+- Committizen - https://github.com/commitizen-tools/commitizen
+- GitGuardian - https://docs.gitguardian.com/ggshield-docs/home
+- pre-commit - https://github.com/pre-commit/pre-commit
+- mise - https://mise.jdx.dev/
+- gotask - https://taskfile.dev/
+
+---
+
 ### :handshake: Thanks
 
 Thanks to all the people who donate their time to the [Home Operations](https://discord.gg/home-operations) Discord community. A lot of inspiration for my cluster comes from the people that have shared their clusters using the [k8s-at-home](https://github.com/topics/k8s-at-home) GitHub topic. Be sure to check out the awesome [Kubesearch](http://kubesearch.dev) tool for ideas on how to deploy applications or get ideas on what you can deploy.
