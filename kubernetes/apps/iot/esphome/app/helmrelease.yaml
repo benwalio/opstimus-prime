@@ -50,17 +50,6 @@ spec:
               repository: ghcr.io/esphome/esphome
               tag: 2025.2.2
 
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
-              startup:
-                enabled: true
-                spec:
-                  failureThreshold: 30
-                  periodSeconds: 5
-
             resources:
               requests:
                 cpu: 20m
