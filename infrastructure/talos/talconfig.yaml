@@ -53,6 +53,11 @@ nodes:
             - permanentAddr: "58:47:ca:7a:b0:3f"
         dhcp: true
         vlans:
+          - &vlan2
+            vlanId: 2
+            mtu: 1500
+            dhcpOptions:
+              routeMetric: 4096
           - &vlan25
             vlanId: 25
             mtu: 1500
@@ -89,6 +94,7 @@ nodes:
             - permanentAddr: "58:47:ca:7a:ac:7f"
         dhcp: true
         vlans:
+          - *vlan2
           - *vlan25
 
   - hostname: "controller-3"
@@ -121,6 +127,7 @@ nodes:
             - permanentAddr: "58:47:ca:7a:c5:eb"
         dhcp: true
         vlans:
+          - *vlan2
           - *vlan25
 
 # Global patches
