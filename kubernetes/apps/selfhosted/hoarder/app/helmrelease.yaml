@@ -53,6 +53,7 @@ spec:
               NEXTAUTH_URL: https://hoarder.${SECRET_DOMAIN}
               # Ai
               INFERENCE_JOB_TIMEOUT_SEC: 600 # 10 Minutes
+              OLLAMA_KEEP_ALIVE: 2m
               # oauth
               OAUTH_WELLKNOWN_URL: https://sso.${SECRET_DOMAIN}/application/o/hoarder/.well-known/openid-configuration
               OAUTH_PROVIDER_NAME: authentik
