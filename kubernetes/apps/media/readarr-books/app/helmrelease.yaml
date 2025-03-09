@@ -42,8 +42,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/readarr-nightly
-              tag: 0.4.0.2593@sha256:22154f5d5ea888c9bbc797e235d34c11cc8c89d49d7f3d6ec9c5c60220962ee6
+              repository: ghcr.io/benwalio/readarr-nightly
+              tag: 0.4.13.2754@sha256:d78ccbd0f120c6bc920bed5d7bb4bd1da071e854dc535dde16d99e54fc394f46
             env:
               TZ: "${TIMEZONE}"
               READARR__APP__THEME: dark
