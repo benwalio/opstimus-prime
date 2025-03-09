@@ -17,6 +17,7 @@ resources:
   - ./pinchflat/ks.yaml
   - ./prowlarr/ks.yaml
   - ./radarr/ks.yaml
+  - ./readarr-audio/ks.yaml
   - ./readarr-books/ks.yaml
   - ./recyclarr/ks.yaml
   - ./redlib/ks.yaml

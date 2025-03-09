@@ -1,0 +1,114 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app readarr-audio
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1003
+        runAsGroup: 100
+        fsGroup: 100
+        fsGroupChangePolicy: OnRootMismatch
+
+    controllers:
+      readarr-audio:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/onedr0p/readarr-nightly
+              tag: 0.4.0.2593@sha256:22154f5d5ea888c9bbc797e235d34c11cc8c89d49d7f3d6ec9c5c60220962ee6
+            env:
+              TZ: "${TIMEZONE}"
+              READARR__APP__THEME: dark
+              READARR__AUTH__METHOD: External
+              READARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              READARR__APP__INSTANCENAME: Readarr Audio
+              READARR__SERVER__PORT: &port 80
+              READARR__LOG__LEVEL: info
+              PUSHOVER_APP_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            envFrom:
+              - secretRef:
+                  name: readarr-audio-secret
+            resources:
+              requests:
+                cpu: 10m
+                memory: 256M
+              limits:
+                memory: 2G
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      app:
+        enabled: true
+        className: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: media-get
+          gethomepage.dev/name: readarr-audio
+          gethomepage.dev/icon: sh-readarr.svg
+          gethomepage.dev/description: audiobook downloads
+        hosts:
+          - host: *host
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: *app
+        globalMounts:
+          - path: /config
+
+      config-cache:
+        existingClaim: readarr-audio-cache
+        globalMounts:
+          - path: /config/MediaCover
+
+      media:
+        type: nfs
+        server: ${SECRET_NFS_SERVER}
+        path: ${SECRET_NFS_MOUNT_MEDIA}
+        globalMounts:
+          - path: /mnt/media
+
+      media-swap:
+        type: nfs
+        server: ${SECRET_NFS_SERVER}
+        path: ${SECRET_NFS_MOUNT_MEDIA_SWAP}
+        globalMounts:
+          - path: /mnt/mediaswap
