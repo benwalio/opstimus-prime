@@ -58,16 +58,17 @@ spec:
       csi:
         readAffinity:
           enabled: true
+      cephConfig:
+        global:
+          bdev_enable_discard: "true"
+          bdev_async_discard: "true"
+          bdev_async_discard_threads: "1"
+          osd_class_update_on_start: "false"
       dashboard:
         enabled: true
         urlPrefix: /
         ssl: false
         prometheusEndpoint: http://prometheus-operated.observability.svc.cluster.local:9090
-      global:
-        bdev_enable_discard: "true"
-        bdev_async_discard: "true"
-        bdev_async_discard_threads: "1"
-        osd_class_update_on_start: "false"
       mgr:
         modules:
           - name: insights
