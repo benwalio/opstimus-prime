@@ -1,8 +1,13 @@
 [env]
+# Python environment
 _.python.venv = { path = "{{config_root}}/.venv", create = true }
+
+# Kubernetes related
 KUBERNETES_DIR = '{{config_root}}/kubernetes'
-MINIJINJA_CONFIG_FILE = '{{config_root}}/.config/.minijinja.toml'
 KUBECONFIG = "{{config_root}}/kubeconfig"
+
+# Configuration files
+MINIJINJA_CONFIG_FILE = '{{config_root}}/.config/.minijinja.toml'
 SOPS_AGE_KEY_FILE = "{{config_root}}/age.key"
 TALOSCONFIG = "{{config_root}}/infrastructure/talos/clusterconfig/talosconfig"
 
@@ -10,12 +15,25 @@ TALOSCONFIG = "{{config_root}}/infrastructure/talos/clusterconfig/talosconfig"
 description = "Install dependencies"
 run = "uv pip install -r .config/requirements.txt"
 
+[tasks.clean]
+description = "Clean up temporary files and caches"
+run = "rm -rf .pytest_cache __pycache__ .coverage .mypy_cache"
+
+[tasks.lint]
+description = "Run all linters"
+run = "pre-commit run --all-files"
+
+[tasks.format]
+description = "Format code"
+run = "pre-commit run --all-files black isort"
+
 [tools]
 # Template tools
 python = "3.13"
 uv = "latest"
 age = "latest"
 sops = "latest"
+
 # Operations tools
 "aqua:budimanjojo/talhelper" = "3.0.18"
 "aqua:cloudflare/cloudflared" = "2025.2.0"
