@@ -33,7 +33,7 @@ spec:
       className: external
       annotations:
         gethomepage.dev/enabled: "true"
-        gethomepage.dev/group: docs
+        gethomepage.dev/group: document
         gethomepage.dev/name: nextcloud
         gethomepage.dev/icon: sh-nextcloud.svg
         # gethomepage.dev/widget.type: nextcloud
