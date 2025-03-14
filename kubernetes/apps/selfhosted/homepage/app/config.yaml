@@ -99,11 +99,6 @@ data:
                 env: {{HOMEPAGE_VAR_SVC_PORT_ENV}}
                 key: {{HOMEPAGE_VAR_SVC_PORT_PASS}}
 
-        - tower:
-            icon: sh-unraid.svg
-            href: {{HOMEPAGE_VAR_SVC_UNRAID_URL}}
-            siteMonitor: {{HOMEPAGE_VAR_SVC_UNRAID_URL}}
-
     - network:
         - unifi:
             icon: ubiquiti
@@ -287,3 +282,5 @@ data:
   kubernetes.yaml: |
     ---
     mode: cluster
+    ingress: true
+    gateway: true
