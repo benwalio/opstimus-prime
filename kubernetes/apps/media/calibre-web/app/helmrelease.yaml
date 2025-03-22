@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: ghcr.io/benwalio/calibre-web
-              tag: 0.6.24@sha256:4d0de3cfdcbb699e00d5c9ab00d4bf67b35adaf020781430f7321eb16974c680
+              tag: 0.6.24@sha256:d52aec819fab1791dacf2ff867dc9cc44100f7905b3e2d189863896dc38524e5
             env:
               TZ: ${TIMEZONE}
               CACHE_DIR: /cache
