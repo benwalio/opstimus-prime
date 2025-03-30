@@ -27,6 +27,14 @@ spec:
     - name: volsync
       namespace: storage
   values:
+    defaultPodOptions:
+      priorityClassName: home-cluster-critical
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 1003
+        runAsGroup: 100
+        fsGroupChangePolicy: OnRootMismatch
+
     controllers:
       paperless:
         labels:
@@ -34,6 +42,10 @@ spec:
           postgres: "true"
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            supplementalGroups:
+              - 65542
         containers:
           app:
             image:
@@ -66,7 +78,7 @@ spec:
               # Configure redis integration
               PAPERLESS_REDIS: redis://dragonfly.storage.svc.cluster.local:6379
               # paperless settings
-              PAPERLESS_FILENAME_FORMAT: "{correspondent}/{created_year}/{created_year}-{created_month}-{created_day} {title}"
+              PAPERLESS_FILENAME_FORMAT: "{{ correspondent }}/{{ created_year }}/{{ created_year }}-{{ created_month }}-{{ created_day }} {{ title }}"
               PAPERLESS_DATE_ORDER: MDY
             envFrom: &envFrom
               - secretRef:
