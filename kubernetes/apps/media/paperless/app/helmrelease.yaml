@@ -31,7 +31,6 @@ spec:
       securityContext:
         runAsUser: 1003
         runAsGroup: 100
-        fsGroupChangePolicy: OnRootMismatch
 
     controllers:
       paperless:
