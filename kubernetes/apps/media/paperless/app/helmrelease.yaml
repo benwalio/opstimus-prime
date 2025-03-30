@@ -78,7 +78,7 @@ spec:
               # Configure redis integration
               PAPERLESS_REDIS: redis://dragonfly.storage.svc.cluster.local:6379
               # paperless settings
-              PAPERLESS_FILENAME_FORMAT: "{{ correspondent }}/{{ created_year }}/{{ created_year }}-{{ created_month }}-{{ created_day }} {{ title }}"
+              PAPERLESS_FILENAME_FORMAT: "{correspondent}/{created_year}/{created_year}-{created_month}-{created_day} {title}"
               PAPERLESS_DATE_ORDER: MDY
             envFrom: &envFrom
               - secretRef:
