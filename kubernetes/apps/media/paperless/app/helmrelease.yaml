@@ -28,8 +28,6 @@ spec:
       namespace: storage
   values:
     defaultPodOptions:
-      priorityClassName: home-cluster-critical
-      automountServiceAccountToken: false
       securityContext:
         runAsUser: 1003
         runAsGroup: 100
