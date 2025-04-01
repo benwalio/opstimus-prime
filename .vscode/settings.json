@@ -50,5 +50,8 @@
   },
   "sops.creationEnabled": false,
   "sops.configPath": "./.sops.yaml",
-  "python.defaultInterpreterPath": "${workspaceFolder}/.venv"
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
+  "debug.javascript.defaultRuntimeExecutable": {
+    "pwa-node": "/Users/ben/.local/share/mise/shims/node"
+  }
 }
