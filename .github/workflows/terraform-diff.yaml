@@ -12,9 +12,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 
-env:
-  OP_VAULT: secrets-automation
-
 jobs:
   changed-terraform:
     name: Changed Terraform
@@ -67,8 +64,8 @@ jobs:
         with:
           export-env: true
         env:
-          MINIO_ACCESS_KEY: op://${{env.OP_VAULT}}/minio/MINIO_TFM_ACCESS_KEY
-          MINIO_SECRET_KEY: op://${{env.OP_VAULT}}/minio/MINIO_TFM_SECRET_KEY
+          MINIO_ACCESS_KEY: op://secrets-automation/minio/MINIO_TFM_ACCESS_KEY
+          MINIO_SECRET_KEY: op://secrets-automation/minio/MINIO_TFM_SECRET_KEY
 
       - name: Generate Token
         uses: actions/create-github-app-token@v2
