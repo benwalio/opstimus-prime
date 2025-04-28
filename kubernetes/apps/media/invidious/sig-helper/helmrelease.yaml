@@ -1,0 +1,60 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &name inv-sig-helper
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 30m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 10
+  upgrade:
+    remediation:
+      retries: 10
+  values:
+    fullnameOverride: *name
+    defaultPodOptions:
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+    controllers:
+      inv-sig-helper:
+        strategy: RollingUpdate
+        replicas: 1
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          inv-sig-helper:
+            image:
+              repository: quay.io/invidious/inv-sig-helper
+              tag: latest@sha256:b5466c9add729e82e4e3ee5515c30b69df02d78ebb2486dbc9c63e456f29083d
+            env:
+              RUST_LOG: debug
+            args:
+              - --tcp
+              - "0.0.0.0:12999"
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 50Mi
+              limits:
+                memory: 100Mi
+    service:
+      inv-sig-helper:
+        controller: *name
+        ports:
+          http:
+            port: 12999

@@ -33,27 +33,16 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
-        initContainers:
-          inv-sig-helper:
-            image:
-              repository: quay.io/invidious/inv-sig-helper
-              tag: latest
-              pullPolicy: IfNotPresent
-            command: ["/app/inv_sig_helper_rust", "--tcp", "0.0.0.0:12999"]
-            env:
-              RUST_LOG: debug
-              RUST_BACKTRACE: full
-            restartPolicy: Always
-            securityContext:
-              capabilities:
-                drop:
-                  - ALL
-
         containers:
           app:
             image:
               repository: quay.io/invidious/invidious
               tag: latest@sha256:07b54eb82bd7b4d3cf9fe2f1a2cc7dfd18f6e14d23db185c2e34ffb8c21da093
+
+            env:
+              TZ: "${TIMEZONE}"
+              INVIDIOUS_PORT: "3000"
+              INVIDIOUS_SIGNATURE_SERVER: inv-sig-helper.media.svc.cluster.local:12999
 
             envFrom: &envFrom
               - secretRef:
