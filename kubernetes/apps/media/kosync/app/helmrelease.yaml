@@ -39,14 +39,15 @@ spec:
               repository: ghcr.io/usa-reddragon/kosync
               tag: v0.0.16
               pullPolicy: IfNotPresent
-          env:
-            STORAGE_TYPE: "postgres"
-            METRICS_ENABLED: "true"
-            LOG_LEVEL: "debug"
 
-          envFrom:
-            - secretRef:
-                name: kosync-secret
+            env:
+              STORAGE_TYPE: "postgres"
+              METRICS_ENABLED: "true"
+              LOG_LEVEL: "debug"
+
+            envFrom:
+              - secretRef:
+                  name: kosync-secret
 
     service:
       app:
