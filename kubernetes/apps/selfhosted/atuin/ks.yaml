@@ -12,7 +12,7 @@ spec:
   dependsOn:
     - name: crunchy-postgres-cluster
       namespace: storage
-    - name: onepassword-store
+    - name: onepassword
       namespace: security
     - name: volsync
       namespace: storage
