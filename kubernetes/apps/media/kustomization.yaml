@@ -11,6 +11,7 @@ resources:
   - ./flaresolverr/ks.yaml
   - ./immich/ks.yaml
   - ./invidious/ks.yaml
+  - ./kosync/ks.yaml
   - ./lidarr/ks.yaml
   - ./overseerr/ks.yaml
   - ./paperless/ks.yaml
