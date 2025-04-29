@@ -39,7 +39,8 @@ spec:
       replicas: &replicas 3
       dataVolumeClaimSpec:
         storageClassName: openebs-hostpath
-        accessModes: ["ReadWriteOnce"]
+        accessModes:
+          - ReadWriteOnce
         resources:
           requests:
             storage: 20Gi
@@ -53,22 +54,27 @@ spec:
   users:
     # Superuser
     - name: *superuser
-      databases: ["postgres"]
+      databases:
+        - postgres
       options: "SUPERUSER"
       password: &password
         type: AlphaNumeric
     # Applications
     - name: "atuin"
-      databases: ["atuin"]
+      databases:
+        - atuin
       password: *password
     - name: "authentik"
-      databases: ["authentik"]
+      databases:
+        - authentik
       password: *password
     - name: "gatus"
-      databases: ["gatus"]
+      databases:
+        - gatus
       password: *password
     - name: "grafana"
-      databases: ["grafana"]
+      databases:
+        - grafana
       password: *password
     - name: "gramps"
       databases:
@@ -77,10 +83,12 @@ spec:
         - gramps_search
       password: *password
     - name: "homebox"
-      databases: ["homebox"]
+      databases:
+        - homebox
       password: *password
     - name: "invidious"
-      databases: ["invidious"]
+      databases:
+        - invidious
       password: *password
     - name: kosync
       databases:
@@ -92,25 +100,32 @@ spec:
         - lidarr_log
       password: *password
     - name: "lldap"
-      databases: ["lldap"]
+      databases:
+        - lldap
       password: *password
     - name: "lubelog"
-      databases: ["lubelog"]
+      databases:
+        - lubelog
       password: *password
     - name: "mealie"
-      databases: ["mealie"]
+      databases:
+        - mealie
       password: *password
     - name: "miniflux"
-      databases: ["miniflux"]
+      databases:
+        - miniflux
       password: *password
     - name: "n8n"
-      databases: ["n8n"]
+      databases:
+        - n8n
       password: *password
     - name: "nextcloud"
-      databases: ["nextcloud"]
+      databases:
+        - nextcloud
       password: *password
     - name: "nocodb"
-      databases: ["nocodb"]
+      databases:
+        - nocodb
       password: *password
     - name: readarraudio
       databases:
@@ -123,16 +138,20 @@ spec:
         - readarr_books_log
         - readarr_books_cache
     - name: "opengist"
-      databases: ["opengist"]
+      databases:
+        - opengist
       password: *password
     - name: "paperless"
-      databases: ["paperless"]
+      databases:
+        - paperless
       password: *password
     - name: "shlink"
-      databases: ["shlink"]
+      databases:
+        - shlink
       password: *password
     - name: "vikunja"
-      databases: ["vikunja"]
+      databases:
+        - vikunja
       password: *password
 
   backups:
@@ -173,7 +192,8 @@ spec:
             volumeClaimSpec:
               storageClassName: nfs-csi #csi-driver-nfs
               volumeName: crunchy-postgres-nfs
-              accessModes: ["ReadWriteMany"]
+              accessModes:
+                - ReadWriteMany
               resources:
                 requests:
                   storage: 1Mi
