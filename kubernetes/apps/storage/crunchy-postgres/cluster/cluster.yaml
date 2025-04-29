@@ -82,9 +82,9 @@ spec:
     - name: "invidious"
       databases: ["invidious"]
       password: *password
-    - name: "kosync"
-      databases: ["kosync"]
-      password: *password
+    # - name: "kosync"
+    #   databases: ["kosync"]
+    #   password: *password
     - name: lidarr
       databases:
         - lidarr_main
