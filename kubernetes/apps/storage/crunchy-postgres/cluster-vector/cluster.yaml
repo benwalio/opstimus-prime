@@ -83,23 +83,13 @@ spec:
         compress-type: "lz4"
         compress-level: "9"
         archive-push-queue-max: 8GiB
-        # PVC
+        # Minio
+        repo1-block: "y"
+        repo1-bundle: "y"
+        repo1-path: /crunchy-pgo-vector
         repo1-retention-full: "30" # days
         repo1-retention-full-type: "time"
-        # R2
-        repo2-block: "y"
-        repo2-bundle: "y"
-        repo2-path: /crunchy-pgo-vector
-        repo2-retention-full: "7" # days
-        repo2-retention-full-type: time
-        repo2-s3-uri-style: path
-        # # Minio
-        repo3-block: "y"
-        repo3-bundle: "y"
-        repo3-path: /crunchy-pgo-vector
-        repo3-retention-full: "30" # days
-        repo3-retention-full-type: "time"
-        repo3-s3-uri-style: path
+        repo1-s3-uri-style: path
       manual:
         repoName: repo1
         options:
@@ -109,27 +99,6 @@ spec:
           app.kubernetes.io/name: crunchy-postgres-vector-backup
       repos:
         - name: repo1
-          volume: &nfs
-            volumeClaimSpec:
-              storageClassName: nfs-csi #csi-driver-nfs
-              volumeName: crunchy-postgres-vector-nfs
-              accessModes: ["ReadWriteMany"]
-              resources:
-                requests:
-                  storage: 1Mi
-          schedules:
-            full: "30 1 * * 0" # Sunday at 01:30
-            differential: "30 1 * * 1-6" # Mon-Sat at 01:30
-            incremental: "30 3-23 * * *" # Every hour except 01:30-2:30
-        # - name: repo2
-        #   s3: &r2
-        #     bucket: crunchy-pgo-vector
-        #     endpoint: ${SECRET_CLOUDFLARE_R2_ENDPOINT}
-        #     region: us-east-1 #https://developers.cloudflare.com/r2/api/s3/api/#bucket-region
-        #   schedules:
-        #     full: "30 2 * * 0" # Sunday at 02:30
-        #     incremental: "30 2 * * 1-6/2" # Mon-Sat at 02:30, every 2nd day
-        - name: repo3
           s3: &minio
             bucket: crunchy-pgo-vector
             endpoint: s3.${SECRET_DOMAIN}
@@ -147,8 +116,7 @@ spec:
       configuration: *backupConfig
       global: *backupFlag
       repo:
-        name: repo3
-        # volume: *nfs
+        name: repo1
         s3: *minio
 
   proxy:
