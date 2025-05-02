@@ -9,9 +9,6 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: csi-driver-nfs
-      namespace: *namespace
   interval: 30m
   path: ./kubernetes/apps/storage/crunchy-postgres/app
   prune: true
