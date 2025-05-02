@@ -26,4 +26,5 @@ resources:
   - ./radicale/ks.yaml
   - ./shlink/ks.yaml
   - ./syncthing/ks.yaml
+  - ./uptime-kuma/ks.yaml
   - ./vikunja/ks.yaml
