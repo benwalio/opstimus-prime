@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: clusterzx/paperless-ai
-              tag: 2.7.6
+              tag: 2.7.8
             env:
               PAPERLESS_API_URL: http://paperless.media:8000/api
 
