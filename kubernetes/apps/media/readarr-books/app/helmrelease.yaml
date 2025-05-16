@@ -39,7 +39,7 @@ spec:
           app:
             image:
               repository: ghcr.io/benwalio/readarr-nightly
-              tag: 0.4.17.2795@sha256:06e3ac0a338588016f39a5d0cc5cd6724e816b0d8ca4ddda451607ca388b7f81
+              tag: 0.4.17.2795@sha256:1bf7c9278c858b6e96d9eaddb15179e10ee70435edb858097ec7e7bcc42aab56
             env:
               TZ: "${TIMEZONE}"
               READARR__APP__THEME: dark
