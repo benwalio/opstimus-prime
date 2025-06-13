@@ -145,7 +145,7 @@ spec:
 
       extraInitContainers:
         - name: wait-database
-          image: alpine:3.21.3
+          image: alpine:3.22.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -162,7 +162,7 @@ spec:
                   name: *secret
                   key: POSTGRES_HOST
         - name: wait-redis
-          image: alpine:3.21.3
+          image: alpine:3.22.0
           imagePullPolicy: IfNotPresent
           command:
             - sh
