@@ -54,7 +54,7 @@ jobs:
         run: git checkout ${{ env.BASE_BRANCH }}
 
       - name: Dump all links from ${{github.event.pull_request.base.ref}}
-        uses: lycheeverse/lychee-action@82202e5e9c2f4ef1a55a3d02563e1cb6041e5332
+        uses: lycheeverse/lychee-action@74c50ae9cb26a12ef66ad5769546fe0848ae9596
         with:
           args: |
             --dump
@@ -80,7 +80,7 @@ jobs:
 
       - name: Check links
         id: lychee
-        uses: lycheeverse/lychee-action@82202e5e9c2f4ef1a55a3d02563e1cb6041e5332
+        uses: lycheeverse/lychee-action@74c50ae9cb26a12ef66ad5769546fe0848ae9596
         with:
           fail: false
           args: |
