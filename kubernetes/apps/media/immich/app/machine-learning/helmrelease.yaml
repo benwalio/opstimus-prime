@@ -105,12 +105,14 @@ spec:
             main:
               - path: /config/matplotlib
 
-      tmpfs:
+      geocoding-dump:
+        enabled: true
         type: emptyDir
-        advancedMounts:
-          server:
-            main:
-              - path: /usr/src/app/.reverse-geocoding-dump
-                subPath: geocoding
-              - path: /usr/src/app/.transformers_cache
-                subPath: transformers
+        globalMounts:
+          - path: /usr/src/app/.reverse-geocoding-dump
+
+      transformers-cache:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /usr/src/app/.transformers_cache
