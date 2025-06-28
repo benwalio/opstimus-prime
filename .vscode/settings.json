@@ -53,5 +53,6 @@
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
   "debug.javascript.defaultRuntimeExecutable": {
     "pwa-node": "/Users/ben/.local/share/mise/shims/node"
-  }
+  },
+  "sops.binPath": "/Users/ben/.local/share/mise/shims/sops"
 }
