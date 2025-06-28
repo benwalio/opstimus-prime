@@ -134,14 +134,12 @@ spec:
           - path: /usr/src/app/upload
             subPath: img/immich
 
-      geocoding-dump:
-        enabled: true
+      tmpfs:
         type: emptyDir
-        globalMounts:
-          - path: /usr/src/app/.reverse-geocoding-dump
-
-      transformers-cache:
-        enabled: true
-        type: emptyDir
-        globalMounts:
-          - path: /usr/src/app/.transformers_cache
+        advancedMounts:
+          server:
+            main:
+              - path: /usr/src/app/.reverse-geocoding-dump
+                subPath: geocoding
+              - path: /usr/src/app/.transformers_cache
+                subPath: transformers

@@ -61,6 +61,7 @@ spec:
             env:
               # General
               IMMICH_MEDIA_LOCATION: &mediaLocation /usr/src/app/upload
+              MPLCONFIGDIR: "/cache/matplotlib"
               # Ports
               MACHINE_LEARNING_HOST: 0.0.0.0
               MACHINE_LEARNING_PORT: &port 3003
@@ -87,20 +88,29 @@ spec:
           - path: /usr/src/app/upload
             subPath: img/immich
 
-      cache:
-        type: persistentVolumeClaim
+      machine-learning-cache:
         existingClaim: immich-machine-learning-cache
-        globalMounts:
-          - path: /cache
+        advancedMounts:
+          machine-learning:
+            main:
+              - path: /cache
+                subPath: cache
+              - path: /.cache
+                subPath: dotCache
 
-      geocoding-dump:
-        enabled: true
+      matplotlib:
         type: emptyDir
-        globalMounts:
-          - path: /usr/src/app/.reverse-geocoding-dump
+        advancedMounts:
+          server:
+            main:
+              - path: /config/matplotlib
 
-      transformers-cache:
-        enabled: true
+      tmpfs:
         type: emptyDir
-        globalMounts:
-          - path: /usr/src/app/.transformers_cache
+        advancedMounts:
+          server:
+            main:
+              - path: /usr/src/app/.reverse-geocoding-dump
+                subPath: geocoding
+              - path: /usr/src/app/.transformers_cache
+                subPath: transformers

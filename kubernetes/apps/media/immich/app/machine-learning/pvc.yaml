@@ -4,8 +4,9 @@ metadata:
   name: immich-machine-learning-cache
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 10Gi
-  storageClassName: ceph-block
+  storageClassName: ceph-filesystem
+  volumeMode: Filesystem
