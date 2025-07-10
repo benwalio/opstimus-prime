@@ -9,7 +9,7 @@ resources:
   - ./bazarr/ks.yaml
   - ./calibre-web/ks.yaml
   - ./flaresolverr/ks.yaml
-  # - ./immich/ks.yaml
+  - ./immich/ks.yaml
   - ./invidious/ks.yaml
   - ./kosync/ks.yaml
   - ./lidarr/ks.yaml
