@@ -183,7 +183,7 @@ spec:
       machine-learning-cache:
         existingClaim: immich-machine-learning-cache
         advancedMounts:
-          machine-learning:
+          immich-machine-learning:
             main:
               - path: /cache
                 subPath: cache
@@ -193,7 +193,7 @@ spec:
       tmpfs:
         type: emptyDir
         advancedMounts:
-          server:
+          immich-server:
             main:
               - path: /usr/src/app/.reverse-geocoding-dump
                 subPath: geocoding
@@ -203,6 +203,6 @@ spec:
       matplotlib:
         type: emptyDir
         advancedMounts:
-          server:
+          immich-server:
             main:
               - path: /config/matplotlib
