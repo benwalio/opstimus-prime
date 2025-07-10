@@ -148,7 +148,7 @@ spec:
             port: 6379
 
     ingress:
-      app:
+      immich-server:
         className: external
         annotations:
           nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
@@ -169,7 +169,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: immich-server
                   port: http
 
     persistence:
