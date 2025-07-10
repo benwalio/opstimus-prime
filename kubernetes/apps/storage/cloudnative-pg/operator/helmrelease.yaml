@@ -9,6 +9,7 @@ spec:
   chartRef:
     kind: OCIRepository
     name: cloudnative-pg
+    namespace: flux-system
   maxHistory: 3
   install:
     createNamespace: true
