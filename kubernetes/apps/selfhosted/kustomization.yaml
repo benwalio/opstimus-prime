@@ -11,10 +11,10 @@ resources:
   - ./atuin/ks.yaml
   - ./changedetection/ks.yaml
   - ./gramps/ks.yaml
-  - ./hoarder/ks.yaml
   - ./homebox/ks.yaml
   - ./homepage/ks.yaml
   - ./it-tools/ks.yaml
+  - ./karakeep/ks.yaml
   - ./lubelog/ks.yaml
   - ./mealie/ks.yaml
   - ./minecraft-bedrock/ks.yaml
