@@ -3,8 +3,8 @@ locals {
     "cloudflare",
     "grafana",
     "headlamp",
-    "hoarder",
     "immich",
+    "karakeep",
     "lubelog",
     "mealie",
     "miniflux",
@@ -48,13 +48,13 @@ locals {
       redirect_uris = ["https://headlamp.${var.cluster_domain}/oidc-callback"]
       launch_url    = "https://headlamp.${var.cluster_domain}/"
     },
-    hoarder = {
-      client_id     = module.onepassword_application["hoarder"].fields["HDR_AK_CLIENT_ID"]
-      client_secret = module.onepassword_application["hoarder"].fields["HDR_AK_CLIENT_SECRET"]
+    karakeep = {
+      client_id     = module.onepassword_application["karakeep"].fields["HDR_AK_CLIENT_ID"]
+      client_secret = module.onepassword_application["karakeep"].fields["HDR_AK_CLIENT_SECRET"]
       group         = "monitoring"
-      icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/hoarder.png"
-      redirect_uris = ["https://hoarder.${var.cluster_domain}/api/auth/callback/custom"]
-      launch_url    = "https://hoarder.${var.cluster_domain}/api/auth/callback/custom"
+      icon_url      = "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/karakeep.png"
+      redirect_uris = ["https://karakeep.${var.cluster_domain}/api/auth/callback/custom"]
+      launch_url    = "https://karakeep.${var.cluster_domain}/api/auth/callback/custom"
     },
     immich = {
       client_id     = module.onepassword_application["immich"].fields["IMMICH_AK_CLIENT_ID"]
