@@ -23,7 +23,7 @@ spec:
   path: "./kubernetes/apps/selfhosted/karakeep/app"
   postBuild:
     substitute:
-      APP: *app
+      APP: hoarder
       VOLSYNC_CLAIM: hoarder-data
   prune: true
   sourceRef:
