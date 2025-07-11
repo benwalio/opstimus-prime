@@ -13,8 +13,8 @@ data:
 
   TZ: ${TIMEZONE}
 
-  # REDIS_HOSTNAME: dragonfly.storage.svc.cluster.local
-  REDIS_HOSTNAME: immich-redis.media.svc.cluster.local
+  REDIS_HOSTNAME: dragonfly.storage.svc.cluster.local
+  # REDIS_HOSTNAME: immich-redis.media.svc.cluster.local
   REDIS_PORT: "6379"
 
   TRANSFORMERS_CACHE: /usr/src/app/.transformers_cache

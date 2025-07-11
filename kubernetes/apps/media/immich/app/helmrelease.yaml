@@ -65,6 +65,7 @@ spec:
             env:
               # Ports
               SERVER_PORT: &serverPort 2283
+              IMMICH_MEDIA_LOCATION: &mediaLocation /usr/src/app/upload
 
             envFrom: &envFrom
               - configMapRef:
@@ -118,16 +119,17 @@ spec:
 
             env:
               MPLCONFIGDIR: "/cache/matplotlib"
+              IMMICH_MEDIA_LOCATION: *mediaLocation
 
-      redis:
-        containers:
-          app:
-            image:
-              repository: public.ecr.aws/docker/library/redis
-              tag: 8.0.3@sha256:a1e0a3b3a6cedd74d8ba44805b2497b93851a296f08a44962fedc03f1c490b47
-            env:
-              REDIS_REPLICATION_MODE: master
-            command: ["redis-server"]
+      # redis:
+      #   containers:
+      #     app:
+      #       image:
+      #         repository: public.ecr.aws/docker/library/redis
+      #         tag: 8.0.3@sha256:a1e0a3b3a6cedd74d8ba44805b2497b93851a296f08a44962fedc03f1c490b47
+      #       env:
+      #         REDIS_REPLICATION_MODE: master
+      #       command: ["redis-server"]
 
 
     service:
@@ -141,11 +143,11 @@ spec:
         ports:
           http:
             port: 3003
-      redis:
-        controller: redis
-        ports:
-          http:
-            port: 6379
+      # redis:
+      #   controller: redis
+      #   ports:
+      #     http:
+      #       port: 6379
 
     ingress:
       server:
@@ -177,7 +179,7 @@ spec:
         enabled: true
         existingClaim: immich-nfs
         globalMounts:
-          - path: /usr/src/app/upload
+          - path: *mediaLocation
             subPath: img/immich
 
       machine-learning-cache:
