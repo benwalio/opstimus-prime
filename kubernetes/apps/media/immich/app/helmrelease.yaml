@@ -29,12 +29,15 @@ spec:
 
   values:
     defaultPodOptions:
+      automountServiceAccountToken: false
       enableServiceLinks: false
       securityContext:
+        runAsNonRoot: true
         runAsUser: 1003
         runAsGroup: 100
         fsGroup: 100
-        fsGroupChangePolicy: OnRootMismatch
+        fsGroupChangePolicy: Always
+        seccompProfile: { type: "RuntimeDefault" }
         supplementalGroups:
           - 1000
           - 568
