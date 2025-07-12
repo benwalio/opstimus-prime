@@ -6,9 +6,10 @@ resources:
   - ./github
   - ./prom.yaml
   - ./helmrelease.yaml
+  - ./ocirepo.yaml
 configMapGenerator:
   - name: flux-instance-helm-values
     files:
-      - values.yaml=./h-v.yaml
+      - values.yaml=./helm/values.yaml
 configurations:
-  - kconf.yaml
+  - ./helm/kustomizeconfig.yaml
