@@ -42,7 +42,7 @@ spec:
             runAsUser: 1003
             runAsGroup: 100
             fsGroup: 100
-            fsGroupChangePolicy: Always
+            fsGroupChangePolicy: "OnRootMismatch"
             seccompProfile: { type: "RuntimeDefault" }
             supplementalGroups:
               - 1000
@@ -191,7 +191,7 @@ spec:
         existingClaim: immich-machine-learning-cache
         advancedMounts:
           machine-learning:
-            main:
+            app:
               - path: /cache
                 subPath: cache
               - path: /.cache
@@ -201,7 +201,7 @@ spec:
         type: emptyDir
         advancedMounts:
           server:
-            main:
+            app:
               - path: /usr/src/app/.reverse-geocoding-dump
                 subPath: geocoding
               - path: /usr/src/app/.transformers_cache
@@ -211,5 +211,5 @@ spec:
         type: emptyDir
         advancedMounts:
           server:
-            main:
+            app:
               - path: /config/matplotlib
