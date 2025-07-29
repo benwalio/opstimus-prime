@@ -75,10 +75,10 @@ spec:
     nextcloud:
       host: &host nextcloud.${SECRET_DOMAIN}
 
-      # securityContext:
-      #   runAsUser: &uid 1003
-      #   runAsGroup: &gid 100
-      #   runAsNonRoot: true
+      securityContext:
+        runAsUser: &uid 1003
+        runAsGroup: &gid 100
+        runAsNonRoot: true
 
       existingSecret:
         enabled: true
