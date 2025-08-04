@@ -26,7 +26,7 @@ spec:
     runner:
       image:
         repository: ghcr.io/benwalio/opentofu-runner
-        tag: 1.10.5@sha256:8e9f9020b7d1ec81b8c548250b9c701e2a83de07126f335b5d4dc7682285bd40
+        tag: 1.10.5@sha256:1c923b880ae511e8f7158eac43cbc1c416341a6e94b604fc65eb327fbd35611b
     metrics:
       enabled: true
       serviceMonitor:
