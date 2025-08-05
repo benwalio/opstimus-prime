@@ -41,8 +41,8 @@ spec:
               N8N_PROTOCOL: "https"
               N8N_PORT: &port 8080
               N8N_HOST: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-              WEBHOOK_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
-              N8N_EDITOR_BASE_URL: *host
+              WEBHOOK_URL: &hook "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
+              N8N_EDITOR_BASE_URL: *hook
 
               N8N_VERSION_NOTIFICATIONS_ENABLED: false
               N8N_HIRING_BANNER_ENABLED: false
