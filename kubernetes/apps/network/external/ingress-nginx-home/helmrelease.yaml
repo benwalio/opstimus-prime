@@ -40,6 +40,7 @@ spec:
               operator: In
               values: ["external-home"]
       config:
+        block-user-agents: "~*AdsBot-Google.*,~*Amazonbot.*,~*anthropic-ai.*,~*Applebot-Extended.*,~*Bytespider.*,~*CCBot.*,~*ChatGPT-User.*,~*ClaudeBot.*,~*Claude-Web.*,~*cohere-ai.*,~*Diffbot.*,~*FacebookBot.*,~*FriendlyCrawler.*,~*Google-Extended.*,~*GoogleOther.*,~*GPTBot.*,~*img2dataset.*,~*omgili.*,~*omgilibot.*,~*peer39_crawler.*,~*peer39_crawler/1.0.*,~*PerplexityBot.*,~*YouBot.*" # taken from https://github.com/ai-robots-txt/ai.robots.txt
         allow-snippet-annotations: true
         annotations-risk-level: Critical
         client-body-buffer-size: 100M
@@ -63,7 +64,8 @@ spec:
           "duration": $request_time,"method": "$request_method", "http_referrer": "$http_referer",
           "http_user_agent": "$http_user_agent"}
         proxy-body-size: 0
-        proxy-buffer-size: 16k
+        proxy-buffer-size: "16k"
+        proxy-busy-buffers-size: "16k"
         ssl-protocols: TLSv1.3 TLSv1.2
         use-forwarded-headers: "true"
       metrics:
