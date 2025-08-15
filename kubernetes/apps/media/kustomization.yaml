@@ -6,6 +6,7 @@ namespace: media
 components:
   - ../../components/common
 resources:
+  - ./audiobookshelf/ks.yaml
   - ./bazarr/ks.yaml
   - ./calibre-web/ks.yaml
   - ./flaresolverr/ks.yaml
