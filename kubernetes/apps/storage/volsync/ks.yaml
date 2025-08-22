@@ -9,8 +9,14 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  dependsOn:
+    - name: snapshot-controller
+      namespace: storage
   interval: 30m
   path: ./kubernetes/apps/storage/volsync/app
+  postBuild:
+    substitute:
+      APP: *app
   prune: true
   sourceRef:
     kind: GitRepository

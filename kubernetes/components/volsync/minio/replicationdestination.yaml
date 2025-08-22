@@ -13,16 +13,16 @@ spec:
     repository: "${APP}-volsync-minio-secret"
     cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-openebs-hostpath}"
     cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
-    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-2Gi}"
+    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-8Gi}"
     storageClassName: "${VOLSYNC_STORAGECLASS:-ceph-block}"
     volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-csi-ceph-blockpool}"
     accessModes:
       - "${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"
-    capacity: "${VOLSYNC_CAPACITY:-1Gi}"
+    capacity: "${VOLSYNC_CAPACITY:-4Gi}"
     enableFileDeletion: true # Uncomment on next Volsync release
     cleanupCachePVC: true # Uncomment on next Volsync release
     cleanupTempPVC: true # Uncomment on next Volsync release
     moverSecurityContext: # Not needed due to privileged movers
-      runAsUser: ${APP_UID:-1000}
-      runAsGroup: ${APP_GID:-1000}
-      fsGroup: ${APP_GID:-1000}
+      runAsUser: ${APP_UID:-1003}
+      runAsGroup: ${APP_GID:-100}
+      fsGroup: ${APP_GID:-100}

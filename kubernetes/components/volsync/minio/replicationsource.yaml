@@ -13,13 +13,13 @@ spec:
     repository: ${APP}-volsync-minio-secret
     cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-openebs-hostpath}"
     cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
-    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-1Gi}"
+    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-5Gi}"
     storageClassName: "${VOLSYNC_STORAGECLASS:-ceph-block}"
     volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-csi-ceph-blockpool}"
     moverSecurityContext:
-      runAsUser: ${APP_UID:-1000}
-      runAsGroup: ${APP_GID:-1000}
-      fsGroup: ${APP_GID:-1000}
+      runAsUser: ${APP_UID:-1003}
+      runAsGroup: ${APP_GID:-100}
+      fsGroup: ${APP_GID:-100}
     pruneIntervalDays: 7
     retain:
       hourly: 24
