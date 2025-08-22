@@ -16,6 +16,11 @@ spec:
       namespace: security
     - name: volsync
       namespace: storage
+  healthCheckExprs:
+    - apiVersion: postgres-operator.crunchydata.com/v1beta1
+      kind: PostgresCluster
+      failed: status.conditions.filter(e, e.type == 'ProxyAvailable').all(e, e.status == 'False')
+      current: status.conditions.filter(e, e.type == 'ProxyAvailable').all(e, e.status == 'True')
   components:
     - ../../../../components/volsync
   interval: 30m
