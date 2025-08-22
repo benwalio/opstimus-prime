@@ -19,9 +19,9 @@ tasks:
     desc: Force Flux to pull in changes from your Git repository [NS=flux-system TYPE=kustomization TARGET=flux-system]
     cmd: flux --namespace {{.NS}} reconcile {{.TYPE}} {{.TARGET}} --with-source
     vars:
-      NS: flux-system
-      TYPE: kustomization
-      TARGET: flux-system
+      NS: '{{.NS | default "flux-system"}}'
+      TYPE: '{{.TYPE | default "kustomization"}}'
+      TARGET: '{{.TARGET | default "flux-system"}}'
     preconditions:
       - test -f {{.KUBECONFIG}}
       - which flux

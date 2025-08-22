@@ -113,7 +113,7 @@ spec:
       repository:
         type: nfs
         server: 10.20.13.10
-        path: /mnt/user/kopia
+        path: /mnt/user/volsync
         globalMounts:
           - path: /repository
 
