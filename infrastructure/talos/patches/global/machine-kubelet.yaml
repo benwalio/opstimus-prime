@@ -8,3 +8,5 @@ machine:
     nodeIP:
       validSubnets:
         - 10.10.10.0/24
+    extraConfig:
+      serializeImagePulls: false

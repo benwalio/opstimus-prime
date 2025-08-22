@@ -94,6 +94,7 @@ spec:
                 service:
                   identifier: app
                   port: http
+
     # route:
     #   app:
     #     hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
