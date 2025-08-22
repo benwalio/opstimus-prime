@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: kopia
+  name: &app kopia
 spec:
   interval: 1h
   chartRef:
@@ -67,16 +67,40 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
+        controller: *app
         ports:
           http:
             port: *port
-    route:
+
+
+    ingress:
       app:
-        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
-        parentRefs:
-          - name: internal
-            namespace: kube-system
-            sectionName: https
+        className: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: apps
+          gethomepage.dev/name: kopia
+          gethomepage.dev/icon: sh-kopia.png
+          gethomepage.dev/description: Kopia
+          # gethomepage.dev/widget.type: kopia
+          # gethomepage.dev/widget.url: http://lubelog.selfhosted:8080
+          # gethomepage.dev/widget.username: "{{ `{{HOMEPAGE_VAR_SVC_LUBEL_USERNAME}}` }}"
+          # gethomepage.dev/widget.password: "{{ `{{HOMEPAGE_VAR_SVC_LUBEL_PASSWORD}}` }}"
+        hosts:
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+    # route:
+    #   app:
+    #     hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+    #     parentRefs:
+    #       - name: internal
+    #         namespace: kube-system
+    #         sectionName: https
     persistence:
       config-file:
         type: configMap
@@ -85,12 +109,14 @@ spec:
           - path: /config/repository.config
             subPath: repository.config
             readOnly: true
+
       repository:
         type: nfs
         server: 10.20.13.10
         path: /mnt/user/kopia
         globalMounts:
           - path: /repository
+
       tmpfs:
         type: emptyDir
         advancedMounts:
