@@ -32,6 +32,8 @@ spec:
               tag: v1.5.0
             env:
               TZ: ${TIMEZONE}
+              LC_ALL: en_US.UTF-8
+              LOGGING__LOGLEVEL__DEFAULT: debug
             envFrom:
               - secretRef:
                   name: "lubelog-secret"
@@ -43,9 +45,10 @@ spec:
                 memory: 256M
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
+        # runAsNonRoot: true
         runAsUser: 1003
         runAsGroup: 100
+        fsGroup: 100
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
