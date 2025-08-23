@@ -14,8 +14,8 @@ spec:
       namespace: storage
     - name: openebs
       namespace: storage
-  components:
-    - ../../../../components/keda/nfs-scaler
+  # components:
+  #   - ../../../../components/keda/nfs-scaler
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
