@@ -27,17 +27,38 @@ tasks:
       - for: { var: APPLY_SECRETS }
         cmd: sops exec-file {{.ITEM}} "kubectl --namespace flux-system apply --server-side --filename {}"
       - kubectl --namespace flux-system apply --server-side --filename {{.KUBERNETES_DIR}}/components/substitutions/cluster-settings.yaml
-      - helmfile --file {{.KUBERNETES_DIR}}/bootstrap/apps/helmfile.yaml apply --skip-diff-on-install --suppress-diff
+      # - helmfile --file {{.KUBERNETES_DIR}}/bootstrap/apps/helmfile.yaml apply --skip-diff-on-install --suppress-diff
+      - helmfile --file {{.BOOTSTRAP_DIR}}/helmfile.d sync --hide-notes
     vars:
       APPLY_NAMESPACES:
         sh: ls -d {{.KUBERNETES_DIR}}/apps/*
       APPLY_SECRETS:
         sh: find {{.KUBERNETES_DIR}}/bootstrap/apps {{.KUBERNETES_DIR}}/flux -type f -name '*.sops.yaml'
+      RANDOM_CONTROLLER:
+        sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | sort --unique --random-sort | head -n 1
     preconditions:
+      - talosctl config info
+      - talosctl --nodes {{.RANDOM_CONTROLLER}} get machineconfig
       - test -f {{.KUBECONFIG}}
       - test -f {{.KUBERNETES_DIR}}/bootstrap/apps/helmfile.yaml
+      - test -d {{.BOOTSTRAP_DIR}}/helmfile.d
       - test -f {{.SOPS_AGE_KEY_FILE}}
       - which helmfile kubectl sops
+
+
+
+  crds:
+    desc: Bootstrap Kubernetes CRDs
+    preconditions:
+      - which helmfile yq jq kubectl op talosctl
+      - test -f {{.BOOTSTRAP_DIR}}/helmfile.d/00-crds.yaml
+      - talosctl config info
+      - talosctl --nodes {{.RANDOM_CONTROLLER}} get machineconfig
+    vars:
+      RANDOM_CONTROLLER:
+        sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | sort --unique --random-sort | head -n 1
+    cmds:
+      - helmfile --quiet --file {{.BOOTSTRAP_DIR}}/helmfile.d/00-crds.yaml template | kubectl apply --server-side --filename -
 
   flux:
     desc: Bootstrap flux into the Talos cluster
